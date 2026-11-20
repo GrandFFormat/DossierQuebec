@@ -5,7 +5,7 @@
 //
 //   node scripts/prerendre.js        les six pages, depuis quebec/
 //
-// Pas de second moteur de rendu à tenir à jour : on exécute assets/app.js lui-même, ici, dans Node,
+// Pas de second moteur de rendu à tenir à jour : on exécute assets/app.js lui-même (ville.js + commun/ville/moteur.js), ici, dans Node,
 // devant un faux document qui ne connaît que les zones remplies par app.js (#fil, #liste-decisions,
 // #compte-votes…). Ce qu'app.js y écrit est recopié tel quel dans la page, entre deux repères
 // <!--PR:id--> … <!--/PR:id-->, et <body> reçoit data-prerendu="1" : dans le navigateur, app.js voit
@@ -27,10 +27,16 @@ const VOLET = fileURLToPath(new URL('..', import.meta.url));
 const RACINE = fileURLToPath(new URL('../..', import.meta.url));
 
 // app.js importe /commun/… (chemin du site) : on le fait pointer vers le dossier commun/ du dépôt.
+// Le moteur commun (/commun/ville/moteur.js, 20 nov. 2026) garde son état au niveau du module : il
+// reçoit le ?page=… de app.js qui l'importe, pour qu'une instance neuve tourne à chaque page.
 register(
   'data:text/javascript,' +
     encodeURIComponent(
-      `export async function resolve(s, c, n) { return s.startsWith('/commun/') ? { url: ${JSON.stringify(pathToFileURL(RACINE).href)} + s.slice(1), shortCircuit: true } : n(s, c); }`
+      `export async function resolve(s, c, n) {
+        if (!s.startsWith('/commun/')) return n(s, c);
+        const q = s.startsWith('/commun/ville/') && c.parentURL ? new URL(c.parentURL).search : '';
+        return { url: ${JSON.stringify(pathToFileURL(RACINE).href)} + s.slice(1) + q, shortCircuit: true };
+      }`
     )
 );
 

@@ -18,6 +18,11 @@ if (!VILLE) throw new Error('moteur.js : globalThis.VILLE absent (importer asset
 const { libelleEn, themeEn } = VILLE.libelles;
 // Adresses des pages du volet, sans extension (ex. « decisions-de-la-ville-de-montreal »).
 const PAGE = VILLE.pages;
+// Les types qui sont des documents de séance, pas des dossiers à suivre.
+const TYPES_DOCUMENTS = VILLE.typesDocuments ?? ['Procès-verbal', 'Ordre du jour'];
+// Ce qui compte comme une décision. Défaut (Montréal) : les résolutions seules. VILLE.horsDecisions
+// (Lévis : procès-verbal et points de procédure) : tout sauf ces types ; ils sortent aussi du fil.
+const estDecision = VILLE.horsDecisions ? (d) => !VILLE.horsDecisions.has(d.type) : (d) => d.type === 'Résolution';
 
 brancherImpression();
 // Les libellés qui viennent des données (type, instance, résultat, fonction, rôle) : traduits en
@@ -118,13 +123,17 @@ function dureeDe(objet) {
   return null;
 }
 let parDossier = null;
+// La clé qui suit un dossier d'une instance à l'autre : VILLE.cleDossier (« dossier » à Montréal,
+// « sommaireId » à Québec).
+const CLE_DOSSIER = VILLE.cleDossier ?? 'dossier';
 function parcoursDe(d) {
-  if (!d.dossier || !etat.decisions?.decisions) return null;
+  const k = d[CLE_DOSSIER];
+  if (!k || !etat.decisions?.decisions) return null;
   if (!parDossier) {
     parDossier = new Map();
-    for (const x of etat.decisions.decisions) if (x.dossier) (parDossier.get(x.dossier) ?? parDossier.set(x.dossier, []).get(x.dossier)).push(x);
+    for (const x of etat.decisions.decisions) if (x[CLE_DOSSIER]) (parDossier.get(x[CLE_DOSSIER]) ?? parDossier.set(x[CLE_DOSSIER], []).get(x[CLE_DOSSIER])).push(x);
   }
-  const l = (parDossier.get(d.dossier) ?? []).filter((x) => x.type !== 'Procès-verbal' && x.type !== 'Ordre du jour');
+  const l = (parDossier.get(k) ?? []).filter((x) => x.type !== 'Procès-verbal' && x.type !== 'Ordre du jour');
   if (l.length < 2) return null;
   return l.slice().sort((a, b) => (a.date ?? '').localeCompare(b.date ?? '')).map((x) => {
     const double = l.some((y) => y !== x && y.date === x.date && y.instance === x.instance);
@@ -178,6 +187,25 @@ function messageSansDonnees() {
   );
 }
 
+// Extraction en panne (Lévis d'abord, 27 sept. 2026) : un fichier peut être là et n'affirmer rien de
+// vrai. Une extraction qui n'a lu aucun procès-verbal alors que la Ville en offre publierait des zéros
+// avec l'air d'un fait : on l'avoue plutôt. Le test porte sur la contradiction (des procès-verbaux
+// publiés et aucune décision), pas sur un zéro : un début d'année sans procès-verbal n'est pas une panne.
+function extractionEnPanne(jeu) {
+  return Boolean(jeu?.seances?.some((s) => s.pv) && !jeu.decisions?.length);
+}
+
+function messageExtractionEnPanne(jeu) {
+  const zone = $('#chargement');
+  if (!zone) return;
+  const le = String(jeu?.generatedAt ?? '').slice(0, 10);
+  zone.innerHTML =
+    "<strong>Extraction en panne.</strong> Aucun procès-verbal n'a pu être lu" +
+    (le ? ` lors du dernier passage (${le})` : '') +
+    '. Les chiffres de cette page ne sont pas à jour&nbsp;; la source officielle reste ' +
+    (VILLE.archivesSeances ? `<a href="${VILLE.archivesSeances}">les archives des séances de la Ville</a>.` : 'le site de la Ville.');
+}
+
 // L'archive des années passées. La page ne charge que l'année en cours ; un lien reçu par courriel
 // il y a des mois peut viser un document plus vieux. Dans ce cas seulement, on va lire l'année
 // archivée : un fichier compressé, demandé une fois, et jamais pour une visite ordinaire.
@@ -197,7 +225,7 @@ async function lireAnneeArchivee(fichier) {
 async function chercherDansArchive(q) {
   const liste = $('#liste-decisions');
   if (!liste) return;
-  const manifeste = await charger('archives/index');
+  const manifeste = VILLE.archives ? await charger('archives/index') : null;
   const annees = [...(manifeste?.annees ?? [])].sort((a, b) => (a.annee < b.annee ? 1 : -1));
   if (!annees.length) return;
   const avis = document.createElement('p');
@@ -243,6 +271,13 @@ function remplirSelect(select, valeurs) {
 // avoir les deux (lot Grok d'après la résolution, puis lecture des sommaires annexés).
 function resumePour(d) {
   if (d.theme === 'procedure') return null;   // résumés de procédure masqués : jamais rien d'utile (Martin, 9 nov. 2026)
+  // Québec (VILLE.resumeDirectDabord) : le résumé du document lui-même d'abord, le sommaire ensuite.
+  if (VILLE.resumeDirectDabord) {
+    const direct = etat.parId.get(d.id);
+    if (direct) return { r: direct, indirect: false };
+    const viaSommaire = d.sommaireId ? etat.parId.get(d.sommaireId) : null;
+    return viaSommaire ? { r: viaSommaire, indirect: true } : null;
+  }
   const viaSommaire = d.sommaireId ? etat.parId.get(d.sommaireId) : null;
   if (viaSommaire) return { r: viaSommaire, indirect: viaSommaire.id !== d.id };
   const direct = etat.parId.get(d.id);
@@ -250,7 +285,7 @@ function resumePour(d) {
 }
 // Combien de décisions de la liste ont un résumé, par l'une ou l'autre voie.
 function nombreResumees(liste) {
-  return liste.filter((d) => d.type === 'Résolution' && resumePour(d)).length;
+  return liste.filter((d) => estDecision(d) && resumePour(d)).length;
 }
 
 // Le résumé n'est affiché que s'il existe pour ce document précis, toujours identifié
@@ -258,6 +293,16 @@ function nombreResumees(liste) {
 function blocResume(trouve) {
   if (!trouve) return '';
   const { r, indirect } = trouve;
+  // Québec (VILLE.enteteResumeCourte) : « — sommaire NUMÉRO » seulement quand le résumé vient du sommaire.
+  if (VILLE.enteteResumeCourte) return `<div class="resume">
+    <div class="resume-entete">
+      <span>${tr('Résumé généré par IA', 'AI-generated summary')}${indirect && r.numero ? ` — ${tr('sommaire', 'decision summary')} ${echapper(r.numero)}` : ''}</span>
+      ${r.montantPrincipal ? `<span class="puce montant">${echapper(sansCents(r.montantPrincipal))}</span>` : ''}
+      ${r.sansContenuSubstantiel ? `<span class="puce procedural">${tr('document de procédure', 'procedural document')}</span>` : ''}
+      ${r.francaisSeulement ? '<span class="puce procedural" lang="en">summary not yet translated</span>' : ''}
+    </div>
+    <ul>${r.puces.map((p) => `<li>${echapper(sansCents(p))}</li>`).join('')}</ul>
+  </div>`;
   return `<div class="resume">
     <div class="resume-entete">
       <span>${tr('Résumé généré par IA', 'AI-generated summary')}${r.source === 'sommaire' || indirect ? `${tr(" — d'après le sommaire décisionnel", ' — from the decision summary')}${indirect && r.numero ? ` ${echapper(r.numero)}` : ''}` : tr(" — d'après le texte de la résolution", ' — from the text of the resolution')}</span>
@@ -381,6 +426,20 @@ function copierLienFiche(b) {
 }
 window.copierLienFiche = copierLienFiche;
 
+// « Ce que le conseil décide » (Lévis d'abord) : la phrase de décision du procès-verbal, recopiée telle
+// quelle (« D’ACCORDER la dérogation mineure… »), montrée quand la décision n'a pas de résumé. Les
+// énumérations « - … ; - … » de la Ville deviennent des lignes, sans rien changer aux mots.
+function blocDispositif(paragraphes) {
+  const paragraphe = (p) => {
+    const [tete, ...items] = p.split(/\s+-\s+(?=\S)/);
+    return `<p style="margin:0 0 6px">${echapper(tete)}</p>${items.length ? `<ul style="margin:0 0 8px">${items.map((i) => `<li>${echapper(i)}</li>`).join('')}</ul>` : ''}`;
+  };
+  return `<div class="resume">
+    <div class="resume-entete"><span>${tr('Ce que le conseil décide — texte du procès-verbal', 'What the council decides — text of the minutes')}</span></div>
+    ${paragraphes.map(paragraphe).join('')}
+  </div>`;
+}
+
 function carteRepliable(entete, corps, ouverte = false) {
   return `<details class="carte pliante"${ouverte ? ' open' : ''} name="${NOM_ACCORDEON}"><summary>${entete}</summary><div class="corps">${corps}</div></details>`;
 }
@@ -393,32 +452,52 @@ function carteDecision(d, ouverte = false) {
       <span class="puce">${echapper(lib(d.type))}</span>
       ${d.instance ? `<span class="puce">${echapper(lib(d.instance))}</span>` : ''}
       ${d.categorie && !/^\d{8,}$/.test(d.categorie) ? `<span class="puce">${echapper(categorieEn(d.categorie))}</span>` : ''}
-      ${d.unite ? `<span class="puce">${echapper(lib(d.unite.replace(/_/g, ', ')))}</span>` : ''}
+      ${d.unite ? `<span class="puce">${echapper(VILLE.uniteBrute ? d.unite : lib(d.unite.replace(/_/g, ', ')))}</span>` : ''}
       ${d.resultat ? `<span class="resultat ${classeResultat(d.resultat)}">${echapper(lib(d.resultat))}</span>` : ''}
+      ${d.refus === 'refus' ? `<span class="resultat r-rejetee">${tr('Demande refusée', 'Request denied')}</span>` : d.refus === 'refus-partiel' ? `<span class="resultat r-rejetee">${tr('Refusée en partie', 'Partly denied')}</span>` : ''}
       ${d.voteEnregistre ? `<span class="puce genre-vote">${tr('vote enregistré', 'recorded vote')}</span>` : ''}
     </div>
     <p class="objet">${echapper(objetDe(d) ?? tr('(sans objet)', '(no subject)'))}</p>`;
-  // Montréal : le numéro de dossier suit la décision d'une instance à l'autre, et les
-  // dissidences sont les noms consignés contre, sans appel nominal complet. Faits bruts.
+  // Faits bruts tirés des données, chacun seulement s'il existe : les dissidences consignées
+  // (Montréal), la phrase de décision du procès-verbal quand il n'y a pas de résumé (d.dispositif,
+  // Lévis), le numéro de résolution annoté (d.annotation) et les sommaires décisionnels cités (d.sommaires).
   const corps = `${blocContexte(d)}${blocResume(resumePour(d))}
+    ${!resumePour(d) && d.dispositif?.length ? blocDispositif(d.dispositif) : ''}
     ${d.dissidences?.length ? `<p class="compte" style="margin:0 0 8px">${tr(`Dissidence${d.dissidences.length > 1 ? 's' : ''}&nbsp;:`, `${s(d.dissidences.length, 'Dissent', 'Dissents')}:`)} ${d.dissidences.map(echapper).join(', ')}.</p>` : ''}
-    <div class="texte-decision" data-id="${echapper(d.id)}"></div>
+    ${VILLE.textes ? `<div class="texte-decision" data-id="${echapper(d.id)}"></div>` : ''}
+    ${d.annotation ? `<p class="compte" style="margin:0 0 8px">${tr('Résolution', 'Resolution')} ${echapper(d.annotation)}.</p>` : ''}
+    ${d.sommaires?.length ? `<p class="compte" style="margin:0 0 8px">${tr('Sommaire décisionnel', 'Decision summary')} ${d.sommaires.map(echapper).join(', ')}</p>` : ''}
     ${d.dossier ? `<p class="compte" style="margin:0 0 8px">${tr('Dossier', 'File')} ${echapper(d.dossier)}${d.article ? ` · ${tr('article', 'item')} ${echapper(d.article)}` : ''}</p>` : ''}
-    ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${d.type === 'Résolution' ? tr('Procès-verbal officiel (PDF)', 'Official minutes (PDF, in French)') : tr('Document officiel (PDF)', 'Official document (PDF, in French)')} ↗</a>` : ''}
+    ${d.pdf ? `<a class="lien-pdf" href="${echapper(d.pdf)}" target="_blank" rel="noopener">${(VILLE.pdfSelonNumero ? d.numero : d.type === 'Résolution') ? tr('Procès-verbal officiel (PDF)', 'Official minutes (PDF, in French)') : tr('Document officiel (PDF)', 'Official document (PDF, in French)')} ↗</a>` : ''}
     ${d.sommairePdf ? ` &nbsp;<a class="lien-pdf" href="${echapper(d.sommairePdf)}" target="_blank" rel="noopener">${tr('Sommaire décisionnel (PDF)', 'Decision summary (PDF, in French)')} ↗</a>` : ''}
     ${actionsFiche(d)}`;
   // Espace abonnés (/commun/abonnes.js) : « Suivre ce dossier » et le détail de l'argent. La clé
   // de dossier suit la décision d'une instance à l'autre.
-  // Un procès-verbal ou un ordre du jour n'est pas un dossier : rien à suivre.
-  if (d.type === 'Procès-verbal' || d.type === 'Ordre du jour') return carteRepliable(entete, corps, ouverte);
-  const abonnes = `<div class="ab-fiche" data-dossier="${echapper(d.dossier ?? d.id)}" data-numero="${echapper(d.numero ?? '')}" data-objet="${echapper((d.objet ?? '').slice(0, 300))}"></div>`;
+  // Un document de séance (VILLE.typesDocuments : procès-verbal, ordre du jour…) n'est pas un dossier : rien à suivre.
+  if (TYPES_DOCUMENTS.includes(d.type)) return carteRepliable(entete, corps, ouverte);
+  let abonnes = `<div class="ab-fiche" data-dossier="${echapper(d[CLE_DOSSIER] ?? d.id)}" data-numero="${echapper(d.numero ?? '')}" data-objet="${echapper((d.objet ?? '').slice(0, 300))}"></div>`;
+  // VILLE.abonnesEtendu (Québec) : « Décision finale », les projets et le montant, pour abonnes.js.
+  if (VILLE.abonnesEtendu) {
+    const projets = (d.projets ?? []).map((cle) => ({ cle, titre: etat.decisions?.projets?.[cle]?.titre ?? cle }));
+    const resume = resumePour(d)?.r;
+    abonnes = `<div class="ab-fiche" data-dossier="${echapper(d[CLE_DOSSIER] ?? d.id)}" data-numero="${echapper(d.numero ?? '')}" data-objet="${echapper((d.objet ?? '').slice(0, 300))}" data-montant="${resume?.montantPrincipal && !resume.sansContenuSubstantiel ? 1 : 0}"
+    data-statut="${echapper(d.statutDossier ?? '')}" data-etape="${echapper(d.etapeFinale ?? '')}" data-echeance="${echapper(d.echeance ?? '')}"
+    data-projets="${echapper(JSON.stringify(projets))}"></div>`;
+  }
   return carteRepliable(entete, corps + abonnes, ouverte);
 }
 
 // Le total honnête : les résolutions seules. `nombre` compte aussi les fiches de
 // documents (un procès-verbal et un ordre du jour par séance), qui ne sont pas des
 // décisions. La facette donne le compte sans reparcourir les milliers de fiches.
+// VILLE.compteCharges (Québec) : les données ne séparent pas les documents des décisions ; on dit
+// combien sont chargées et combien la Ville en a publié (totalDisponible).
 function totalDecisions() {
+  if (VILLE.compteCharges) return etat.decisions.totalDisponible;
+  if (VILLE.horsDecisions) {
+    const types = etat.decisions.facettes?.type;
+    return types ? types.filter((t) => estDecision({ type: t.valeur })).reduce((n, t) => n + t.n, 0) : etat.decisions.decisions.filter(estDecision).length;
+  }
   const f = (etat.decisions.facettes?.type ?? []).find((t) => t.valeur === 'Résolution');
   return f ? f.n : etat.decisions.decisions.filter((d) => d.type === 'Résolution').length;
 }
@@ -439,7 +518,8 @@ function decisionsFiltrees() {
     if (avecVote && !etat['votes-decisions']?.v?.[d.numero]) return false;
     // L'identifiant du document entre aussi dans la recherche : un procès-verbal n'a pas de numéro,
     // et c'est par son identifiant que le courriel ouvre sa fiche (?q=PV_CA4_OR_…).
-    if (q && !((d.objet ?? '') + ' ' + (d.numero ?? '') + ' ' + (d.id ?? '')).toLowerCase().includes(q)) return false;
+    // Les identifiants de sommaires cités (d.sommaires, Lévis : FIN-2026-035) se cherchent aussi, Mes dossiers y renvoie.
+    if (q && !((d.objet ?? '') + ' ' + (d.numero ?? '') + ' ' + (d.id ?? '') + (d.sommaires?.length ? ' ' + d.sommaires.join(' ') : '')).toLowerCase().includes(q)) return false;
     return true;
   });
 }
@@ -472,7 +552,7 @@ function rendreDecisions() {
   // ont eux aussi leur fiche — elles donnent accès au PDF officiel — mais ce sont des
   // documents, pas des décisions, et les compter gonflerait le total de 272 pour rien.
   // C'est précisément le défaut qu'on reproche aux données de Québec : on ne le refait pas.
-  const nDecisions = filtrees.reduce((n, d) => n + (d.type === 'Résolution' ? 1 : 0), 0);
+  const nDecisions = filtrees.reduce((n, d) => n + (estDecision(d) ? 1 : 0), 0);
 
   // Court : le nombre, l'état des séances, les résumés. Le compte des documents de séance
   // (procès-verbaux, ordres du jour) se lit dans le filtre des types, pas ici.
@@ -489,7 +569,14 @@ function rendreDecisions() {
   const resumesTexte = etat.parId.size
     ? tr(` ${nombreFr(nombreResumees(etat.decisions.decisions))} ont un résumé.`, ` ${nombreFr(nombreResumees(etat.decisions.decisions))} have a summary.`)
     : '';
-  $('#compte-decisions').textContent = `${filtre}${seancesTexte}.${resumesTexte}`;
+  $('#compte-decisions').textContent = VILLE.compteCharges
+    ? (EN
+      ? `${nombreFr(filtrees.length)} decision(s) shown of ${nombreFr(etat.decisions.nombre)} loaded — the City published ${nombreFr(etat.decisions.totalDisponible)} in ${parametres.annee}.` +
+        (etat.parId.size ? ` ${nombreFr(etat.parId.size)} have a plain-language summary.` : '')
+      : `${nombreFr(filtrees.length)} décision(s) affichée(s) sur ${nombreFr(etat.decisions.nombre)} chargées — ` +
+        `la Ville en a publié ${nombreFr(etat.decisions.totalDisponible)} en ${parametres.annee}.` +
+        (etat.parId.size ? ` ${nombreFr(etat.parId.size)} portent un résumé en langage clair.` : ''))
+    : `${filtre}${seancesTexte}.${resumesTexte}`;
 
   let reste;
   if (parSeance) {
@@ -510,7 +597,7 @@ function rendreDecisions() {
     $('#plus-decisions').hidden = reste <= 0;
     $('#plus-decisions').textContent = tr(`Afficher plus (${nombreFr(reste)} restantes)`, `Show more (${nombreFr(reste)} left)`);
   }
-  brancherTextes($('#liste-decisions'));
+  if (VILLE.textes) brancherTextes($('#liste-decisions'));
   reinitialiserDepliage();
 }
 
@@ -521,7 +608,9 @@ function rendreDecisions() {
 // Les sommaires décisionnels n'ont pas d'instance (la Ville ne la publie pas sur ce type
 // de document) : ils sont regroupés à part sous leur date, plutôt que d'être rattachés
 // d'autorité à une séance à laquelle rien ne dit qu'ils appartiennent.
-const SANS_INSTANCE = 'Autres documents';
+// VILLE.sansInstance : { fr, en } (Montréal « Autres documents », Québec « Documents préparatoires »).
+const SANS_INSTANCE = VILLE.sansInstance?.fr ?? 'Autres documents';
+const SANS_INSTANCE_EN = VILLE.sansInstance?.en ?? 'Other documents';
 
 function grouperParSeance(decisions) {
   // La date la plus ancienne du jeu chargé est presque toujours coupée : on ne rapatrie
@@ -575,7 +664,7 @@ function rendreSeance(g, ouverte = false) {
     : '';
   return `<details class="seance"${ouverte ? ' open' : ''}>
       <summary class="seance-entete">
-        <h3>${echapper(g.instance === SANS_INSTANCE ? tr(SANS_INSTANCE, 'Other documents') : lib(g.instance))}</h3>
+        <h3>${echapper(g.instance === SANS_INSTANCE ? tr(SANS_INSTANCE, SANS_INSTANCE_EN) : lib(g.instance))}</h3>
         <span class="seance-date">${dateFr(g.date)}</span>
         <span class="puce">${g.lignes.length} ${tr(s(g.lignes.length, 'décision', 'décisions'), s(g.lignes.length, 'decision', 'decisions'))}</span>
         ${g.tronquee ? `<span class="puce procedural">${tr('journée partiellement chargée', 'day partly loaded')}</span>` : ''}
@@ -631,7 +720,7 @@ function carteVote(v) {
     ${v.demandeParVote ? `<p class="compte" style="margin:2px 0 0">${tr('Vote demandé par', 'Vote called by')} ${echapper(v.demandeParVote)}.</p>` : ''}
     ${v.avertissements.length ? `<div class="drapeau"><strong>${tr('À vérifier&nbsp;:', 'To check:')}</strong> ${v.avertissements.map((a) => echapper(EN ? a.replace(/^Texte source dégradé.*$/, 'Degraded source text (PDF with spaced-out glyphs) — names not extracted; see the original passage.') : a)).join(' · ')}</div>` : ''}
     <details><summary>${tr("Voir le passage d'origine", 'See the original passage (in French)')}</summary><p>${echapper(v.brut)}</p></details>
-    ${v.pdf ? `<p style="margin:9px 0 0"><a class="lien-pdf" href="${echapper(v.pdf)}" target="_blank" rel="noopener">${tr('Procès-verbal officiel (PDF)', 'Official minutes (PDF, in French)')} ↗</a></p>` : ''}`;
+    ${v.pdf ? `<p style="margin:9px 0 0"><a class="lien-pdf" href="${echapper(v.pdf)}" target="_blank" rel="noopener">${VILLE.pdfVoteResolution ? tr('Résolution officielle (PDF)', 'Official resolution (PDF, in French)') : tr('Procès-verbal officiel (PDF)', 'Official minutes (PDF, in French)')} ↗</a></p>` : ''}`;
 
   return carteRepliable(entete, corps);
 }
@@ -660,7 +749,9 @@ function tableauVotesContre(votes) {
     }
   }
   return [...parPersonne.entries()]
-    .sort((a, b) => a[0].localeCompare(b[0], 'fr'))   // ordre alphabétique : pas de palmarès (20 nov. 2026, comme Laval)
+    // Ordre alphabétique : pas de palmarès (20 nov. 2026, comme Laval). VILLE.palmaresVotesContre
+    // (Québec, pas encore aligné) garde l'ancien tri par nombre.
+    .sort(VILLE.palmaresVotesContre ? (a, b) => b[1].n - a[1].n : (a, b) => a[0].localeCompare(b[0], 'fr'))
     .map(([nom, fiche]) => {
       const principale = [...fiche.instances.entries()].sort((a, b) => b[1] - a[1])[0];
       return `<tr><td>${echapper(nom)}</td><td>${echapper(principale ? lib(principale[0]) : '—')}</td><td class="n">${fiche.n}</td></tr>`;
@@ -679,12 +770,37 @@ function rendreDissidence(votes) {
       const compte = new Map();
       for (const v of votes) for (const n of v.contre) compte.set(n, (compte.get(n) ?? 0) + 1);
       const n = compte.size;
-      $('#resume-dissidence').textContent = EN
-        ? `${n} ${s(n, 'person', 'people')}, in alphabetical order`
-        : `${n} personne${n > 1 ? 's' : ''}, en ordre alphabétique`;
+      if (VILLE.palmaresVotesContre) {
+        const tri = [...compte.entries()].sort((a, b) => b[1] - a[1]);
+        const tete = tri.slice(0, 3).map(([nom, c]) => `${nom} (${c})`).join(', ');
+        $('#resume-dissidence').textContent = EN
+          ? `${n} ${s(n, 'person', 'people')}` + (tete ? `. Most: ${tete}` : '')
+          : `${n} personne${n > 1 ? 's' : ''}` + (tete ? `. En tête : ${tete}` : '');
+      } else {
+        $('#resume-dissidence').textContent = EN
+          ? `${n} ${s(n, 'person', 'people')}, in alphabetical order`
+          : `${n} personne${n > 1 ? 's' : ''}, en ordre alphabétique`;
+      }
     }
   }
 
+  // Qui demande les votes du conseil, calculé sur l'année affichée (Hugo, 12 nov. 2026) : une phrase
+  // écrite à la main aurait vieilli à la prochaine élection. Seulement si la page a #qui-demande et
+  // que VILLE.instanceConseil dit quelle instance est le conseil.
+  if ($('#qui-demande') && etat.elus?.membres && VILLE.instanceConseil) {
+    const parti = new Map(etat.elus.membres.map((m) => [m.nomComplet, m.parti]));
+    const maire = etat.elus.membres.find((m) => m.roles?.includes('Maire'))?.parti;
+    const duConseil = votes.filter((v) => VILLE.instanceConseil.test(v.instance ?? ''));
+    // L'opposition : un parti reconnu autre que celui du maire. Un indépendant ou un élu sans parti connu
+    // n'y est pas compté (Hugo, 12 nov. 2026).
+    const opposition = (n) => { const p = parti.get(n); return Boolean(p) && p !== maire && !/ind[ée]pendant/i.test(p); };
+    const parOpposition = duConseil.filter((v) => v.demandeParVote && opposition(v.demandeParVote)).length;
+    const annee = etat.votes.parametres?.annee ?? '';
+    $('#qui-demande').textContent = duConseil.length && parOpposition * 2 > duConseil.length
+      ? tr(`En ${annee}, le vote a surtout été demandé par les élus de l’opposition (${parOpposition} des ${duConseil.length} votes du conseil de la ville).`,
+           `In ${annee}, the vote was mostly called by opposition members (${parOpposition} of the ${duConseil.length} votes of City Council).`)
+      : '';
+  }
 }
 
 function rendreVotes() {
@@ -705,7 +821,7 @@ function rendreVotes() {
         $('#filtre-theme-votes'),
         [...parTheme.entries()]
           .sort((a, b) => b[1] - a[1])
-          .map(([valeur, n]) => ({ valeur, n, libelle: etat.votes.themes?.[valeur]?.libelle }))
+          .map(([valeur, n]) => ({ valeur, n, libelle: EN ? themeEn(valeur, etat.votes.themes?.[valeur]?.libelle) : etat.votes.themes?.[valeur]?.libelle }))
       );
     }
     $('#filtre-instance-votes').dataset.rempli = '1';
@@ -716,7 +832,7 @@ function rendreVotes() {
   $('#compte-votes').textContent = EN
     ? `${filtres.length} recorded vote(s) shown of ${etat.votes.nombre} in ${etat.votes.parametres.annee}. ` +
       `${etat.votes.avecAvertissement} carry an extraction warning.`
-    : `${filtres.length} vote(s) enregistré(s) affiché(s) sur ${etat.votes.nombre} en ${etat.votes.parametres.annee}. ` +
+    : `${filtres.length} ${VILLE.appelsNominaux ? 'appel(s) nominal(aux)' : 'vote(s) enregistré(s)'} affiché(s) sur ${etat.votes.nombre} en ${etat.votes.parametres.annee}. ` +
       `${etat.votes.avecAvertissement} portent un avertissement d'extraction.`;
   $('#liste-votes').innerHTML = visibles.map(carteVote).join('');
   const reste = filtres.length - visibles.length;
@@ -734,32 +850,78 @@ function numeroDistrict(m) {
   return etat.districts.districts.find((d) => d.cle === m.districtCle)?.numero ?? null;
 }
 
-// Les procès-verbaux de Montréal nomment les votants par leur nom de famille seulement
-// (« Mmes et MM. Martinez Ferrada, Bourque… »). On compare sur le nom de famille.
+// Les votes contre d'un élu. VILLE.comparerNoms :
+//  « famille » (Montréal, défaut) : les procès-verbaux nomment les votants par leur nom de famille
+//    seulement (« Mmes et MM. Martinez Ferrada, Bourque… ») ; on compare sur le nom de famille ou le nom complet.
+//  « normalise » (Québec) : nom complet comparé sans accents, tirets ni espaces ; les résolutions
+//    écrivent parfois « Marie–Pierre » ou « Vallières- Roland » (12 nov. 2026).
+const cleNom = (s) => String(s ?? '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z]/g, '').toLowerCase();
+//  « complet » (Lévis) : nom complet sans accents ni casse, espaces et tirets confondus ; deux
+//    conseillers portent le nom Tremblay. Sert aussi aux présences des conseils d'arrondissement.
+const cleNomComplet = (s) => String(s ?? '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replace(/[\s-]+/g, ' ').trim();
 function votesContreDe(m) {
+  if (VILLE.comparerNoms === 'complet') {
+    if (!etat.votes || !m.nomComplet) return null;
+    const cle = cleNomComplet(m.nomComplet);
+    return etat.votes.votes.filter((v) => v.contre.some((n) => cleNomComplet(n) === cle)).length;
+  }
+  if (VILLE.comparerNoms === 'normalise') {
+    if (!etat.votes || !m.nomComplet) return 0;
+    const moi = cleNom(m.nomComplet);
+    return etat.votes.votes.filter((v) => v.contre.some((n) => cleNom(n) === moi)).length;
+  }
   if (!etat.votes || !m.nom) return null;
   const nom = m.nom.toLowerCase();
   return etat.votes.votes.filter((v) => v.contre.some((n) => n.toLowerCase() === nom || n.toLowerCase() === m.nomComplet.toLowerCase())).length;
 }
 
+// LA LÉGENDE DU COMITÉ EXÉCUTIF (Martin, 7 oct. 2026). Le conseil et le comité exécutif se confondent
+// facilement : la légende dit ce qu'est chacun, et qui siège au comité EN CE MOMENT, calculé sur les
+// données lues à la Ville (data/elus.json, champ `executif` des élus) plutôt qu'écrit en dur. Seulement
+// si la page a #legende-executif et que les données ont des rôles au comité.
+function rendreLegendeExecutif(membres) {
+  const boite = $('#legende-executif');
+  if (!boite) return;
+  const ex = membres.filter((m) => m.executif);
+  if (!ex.length) { boite.hidden = true; return; }
+  const associes = ex.filter((m) => /associ/i.test(m.executif.role));
+  const titulaires = ex.length - associes.length;
+  const partisEx = [...new Set(ex.map((m) => m.parti).filter(Boolean))];
+  const absents = [...new Set(membres.map((m) => m.parti).filter(Boolean))].filter((p) => !partisEx.includes(p));
+  const source = etat.elus.executif?.source;
+  const fr = `<strong>Le comité exécutif n'est pas le conseil.</strong> Le conseil municipal réunit les ${membres.length} élus, en séance publique : c'est là qu'on débat et qu'on vote devant les citoyens. Le comité exécutif est un petit groupe : ${titulaires} membres${associes.length ? ` et ${associes.length} conseiller${associes.length > 1 ? 's' : ''} associé${associes.length > 1 ? 's' : ''}` : ''}, qui siègent à huis clos, environ une fois par semaine, et prennent la plupart des décisions courantes de la Ville. Sur les fiches ci-dessous, leur rôle au comité est sur une pastille jaune, avec leurs responsabilités. ${partisEx.length === 1
+    ? `En ce moment, ses membres sont tous de ${partisEx[0]}${absents.length ? `. Aucun élu de ${absents.join(' ni de ')} n'y siège` : ''}.`
+    : `En ce moment, y siègent des élus de ${partisEx.join(' et de ')}.`}`;
+  const en = `<strong>The executive committee is not the council.</strong> City Council brings together all ${membres.length} elected members, in public session: that is where debates and votes take place in front of citizens. The executive committee is a small group: ${titulaires} members${associes.length ? ` and ${associes.length} associate councillor${associes.length > 1 ? 's' : ''}` : ''}, who sit behind closed doors about once a week and make most of the City's day-to-day decisions. On the cards below, their role on the committee is on a yellow tag, with their responsibilities. ${partisEx.length === 1
+    ? `At the moment, its members are all from ${partisEx[0]}${absents.length ? `. No member of ${absents.join(' or ')} sits on it` : ''}.`
+    : `At the moment, members of ${partisEx.join(' and ')} sit on it.`}`;
+  boite.hidden = false;
+  boite.innerHTML = tr(fr, en) + (source ? ` <a href="${echapper(source)}" target="_blank" rel="noopener">${tr('La liste, sur le site de la Ville', 'The list, on the City’s website')}</a>.` : '');
+}
+
 function carteElu(m) {
-  const roles = m.roles.filter((r) => r && r !== 'Maire');
+  const roles = m.roles.filter((r) => (VILLE.elusSimple ? true : r) && r !== 'Maire');
   const votesContre = votesContreDe(m);
   const numero = numeroDistrict(m);
   const arr = instanceArrondissement(m.arrondissement);
   const fonction = m.fonction ?? '';
-  const sousTitre = m.district ? `${m.district}${m.district !== m.arrondissement && m.arrondissement && m.siegeAuConseilMunicipal === false ? '' : ''}` : fonction;
+  // VILLE.elusSimple (Québec) : sous le nom, le district et son numéro ; le maire n'a pas de district.
+  const ligneDistrict = VILLE.elusSimple
+    ? `${echapper(m.district ?? tr(`Maire de ${VILLE.nom}`, `Mayor of ${VILLE.nom}`))}${m.districtNumero ? ` (${m.districtNumero})` : ''}`
+    : `${echapper(m.district ? m.district : fonction)}${m.district && fonction ? ` — ${echapper(fonction)}` : ''}`;
 
   return `<article class="carte elu${m.siegeAuConseilMunicipal === false ? ' arrondissement-seulement' : ''}"${numero ? ` id="elu-${numero}"` : ''}>
     ${m.photo ? `<img src="${echapper(m.photo)}" alt="" loading="lazy">` : ''}
     <div>
       <h3>${echapper(m.nomComplet)}</h3>
-      <p class="district">${echapper(sousTitre)}${m.district && fonction ? ` — ${echapper(fonction)}` : ''}</p>
+      <p class="district">${ligneDistrict}</p>
       <div class="meta">
         ${m.parti ? `<span class="puce">${echapper(m.parti)}</span>` : ''}
         ${m.siegeAuConseilMunicipal === false ? `<span class="puce procedural">${tr("conseil d'arrondissement seulement", 'borough council only')}</span>` : ''}
         ${roles.map((r) => `<span class="puce">${echapper(lib(r))}</span>`).join('')}
+        ${m.executif ? `<span class="puce puce-executif">${echapper(lib(m.executif.role))}</span>` : ''}
       </div>
+      ${m.executif && m.executif.responsabilites?.length ? `<p class="responsabilites"><strong>${tr('Responsabilités au comité exécutif :', 'Responsibilities on the executive committee:')}</strong> ${m.executif.responsabilites.map(echapper).join(' · ')}</p>` : ''}
       <p class="compte" style="margin:6px 0 0">${echapper(m.telephone ?? '')}</p>
       ${votesContre ? `<p class="compte" style="margin:2px 0 0">${votesContre} ${tr('vote(s) contre consigné(s) cette année.', 'vote(s) against recorded this year.')}</p>` : ''}
       <p style="margin:4px 0 0; font-size:13px">
@@ -774,6 +936,21 @@ function carteElu(m) {
 function rendreElus() {
   const membres = etat.elus.membres;
   const partis = Object.entries(etat.elus.partis).sort((a, b) => b[1] - a[1]);
+  rendreLegendeExecutif(membres);
+  // VILLE.elusSimple (Québec) : les élus dans l'ordre des données, groupés par arrondissement.
+  if (VILLE.elusSimple) {
+    $('#compte-elus').textContent = `${membres.length} ${tr('membres', 'members')} — ` + partis.map(([p, n]) => `${p} : ${n}`).join(' · ');
+    const groupes = new Map();
+    for (const m of membres) {
+      const cle = m.arrondissement ?? 'Mairie';
+      if (!groupes.has(cle)) groupes.set(cle, []);
+      groupes.get(cle).push(m);
+    }
+    $('#liste-elus').innerHTML = [...groupes.entries()]
+      .map(([titre, gens]) => `<h2 class="section">${echapper(lib(titre))}</h2><div class="grille-elus">${gens.map(carteElu).join('')}</div>`)
+      .join('');
+    return;
+  }
   const total = etat.elus.nombreTotal && etat.elus.nombreTotal !== etat.elus.nombre
     ? tr(` (${etat.elus.nombreTotal} élus avec les conseils d'arrondissement)`, ` (${etat.elus.nombreTotal} elected officials including borough councils)`)
     : '';
@@ -781,10 +958,16 @@ function rendreElus() {
 
   // La mairie d'abord, puis les arrondissements par ordre alphabétique ; dans chacun, la
   // mairie d'arrondissement, les conseillers de ville, puis ceux d'arrondissement.
-  const rang = (m) => (VILLE.regexMaire.test(m.fonction ?? '') ? 0 : /maire/i.test(m.fonction ?? '') ? 1 : m.siegeAuConseilMunicipal === false ? 3 : 2);
+  // VILLE.elusParDistrict (Lévis) : le maire, puis chaque arrondissement, les districts dans l'ordre de
+  // leur numéro ; le titre du groupe vient du crochet VILLE.titreArrondissement(nom) s'il existe.
+  const parDistrict = VILLE.elusParDistrict;
+  const rang = parDistrict
+    ? (m) => (VILLE.regexMaire.test(m.fonction ?? '') ? 0 : 2)
+    : (m) => (VILLE.regexMaire.test(m.fonction ?? '') ? 0 : /maire/i.test(m.fonction ?? '') ? 1 : m.siegeAuConseilMunicipal === false ? 3 : 2);
+  const ordre = parDistrict ? (a, b) => (a.districtNumero ?? 0) - (b.districtNumero ?? 0) : (a, b) => a.nom.localeCompare(b.nom);
   const groupes = new Map();
-  for (const m of [...membres].sort((a, b) => rang(a) - rang(b) || a.nom.localeCompare(b.nom))) {
-    const cle = rang(m) === 0 ? tr(`Mairie de ${VILLE.nom}`, `${VILLE.nom} City Hall`) : m.arrondissement ?? tr('Sans arrondissement', 'No borough');
+  for (const m of [...membres].sort((a, b) => rang(a) - rang(b) || ordre(a, b))) {
+    const cle = rang(m) === 0 ? tr(`Mairie de ${VILLE.nom}`, `${VILLE.nom} City Hall`) : m.arrondissement ? (VILLE.titreArrondissement?.(m.arrondissement) ?? m.arrondissement) : tr('Sans arrondissement', 'No borough');
     if (!groupes.has(cle)) groupes.set(cle, []);
     groupes.get(cle).push(m);
   }
@@ -796,14 +979,17 @@ function rendreElus() {
 // Le conseil d'agglomération : une instance distincte, avec des élus d'autres villes.
 // On l'affiche sur la même page que le conseil municipal — les gens concernés sont les
 // mêmes — mais dans sa propre section, parce que ce ne sont pas les mêmes sièges.
+// VILLE.agglomeration = { sieges } (Québec) : le conseil compte N sièges, les remplaçants sont dits,
+// la fonction est suivie de la ville, et les villes reconstituées passent d'abord, par présences.
 function carteMembreAgglo(m) {
-  const deMontreal = (m.ville ?? '') === VILLE.nom;
+  const deLaVille = (m.ville ?? '') === VILLE.nom;
+  const sieges = VILLE.agglomeration?.sieges;
   return `<article class="carte elu">
     <div>
       <h3>${echapper(m.nom)}</h3>
-      <p class="district">${echapper(m.fonctionTelleQuelle ?? m.fonction ?? '')}${m.district ? ' — ' + echapper(m.district) : ''}</p>
+      <p class="district">${sieges ? `${echapper(lib(m.fonction))}${m.ville ? ' — ' + echapper(m.ville) : ''}` : `${echapper(m.fonctionTelleQuelle ?? m.fonction ?? '')}${m.district ? ' — ' + echapper(m.district) : ''}`}</p>
       <div class="meta">
-        ${m.ville ? `<span class="puce ${deMontreal ? '' : 'reconstituee'}">${echapper(m.ville)}</span>` : ''}
+        ${m.ville ? `<span class="puce ${deLaVille ? '' : 'reconstituee'}">${echapper(m.ville)}</span>` : ''}
         ${m.parti ? `<span class="puce">${echapper(m.parti)}</span>` : ''}
         ${m.roles.map((r) => `<span class="puce">${echapper(lib(r))}</span>`).join('')}
       </div>
@@ -812,6 +998,97 @@ function carteMembreAgglo(m) {
       ${m.courriel ? `<p style="margin:4px 0 0; font-size:13px"><a href="mailto:${echapper(m.courriel)}">${tr('Écrire', 'Write')}</a></p>` : ''}
     </div>
   </article>`;
+}
+
+// ---------- commission d'urbanisme (CUCQ, Québec) ----------
+// Données : data/cucq.json (VILLE.cucq). Même source que l'agglomération : les listes de présences.
+// On dit ce que le procès-verbal dit — votant ou substitut, élu·e ou non, présidence — et rien de plus.
+function carteMembreCucq(m) {
+  const statut = m.categorie === 'substitut' ? tr('Membre substitut', 'Substitute member') : tr('Membre votant', 'Voting member');
+  const fonction = m.elu ? (EN ? 'city councillor' : m.civilite === 'Mme' ? 'conseillère municipale' : 'conseiller municipal') : null;
+  const partiel = m.partielles ? tr(`, dont ${m.partielles} en partie`, `, ${m.partielles} of them in part`) : '';
+  return `<article class="carte elu">
+    <div>
+      <h3>${echapper(m.nom)}</h3>
+      <p class="district">${statut}${fonction ? ' — ' + fonction : ''}</p>
+      <div class="meta">
+        ${m.roles.map((r) => `<span class="puce">${echapper(lib(r))}</span>`).join('')}
+        ${m.elu ? `<span class="puce">${tr('siège au conseil municipal', 'sits on City Council')}</span>` : ''}
+      </div>
+      <p class="compte" style="margin:6px 0 0">
+        ${EN ? `Attendance recorded at ${m.presences} of ${m.seances} meeting(s)${partiel}.` : `Présence consignée à ${m.presences} séance(s) sur ${m.seances}${partiel}.`}
+      </p>
+    </div>
+  </article>`;
+}
+
+function rendreCucq() {
+  if (!$('#liste-cucq') || !etat.cucq) return;
+  const c = etat.cucq;
+  const elus = c.membres.filter((m) => m.elu).length;
+  $('#compte-cucq').textContent = EN
+    ? `${c.votants} voting members and ${c.substituts} substitutes found over ${c.seancesAnalysees} meetings in ${c.parametres.annee}, ${elus} of whom also sit on City Council. ` +
+      (c.derniereSeance ? `Last minutes analyzed: ${dateFr(c.derniereSeance.date)}.` : '')
+    : `${c.votants} membres votants et ${c.substituts} substituts relevés sur ${c.seancesAnalysees} séances de ` +
+      `${c.parametres.annee}, dont ${elus} qui siègent aussi au conseil municipal. ` +
+      (c.derniereSeance ? `Dernier procès-verbal analysé : ${dateFr(c.derniereSeance.date)}.` : '');
+  $('#liste-cucq').innerHTML = `<div class="grille-elus">${c.membres.map(carteMembreCucq).join('')}</div>`;
+}
+
+// ---------- conseils d'arrondissement par les présences (Lévis d'abord) ----------
+// VILLE.presences = { arrondissements: [[code, nom de l'instance], …] } et data/presences.json. La Ville ne
+// publie pas la composition des conseils d'arrondissement à part : elle se lit dans les listes de
+// présences en tête de chaque procès-verbal. On montre les faits consignés, bruts.
+function membresDInstance(code) {
+  const seances = (etat.presences?.seances ?? []).filter((s) => s.instanceCode === code);
+  const parNom = new Map();
+  for (const s of seances) {
+    for (const nom of s.presents ?? []) {
+      const m = parNom.get(cleNomComplet(nom)) ?? { nom, presences: 0, absences: 0, presidences: 0 };
+      m.presences++;
+      if (cleNomComplet(s.president) === cleNomComplet(nom)) m.presidences++;
+      parNom.set(cleNomComplet(nom), m);
+    }
+    for (const nom of s.absents ?? []) {
+      const m = parNom.get(cleNomComplet(nom)) ?? { nom, presences: 0, absences: 0, presidences: 0 };
+      m.absences++;
+      parNom.set(cleNomComplet(nom), m);
+    }
+  }
+  return { seances: seances.length, membres: [...parNom.values()].sort((a, b) => b.presences - a.presences || a.nom.localeCompare(b.nom)) };
+}
+
+// Le dénominateur ne peut pas se lire dans presences.json seul : une séance dont l'en-tête n'a pas
+// été reconnu n'y a AUCUNE entrée. On compte donc les procès-verbaux réellement lus ; Math.max : le
+// dénominateur ne doit jamais passer sous le numérateur (27 septembre 2026).
+function pvLus(code, auMoins) {
+  return Math.max((etat.decisions?.seances ?? []).filter((s) => s.instance === code && s.etat === 'lue').length, auMoins);
+}
+
+function carteMembreInstance(m, seances) {
+  const elu = (etat.elus?.membres ?? []).find((e) => cleNomComplet(e.nomComplet) === cleNomComplet(m.nom));
+  return `<article class="carte elu">
+    ${elu?.photo ? `<img src="${echapper(elu.photo)}" alt="" loading="lazy">` : ''}
+    <div>
+      <h3>${echapper(m.nom)}</h3>
+      <p class="district">${elu?.district ? `District ${elu.districtNumero}, ${echapper(elu.district)}` : echapper(elu?.fonction ?? '')}</p>
+      <p class="compte" style="margin:6px 0 0">Présent à ${m.presences} séance(s) sur ${seances}${m.absences ? `, absence consignée à ${m.absences}` : ''}.${m.presidences ? ` A présidé ${m.presidences} séance(s).` : ''}</p>
+      ${elu?.districtNumero ? `<p style="margin:4px 0 0; font-size:13px"><a href="#elu-${elu.districtNumero}">Sa fiche au conseil de la Ville</a></p>` : ''}
+    </div>
+  </article>`;
+}
+
+function rendreArrondissements() {
+  if (!$('#liste-arrondissements') || !etat.presences || !VILLE.presences) return;
+  $('#liste-arrondissements').innerHTML = VILLE.presences.arrondissements.map(([code, nom]) => {
+    const { seances, membres } = membresDInstance(code);
+    const lus = pvLus(code, seances);
+    if (!lus) return '';
+    const n = etat.decisions?.facettes.instance.find((f) => f.valeur === nom)?.n;
+    return `<h2 class="section">${echapper(nom.replace("Conseil d'arrondissement ", 'Arrondissement '))}</h2>
+      <p class="compte">${membres.length} membres nommés dans ${lus === seances ? `les ${seances} procès-verbaux` : `${seances} des ${lus} procès-verbaux`} de l'année${lus > seances ? ` — la liste des présences de ${lus - seances} d'entre eux n'a pas été reconnue` : ''}${n ? ` · <a href="${PAGE.decisions}?instance=${encodeURIComponent(nom)}">${nombreFr(n)} décisions</a>` : ''}</p>
+      <div class="grille-elus">${membres.map((m) => carteMembreInstance(m, lus)).join('')}</div>`;
+  }).join('');
 }
 
 // ---------- comité exécutif ----------
@@ -848,12 +1125,16 @@ function rendreComiteExecutif() {
     );
     return;
   }
-  const rang = (m) => (VILLE.regexMaire.test(m.fonction ?? '') ? 0 : /pr[ée]siden/i.test(m.roles.join(' ')) && !/vice/i.test(m.roles.join(' ')) ? 1 : /vice-pr[ée]siden/i.test(m.roles.join(' ')) ? 2 : 3);
+  // Crochet VILLE.rangComiteExecutif(m) : l'ordre propre à une ville (Lévis : le maire, la vice-présidence, les membres).
+  const rang = VILLE.rangComiteExecutif ?? ((m) => (VILLE.regexMaire.test(m.fonction ?? '') ? 0 : /pr[ée]siden/i.test(m.roles.join(' ')) && !/vice/i.test(m.roles.join(' ')) ? 1 : /vice-pr[ée]siden/i.test(m.roles.join(' ')) ? 2 : 3));
   membres.sort((a, b) => rang(a) - rang(b) || a.nom.localeCompare(b.nom));
-  $('#compte-ce').textContent = tr(
-    `${membres.length} membres, d'après les rôles publiés dans la liste des élus de la Ville.`,
-    `${membres.length} members, based on the roles published in the City's list of elected officials.`
-  );
+  // VILLE.comiteSelonFonctions (Lévis) : la composition vient des fonctions de la page des membres du conseil.
+  $('#compte-ce').textContent = VILLE.comiteSelonFonctions
+    ? tr(`${membres.length} membres, d'après les fonctions publiées sur la page des membres du conseil.`, `${membres.length} members, based on the positions published on the council members page.`)
+    : tr(
+      `${membres.length} membres, d'après les rôles publiés dans la liste des élus de la Ville.`,
+      `${membres.length} members, based on the roles published in the City's list of elected officials.`
+    );
   $('#liste-ce').innerHTML = `<div class="grille-elus">${membres.map(carteMembreCe).join('')}</div>`;
 }
 
@@ -861,13 +1142,21 @@ function rendreAgglomeration() {
   if (!$('#liste-agglo') || !etat.agglomeration) return;
   const a = etat.agglomeration;
   const villes = Object.entries(a.villes ?? {}).sort((x, y) => y[1] - x[1]);
-  $('#compte-agglo').textContent = tr(`${a.nombre} membres — `, `${a.nombre} members — `) + villes.map(([v, n]) => `${v} : ${n}`).join(' · ');
+  const sieges = VILLE.agglomeration?.sieges;
+  // Avec VILLE.agglomeration.sieges : nos listes de présences relèvent plus de personnes que de sièges,
+  // parce que les remplaçants y figurent ; on le dit, plutôt que de laisser croire à un conseil plus grand.
+  $('#compte-agglo').textContent = (sieges
+    ? (EN
+      ? `The council has ${sieges} seats. ${a.nombre} people held them over ${a.seancesAnalysees} meetings in ${a.parametres.annee}, replacements included — `
+      : `Le conseil compte ${sieges} sièges. ${a.nombre} personnes les ont occupés sur ${a.seancesAnalysees} séances ` +
+        `de ${a.parametres.annee}, remplaçants compris — `)
+    : tr(`${a.nombre} membres — `, `${a.nombre} members — `)) + villes.map(([v, n]) => `${v} : ${n}`).join(' · ');
 
   // Les villes liées d'abord : ce sont elles qu'on ne trouve nulle part ailleurs sur le site.
   const membres = [...a.membres].sort((x, y) => {
     const xm = (x.ville ?? '') === VILLE.nom ? 1 : 0;
     const ym = (y.ville ?? '') === VILLE.nom ? 1 : 0;
-    return xm - ym || (x.ville ?? '').localeCompare(y.ville ?? '') || x.nom.localeCompare(y.nom);
+    return xm - ym || (sieges ? y.presences - x.presences : (x.ville ?? '').localeCompare(y.ville ?? '') || x.nom.localeCompare(y.nom));
   });
   $('#liste-agglo').innerHTML = `<div class="grille-elus">${membres.map(carteMembreAgglo).join('')}</div>`;
 }
@@ -991,7 +1280,8 @@ function lexiqueFiltre() {
 
 function rendreLexique() {
   const entrees = lexiqueFiltre();
-  const categories = (EN && etat.lexiqueEn?.categories) || etat.lexique.categories || {};
+  // L'ordre et les clés viennent du lexique français ; le titre anglais, clé par clé (lexique-en.json).
+  const categories = etat.lexique.categories ?? {};
   // Chaque catégorie est un menu dépliant, fermé à l'arrivée : on voit les six titres d'un
   // coup, on ouvre celui qu'on cherche. Une recherche en cours ouvre les catégories où
   // elle a trouvé quelque chose — sinon les résultats resteraient cachés.
@@ -1010,7 +1300,7 @@ function rendreLexique() {
       // héritent, sans qu'aucune teinte soit écrite dans le HTML.
       return (
         `<details class="lexique-cat cat-${echapper(cle)}"${recherche ? ' open' : ''}>` +
-        `<summary><h2 class="section">${echapper(titre)}<span class="compte-cat">${dedans.length} ${tr(s(dedans.length, 'terme', 'termes'), s(dedans.length, 'term', 'terms'))}</span></h2></summary>` +
+        `<summary><h2 class="section">${echapper((EN && etat.lexiqueEn?.categories?.[cle]) || titre)}<span class="compte-cat">${dedans.length} ${tr(s(dedans.length, 'terme', 'termes'), s(dedans.length, 'term', 'terms'))}</span></h2></summary>` +
         `<div class="bloc-lexique">${dedans.map(entreeLexique).join('')}</div>` +
         `</details>`
       );
@@ -1024,12 +1314,19 @@ function rendreLexique() {
 // Les scrapers marquent `nouveau` sur ce qui n'était pas là à l'extraction précédente.
 // Quand rien n'a bougé (ou à la toute première extraction, où il n'y a rien à comparer),
 // on montre l'activité la plus récente en le disant clairement, plutôt qu'une page vide.
-function evenementsRecents() {
+export function evenementsRecents() {
+  // Page pré-rendue, jeux complets pas encore chargés : le fil vient de data/pages/accueil.json, le
+  // début du même fil, déjà trié et choisi au build (quebec/scripts/prerendre.js).
+  if (!etat.decisions && etat.fil) {
+    const { evenements, mode, total } = etat.fil;
+    return { evenements, nouveaux: evenements, mode, total };
+  }
   const evenements = [];
   for (const d of etat.decisions?.decisions ?? []) {
     // Martin, 9 nov. 2026 : le fil ne montre que les décisions qui ont un résumé IA.
     if (!resumePour(d)) continue;
     if (d.theme === 'procedure') continue;   // ni ordre du jour ni procès-verbal en vitrine, même résumés (9 nov. 2026)
+    if (VILLE.horsDecisions && !estDecision(d)) continue;   // ni procès-verbal ni point de procédure (Lévis)
     evenements.push({ date: d.date, genre: 'decision', nouveau: d.nouveau === true, data: d });
   }
   // Les votes nominatifs n'ont pas de résumé IA : ils restent sur leur page, hors du fil (9 nov. 2026).
@@ -1144,10 +1441,12 @@ function rendreEtat() {
   ajouter(tr('Résumés en langage clair', 'Plain-language summaries'), etat.resumes, etat.resumes ? `${etat.resumes.nombre}` : '');
   ajouter(tr('Membres du conseil', 'Council members'), etat.elus, etat.elus ? `${etat.elus.nombre}` : '');
   ajouter(tr('Districts électoraux', 'Electoral districts'), etat.districts, etat.districts ? `${etat.districts.nombre}` : '');
-  ajouter(tr("Conseil d'agglomération", 'Urban Agglomeration Council'), etat.agglomeration, etat.agglomeration ? `${etat.agglomeration.nombre}` : '');
+  if (VILLE.agglomeration) ajouter(tr("Conseil d'agglomération", 'Urban Agglomeration Council'), etat.agglomeration, etat.agglomeration ? `${etat.agglomeration.nombre}` : '');
+  if (VILLE.presences) ajouter(tr('Présences aux séances', 'Meeting attendance'), etat.presences, etat.presences ? `${etat.presences.seances.length} ${tr('séances', 'meetings')}` : '');
   if (etat.decisions?.seances) {
     lignes.push(`<tr><td>${tr("Séances de l'année", 'Meetings this year')}</td><td>${etat.decisions.seancesLues ?? 0} ${tr('procès-verbaux lus', 'minutes read')}</td><td class="n">${etat.decisions.seancesEnAttente ?? 0} ${tr('en attente', 'awaiting')}</td></tr>`);
   }
+  if (VILLE.cucq) ajouter(tr("Commission d'urbanisme (CUCQ)", 'Urban Planning Commission (CUCQ)'), etat.cucq, etat.cucq ? `${etat.cucq.nombre}` : '');
   $('#etat-donnees').innerHTML =
     `<table><thead><tr><th>${tr('Jeu', 'Dataset')}</th><th>${tr('Dernière extraction', 'Last extraction')}</th><th class="n">${tr('Chargé / disponible', 'Loaded / available')}</th></tr></thead><tbody>${lignes.join('')}</tbody></table>` +
     (etat.resumes?.modele ? `<p class="compte">${tr('Modèle utilisé pour les résumés&nbsp;:', 'Model used for the summaries:')} <code>${echapper(etat.resumes.modele)}</code>.</p>` : '');
@@ -1179,51 +1478,85 @@ function rendreEtat() {
 }
 
 // ---------- démarrage ----------
+// Les jeux propres à certaines villes, lus seulement si ville.js les déclare (sinon un 404 par page).
+const JEUX_EN_PLUS = [
+  ...(VILLE.agglomeration ? ['agglomeration'] : []),
+  ...(VILLE.cucq ? ['cucq'] : []),
+  ...(VILLE.presences ? ['presences'] : []),
+];
 const BESOINS = {
   accueil: ['decisions', 'votes', 'elus', 'resumes'],
   decisions: ['decisions', 'resumes', 'votes-decisions'],
-  votes: ['votes'],
-  conseil: ['elus', 'districts', 'votes', 'decisions', 'agglomeration'],
+  votes: ['votes', 'elus'],
+  conseil: ['elus', 'districts', 'votes', 'decisions', ...JEUX_EN_PLUS],
   lexique: ['lexique'],
-  sources: ['decisions', 'votes', 'elus', 'resumes', 'districts', 'agglomeration'],
+  sources: ['decisions', 'votes', 'elus', 'resumes', 'districts', ...JEUX_EN_PLUS],
 };
+
+// Les jeux complets de la page, chargés une seule fois. Sur une page pré-rendue, on ne les demande
+// qu'au premier geste qui en a besoin (recherche, filtre, « afficher plus ») : le premier écran est
+// déjà dans le HTML.
+let promesseJeux = null;
+function chargerJeux(page) {
+  promesseJeux ??= (async () => {
+    const noms = BESOINS[page] ?? [];
+    const jeux = await Promise.all(noms.map(charger));
+    noms.forEach((nom, i) => {
+      etat[nom] = jeux[i];
+    });
+    // En anglais : les puces traduites remplacent les françaises, et l'objet de chaque décision
+    // aussi (data/resumes-en.json). Ce qui n'est pas encore traduit reste en français, et le dit.
+    if (EN && (etat.resumes || etat.decisions)) {
+      const en = await charger('resumes-en');
+      etat.traductionsEn = en;
+      const traductions = en?.traductions ?? {};
+      const objets = en?.objets ?? {};
+      for (const r of etat.resumes?.resumes ?? []) {
+        const t = traductions[r.id];
+        if (t) Object.assign(r, { puces: t.puces, montantPrincipal: t.montantPrincipal });
+        else if (r.puces?.length) r.francaisSeulement = true;
+      }
+      for (const d of etat.decisions?.decisions ?? []) {
+        const o = objets[d.id];
+        if (o?.en) d.objet = o.en;
+      }
+    }
+    if (EN && page === 'lexique') etat.lexiqueEn = await charger('lexique-en');
+    etat.parId = new Map((etat.resumes?.resumes ?? []).map((r) => [r.id, r]));
+    // Le manifeste de l'archive vit dans un sous-dossier ; seule la page des sources le lit,
+    // et elle ne lit que le manifeste, jamais les fichiers d'années eux-mêmes.
+    if (page === 'sources' && VILLE.archives) etat.archives = await charger('archives/index');
+  })();
+  return promesseJeux;
+}
+
+// PRÉ-RENDU (6 nov. 2026, Québec). quebec/scripts/prerendre.js exécute ce même moteur au build et écrit
+// le premier écran dans le HTML (body[data-prerendu]). Ici, rien à redessiner : la page est déjà la
+// bonne. Seul un lien profond (?q=, ?instance=, ?projet=, ?vote=) change le premier écran : celui-là
+// se rend comme avant, jeux complets chargés. Une page sans data-prerendu se rend toujours.
+const PRERENDU = document.body.dataset.prerendu === '1';
 
 async function init() {
   const page = document.body.dataset.page;
-  const noms = BESOINS[page] ?? [];
-  const jeux = await Promise.all(noms.map(charger));
-  noms.forEach((nom, i) => {
-    etat[nom] = jeux[i];
-  });
-  // En anglais : les puces traduites remplacent les françaises, et l'objet de chaque décision
-  // aussi (data/resumes-en.json). Ce qui n'est pas encore traduit reste en français, et le dit.
-  if (EN && (etat.resumes || etat.decisions)) {
-    const en = await charger('resumes-en');
-    etat.traductionsEn = en;
-    const traductions = en?.traductions ?? {};
-    const objets = en?.objets ?? {};
-    for (const r of etat.resumes?.resumes ?? []) {
-      const t = traductions[r.id];
-      if (t) Object.assign(r, { puces: t.puces, montantPrincipal: t.montantPrincipal });
-      else if (r.puces?.length) r.francaisSeulement = true;
-    }
-    for (const d of etat.decisions?.decisions ?? []) {
-      const o = objets[d.id];
-      if (o?.en) d.objet = o.en;
-    }
-  }
-  if (EN && page === 'lexique') etat.lexiqueEn = await charger('lexique-en');
-  etat.parId = new Map((etat.resumes?.resumes ?? []).map((r) => [r.id, r]));
-  // Le manifeste de l'archive vit dans un sous-dossier ; seule la page des sources le lit,
-  // et elle ne lit que le manifeste, jamais les fichiers d'années eux-mêmes.
-  if (page === 'sources') etat.archives = await charger('archives/index');
+  const parametres = new URLSearchParams(location.search);
+  const lienProfond = (page === 'decisions' && ['q', 'instance', 'projet', 'vote'].some((p) => parametres.has(p))) || (page === 'votes' && parametres.has('q'));
+  if (PRERENDU && !lienProfond && !EN) return;
+  await chargerJeux(page);
 
   const requis = { accueil: 'decisions', decisions: 'decisions', votes: 'votes', conseil: 'elus', lexique: 'lexique', sources: null }[page];
   if (requis && !etat[requis]) {
     messageSansDonnees();
     return;
   }
+  // Les pages qui vivent des procès-verbaux : si la dernière extraction n'en a lu aucun, on ne
+  // remplit pas la page de zéros, on dit ce qui s'est passé.
+  if (['accueil', 'decisions'].includes(page) && extractionEnPanne(etat.decisions)) {
+    messageExtractionEnPanne(etat.decisions);
+    return;
+  }
   if ($('#chargement')) $('#chargement').hidden = true;
+  // Lien profond sur une page pré-rendue : le script en ligne avait caché la liste du premier écran.
+  if (PRERENDU && $('#liste-decisions')) $('#liste-decisions').hidden = false;
 
   if (page === 'accueil') rendreAccueil();
   if (page === 'decisions') {
@@ -1265,24 +1598,36 @@ async function init() {
     rendreElus();
     rendreComiteExecutif();
     rendreAgglomeration();
+    rendreCucq();
+    rendreArrondissements();
   }
   if (page === 'lexique') rendreLexique();
   if (page === 'sources') rendreEtat();
 }
 
 // Filtres et pagination : câblés seulement si la page les contient.
-document.addEventListener('input', (e) => {
+// Sur une page pré-rendue, chaque geste attend d'abord les jeux complets (chargerJeux, une fois).
+const jeux = () => chargerJeux(document.body.dataset.page);
+document.addEventListener('input', async (e) => {
   if (e.target.matches('#rech-decisions, #filtre-type, #filtre-instance, #filtre-theme, #filtre-resume, #filtre-vote, #affichage')) {
+    await jeux();
     etat.limiteDecisions = PAS;
     etat.limiteSeances = PAS_SEANCES;
     rendreDecisions();
   }
-  if (e.target.matches('#rech-lexique')) rendreLexique();
+  if (e.target.matches('#rech-lexique')) { await jeux(); rendreLexique(); }
   if (e.target.matches('#rech-votes, #filtre-instance-votes, #filtre-theme-votes')) {
+    await jeux();
     etat.limiteVotes = PAS_VOTES_DEPART;
     rendreVotes();
   }
 });
+// Le chargement part dès qu'une main approche des outils : la frappe qui suit n'attend presque plus.
+for (const geste of ['focusin', 'pointerdown']) {
+  document.addEventListener(geste, (e) => {
+    if (PRERENDU && e.target.closest?.('.barre-outils, #plus-decisions, #plus-votes')) jeux();
+  });
+}
 // Ouvrir une séance ouvre aussi sa première décision, si elle porte un résumé IA (9 nov. 2026).
 if (existe('#liste-decisions')) {
   $('#liste-decisions').addEventListener('toggle', (ev) => {
@@ -1293,7 +1638,8 @@ if (existe('#liste-decisions')) {
   }, true);
 }
 if (existe('#plus-decisions')) {
-  $('#plus-decisions').addEventListener('click', () => {
+  $('#plus-decisions').addEventListener('click', async () => {
+    await jeux();
     etat.limiteDecisions += PAS;
     etat.limiteSeances += PAS_SEANCES;
     rendreDecisions();
@@ -1306,7 +1652,8 @@ if (existe('#plus-fil')) {
   });
 }
 if (existe('#plus-votes')) {
-  $('#plus-votes').addEventListener('click', () => {
+  $('#plus-votes').addEventListener('click', async () => {
+    await jeux();
     etat.limiteVotes += PAS_VOTES;
     rendreVotes();
   });
@@ -1365,7 +1712,9 @@ document.addEventListener('click', (e) => {
   bouton.textContent = onDeplie ? tr('Tout replier', 'Collapse all') : tr('Tout déplier', 'Expand all');
 });
 
-init();
+// Exporté pour quebec/scripts/prerendre.js, qui attend la fin du rendu avant d'écrire la page.
+export const rendu = init();
+export { etat };
 
 // ---------- Bascule clair / sombre ----------
 // Le thème est déjà posé sur <html> par le script en <head> (avant le premier rendu).
