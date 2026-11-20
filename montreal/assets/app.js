@@ -656,7 +656,7 @@ function tableauVotesContre(votes) {
     }
   }
   return [...parPersonne.entries()]
-    .sort((a, b) => b[1].n - a[1].n)
+    .sort((a, b) => a[0].localeCompare(b[0], 'fr'))   // ordre alphabétique : pas de palmarès (20 nov. 2026, comme Laval)
     .map(([nom, fiche]) => {
       const principale = [...fiche.instances.entries()].sort((a, b) => b[1] - a[1])[0];
       return `<tr><td>${echapper(nom)}</td><td>${echapper(principale ? lib(principale[0]) : '—')}</td><td class="n">${fiche.n}</td></tr>`;
@@ -670,15 +670,14 @@ function rendreDissidence(votes) {
   if ($('#table-dissidence')) {
     $('#table-dissidence tbody').innerHTML = tableauVotesContre(votes);
     // Le tableau est replié : son résumé doit donc porter assez d'information pour qu'on
-    // sache s'il vaut la peine de l'ouvrir — le nombre de personnes et les trois premières.
+    // sache s'il vaut la peine de l'ouvrir : le nombre de personnes, sans nommer personne en tête.
     if ($('#resume-dissidence')) {
       const compte = new Map();
       for (const v of votes) for (const n of v.contre) compte.set(n, (compte.get(n) ?? 0) + 1);
-      const tri = [...compte.entries()].sort((a, b) => b[1] - a[1]);
-      const tete = tri.slice(0, 3).map(([n, c]) => `${n} (${c})`).join(', ');
+      const n = compte.size;
       $('#resume-dissidence').textContent = EN
-        ? `${tri.length} ${s(tri.length, 'person', 'people')}` + (tete ? `. Most: ${tete}` : '')
-        : `${tri.length} personne${tri.length > 1 ? 's' : ''}` + (tete ? `. En tête : ${tete}` : '');
+        ? `${n} ${s(n, 'person', 'people')}, in alphabetical order`
+        : `${n} personne${n > 1 ? 's' : ''}, en ordre alphabétique`;
     }
   }
 
