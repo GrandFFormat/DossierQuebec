@@ -17,7 +17,7 @@
   // site (plus son volet de ville s'il y a lieu) et leur page garde le domaine, pour ne pas mêler
   // l'accueil de DC avec celui de DQ.
   var SITES = { 'dossiercanada.ca': 'canada', 'dossierontario.ca': 'ontario', 'dossiersaskatchewan.ca': 'saskatchewan', 'dossiernbrunswick.ca': 'nbrunswick', 'dossierbc.ca': 'bc' };
-  var VOLETS = ['ottawa', 'vancouver'];
+  var VOLETS = ['ottawa', 'vancouver', 'fredericton'];
   var HOTE = location.hostname.replace(/^www\./, '');
   var SITE = SITES[HOTE] || '';
   if (!SITE && HOTE !== 'dossierquebec.ca' && !/^(localhost|127\.0\.0\.1|\[::1\])$/.test(HOTE)) return;   // copie de prévisualisation, domaine inconnu

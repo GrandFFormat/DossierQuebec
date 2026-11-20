@@ -12,7 +12,7 @@
   var PERIODES = [[1, 'Aujourd’hui'], [7, '7 jours'], [30, '30 jours'], [90, '90 jours']];
   var jours = 7;
   try { jours = parseInt(localStorage.getItem('dq:admin-jours'), 10) || 7; } catch (e) {}
-  var NOMS_VILLE = { '': 'Assemblée nationale', quebec: 'Ville de Québec', montreal: 'Ville de Montréal', levis: 'Ville de Lévis', longueuil: 'Ville de Longueuil', laval: 'Ville de Laval', canada: 'DossierCanada', ontario: 'DossierOntario', 'ontario-ottawa': 'Ontario · Ottawa', saskatchewan: 'DossierSaskatchewan', nbrunswick: 'DossierNBrunswick', bc: 'DossierBC', 'bc-vancouver': 'BC · Vancouver' };
+  var NOMS_VILLE = { '': 'Assemblée nationale', quebec: 'Ville de Québec', montreal: 'Ville de Montréal', levis: 'Ville de Lévis', longueuil: 'Ville de Longueuil', laval: 'Ville de Laval', canada: 'DossierCanada', ontario: 'DossierOntario', 'ontario-ottawa': 'Ontario · Ottawa', saskatchewan: 'DossierSaskatchewan', nbrunswick: 'DossierNBrunswick', 'nbrunswick-fredericton': 'N.-B. · Fredericton', bc: 'DossierBC', 'bc-vancouver': 'BC · Vancouver' };
   var DEMO = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) && /[?&]demo=1/.test(location.search);
   var ouverts = {};
   var onglets = document.getElementById('tbOnglets');
@@ -286,7 +286,9 @@
     { nom: 'Ontario', site: 'https://dossierontario.ca', villes: [
       { cle: 'ottawa', nom: 'Ottawa', etat: 'pause', url: 'https://dossierontario.ca/ottawa/', file: null }
     ] },
-    { nom: 'Nouveau-Brunswick', site: 'https://dossiernbrunswick.ca', villes: [] },
+    { nom: 'Nouveau-Brunswick', site: 'https://dossiernbrunswick.ca', villes: [
+      { cle: 'fredericton', nom: 'Fredericton', etat: 'pause', url: 'https://dossiernbrunswick.ca/fredericton/', file: null, note: 'En ligne depuis le 19 nov. 2026, en pause (réactivation 150 $). Pas lu par api/represente.js : son avis de pause ne passe pas par avis-pause.js.' }
+    ] },
     { nom: 'Saskatchewan', site: 'https://dossiersaskatchewan.ca', villes: [] }
   ];
   var ETATS = { actif: ['Active', 'bleu'], pause: ['En pause', 'rouge'], apercu: ['Pas encore en ligne', 'gris'] };
