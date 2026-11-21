@@ -97,7 +97,7 @@
     var villes = (r.par_ville || []).map(function (v) { return { nom: NOMS_VILLE[v.ville] || v.ville, n: v.pages, detail: pluriel(v.visites, 'visite', 'visites'), sansRang: true }; });
     var provs = (r.par_provenance || []).filter(function (p) { return p.provenance; }).map(function (p) { return { nom: p.provenance === 'direct' ? 'Direct (adresse, favori, courriel)' : p.provenance, n: p.visites, detail: 'visites' }; });
     var pages = (r.par_page || []).map(function (p) { return { nom: titreCourt(p.titre) || p.page, sous: p.page, lien: p.page, n: p.pages, detail: pluriel(p.visites, 'visite', 'visites') }; });
-    var cibles = (r.par_cible || []).map(function (c) { return { nom: c.cible, sous: 'depuis ' + c.page, lien: c.page, n: c.clics, detail: 'clics' }; });
+    var cibles = (r.par_cible || []).filter(function (c) { return !/^(Accepter|Refuser|Accept|Decline)$/i.test(String(c.cible).trim()); }).map(function (c) { return { nom: c.cible, sous: 'depuis ' + c.page, lien: c.page, n: c.clics, detail: 'clics' }; });
 
     html += '<div class="tb-deux">' +
       '<section class="tb-bloc tb-villes">' + titre(jours > 1 ? '02' : '01', 'Sites et villes', 'Pages vues par site et par volet.') + liste('villes', villes, 10) + '</section>' +
