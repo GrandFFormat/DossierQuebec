@@ -2,9 +2,13 @@
 > dossiervillelevis@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit f307063 — Node v22.23.5
+Code : commit 0b15b9a — Node v22.23.5
 
 === Syntaxe du JavaScript du site ===
+
+=== Syntaxe de la configuration de Lévis ===
+
+=== Syntaxe du moteur commun des volets ===
 
 === Archivage des années révolues ===
 data/decisions.json porte l'année courante (2026) — rien à archiver.
@@ -51,8 +55,8 @@ Pastilles thématiques :
      17  Immobilier
     155  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-09-21) ===
-Fenêtre depuis 2026-09-21 : 10 séance(s) relue(s), 17 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-09-22) ===
+Fenêtre depuis 2026-09-22 : 10 séance(s) relue(s), 17 vote(s) conservé(s) du fichier précédent.
 
 20 votes nominaux écrits dans data/votes.json (10 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
@@ -73,7 +77,7 @@ Votes par décision : 18 décisions, 18 noms.
 ⚠ « Lexique, mesuré sur les procès-verbaux » a échoué (code 1) — on garde les données précédentes, ça attendra.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-09-21 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-09-22 pas encore résumés (plafond : 120)…
 651 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
@@ -100,6 +104,6 @@ levis : 30 décisions écrites dans la page des décisions (inchangé).
 --mois=2026-10 → Déjà publié : 2026-10. Rien à faire.
 
 === Bilan ===
-  étapes         : 18
+  étapes         : 20
   échecs         : aucun
   avertissements : Lexique, mesuré sur les procès-verbaux
