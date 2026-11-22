@@ -71,3 +71,12 @@
 
 /* Accueil des volets : le bloc suit le contenu de la page. */
 main > #infolettre > .cr{margin-top:36px}
+
+/* La boîte en couleur, pour qu'on la voie (Martin, 22 nov. 2026). */
+.cr{border:2px solid var(--accent,var(--gold,#0B8A4B));border-top-width:6px;background:color-mix(in srgb,var(--accent,var(--gold,#0B8A4B)) 11%,var(--carte,var(--card,#fff)));box-shadow:0 6px 22px color-mix(in srgb,var(--accent,var(--gold,#0B8A4B)) 22%,transparent)}
+.cr-tete{background:none;border:0;padding:0;position:static}
+.cr-tete h2{font-size:23px;color:var(--accent-encre,var(--encre,var(--ink,#16191D)))}
+.cr-chip{background:var(--carte,var(--card,#fff))}
+.cr-pdf{background:var(--carte,var(--card,#fff))}
+.cr-bouton,.cr-pdf:hover{color:var(--carte,var(--card,#fff));background:var(--accent,var(--gold,#0B8A4B))}
+.cr-bouton{font-size:15px;padding:10px 22px}
