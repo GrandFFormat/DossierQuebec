@@ -22,7 +22,7 @@ async function utilisateurDe(jeton) {
   const u = res?.ok ? await res.json() : null;
   return u?.id && /^[0-9a-f-]{36}$/.test(u.id) ? { id: u.id, email: u.email ?? '' } : null;
 }
-import { COURRIEL, VILLES_INFOLETTRE, LANGUES_PAR_VILLE, choixValide, deMois, dernierNumero, echapper, envoyerBienvenue, envoyerCourriels, idsSignes, lienSigne, nomComplet, offreDe, prochainEnvoiDe, pageDe, ASSEMBLEE, NOTES_INFOLETTRE } from './_infolettre.js';
+import { COURRIEL, VILLES_INFOLETTRE, LANGUES_PAR_VILLE, choixValide, deMois, dernierMois, dernierNumero, pagePdf, echapper, envoyerBienvenue, envoyerCourriels, idsSignes, lienSigne, nomComplet, offreDe, prochainEnvoiDe, pageDe, ASSEMBLEE, NOTES_INFOLETTRE } from './_infolettre.js';
 
 const jetonDe = (req) => String(req.headers.authorization ?? '').replace(/^Bearer\s+/i, '') || null;
 const corpsDe = (req) => {
@@ -53,8 +53,10 @@ const cleChoix = ({ ville, type = 'mensuel', arrondissement = '', langue = 'fr' 
 async function etat(u) {
   const inscriptions = {};
   if (u?.email) for (const i of await inscriptionsDe(u.email.toLowerCase())) inscriptions[cleChoix(i)] = i.statut;
+  const cles = Object.keys(VILLES_INFOLETTRE);
+  const mois = Object.fromEntries(await Promise.all(cles.map(async (c) => [c, c === ASSEMBLEE ? null : await dernierMois(c)])));
   return {
-    villes: Object.entries(VILLES_INFOLETTRE).map(([cle, nom]) => ({ cle, nom, offre: offreDe(cle), langues: LANGUES_PAR_VILLE[cle] ?? ['fr'], note: typeof NOTES_INFOLETTRE[cle] === 'string' ? NOTES_INFOLETTRE[cle] : (NOTES_INFOLETTRE[cle]?.fr ?? null),
+    villes: Object.entries(VILLES_INFOLETTRE).map(([cle, nom]) => ({ cle, nom, dernierMois: mois[cle], offre: offreDe(cle), langues: LANGUES_PAR_VILLE[cle] ?? ['fr'], note: typeof NOTES_INFOLETTRE[cle] === 'string' ? NOTES_INFOLETTRE[cle] : (NOTES_INFOLETTRE[cle]?.fr ?? null),
       noteEn: typeof NOTES_INFOLETTRE[cle] === 'object' ? (NOTES_INFOLETTRE[cle]?.en ?? null) : null })),
     connecte: Boolean(u),
     courriel: u?.email ?? null,
@@ -145,6 +147,23 @@ export default async function handler(req, res) {
     } catch (erreur) {
       console.error('infolettre :', action, erreur);
       return res.status(500).send(page('Erreur', '<p>Une erreur est survenue. Réessayez dans un moment.</p>'));
+    }
+  }
+
+  // ---------- le dernier compte rendu d'une ville, à enregistrer en PDF ----------
+  if (action === 'dernier' && req.method === 'GET') {
+    const ville = String(req.query?.ville ?? '');
+    const langue = req.query?.langue === 'en' ? 'en' : 'fr';
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    if (ville === ASSEMBLEE || !Object.hasOwn(VILLES_INFOLETTRE, ville)) return res.status(404).send(page('Introuvable', '<p>Cette ville n’a pas de compte rendu.</p>'));
+    try {
+      const numero = await dernierNumero({ ville, langue });
+      if (!numero) return res.status(404).send(page('Pas encore de compte rendu', '<p>Le premier s’en vient.</p>'));
+      res.setHeader('Cache-Control', 'public, s-maxage=3600');
+      return res.status(200).send(pagePdf(numero, langue));
+    } catch (erreur) {
+      console.error('infolettre : dernier', erreur);
+      return res.status(500).send(page('Erreur', '<p>Réessayez dans un instant.</p>'));
     }
   }
 

@@ -47,6 +47,10 @@
 .cr-lang{padding:3px 8px;border-radius:6px;font-size:12.5px;font-weight:700}
 .cr-lang:has(input:checked){background:var(--fond-2,var(--paper-2,#EEF1F4))}
 
+.cr-pdf{display:inline-flex;align-items:center;margin-left:auto;padding:5px 12px;border:2px solid var(--accent,var(--gold,#0B8A4B));border-radius:999px;font-size:13.5px;font-weight:700;line-height:1.3;text-decoration:none;color:inherit}
+.cr-pdf:hover{background:var(--accent,var(--gold,#0B8A4B));color:#fff}
+.cr-langues + .cr-pdf{margin-left:0}
+
 .cr-form{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
 .cr-form input[type="email"]{flex:1 1 220px;font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--ligne-forte,var(--line,#C2CAD2));border-radius:6px;background:var(--fond,var(--paper,#fff));color:inherit}
 .cr-bouton{font:inherit;font-size:14px;font-weight:700;cursor:pointer;color:#fff;background:var(--accent,var(--gold,#0B8A4B));border:0;border-radius:6px;padding:8px 16px}

@@ -107,11 +107,13 @@ function rangeeVille(etat, v, mode) {
     ? `<span class="cr-langues" role="group" aria-label="${tr('Langue des courriels', 'Email language')}">${langues.map((lang) =>
       `<label class="cr-lang" title="${NOM_LANGUE[lang] ?? lang}"><input type="checkbox" class="ab-langue-case" data-ville="${echapper(ville)}" data-langue="${lang}"${cochees.includes(lang) ? ' checked' : ''}><span>${lang.toUpperCase()}</span></label>`).join('')}</span>`
     : caseLangueCachee(ville);
+  // Le dernier compte rendu, sans s'inscrire (Martin, 22 nov. 2026).
+  const pdf = v.dernierMois ? `<a class="cr-pdf" data-mesure="infolettre-pdf-${echapper(ville)}" href="/api/infolettre?action=dernier&amp;ville=${encodeURIComponent(ville)}&amp;langue=${tr('fr', 'en')}" target="_blank" rel="noopener">⬇ ${tr('Dernier compte rendu (PDF)', 'Latest report (PDF)')}</a>` : '';
   const note = (v.note || v.noteEn) ? `<p class="cr-note">${v.noteEn ? tr(v.note, v.noteEn) : v.note}</p>` : '';
 
   return `<div class="cr-ville ab-mtl-blocs" data-ville="${echapper(ville)}" data-mode="${mode}">
     <div class="cr-ville-nom">${echapper(v.nom)}</div>
-    <div class="cr-ville-choix">${chip(v.offre.find((o) => o.cle === 'mensuel'))}${chip(v.offre.find((o) => o.cle === 'conseil'))}${arr}${langue}</div>
+    <div class="cr-ville-choix">${chip(v.offre.find((o) => o.cle === 'mensuel'))}${chip(v.offre.find((o) => o.cle === 'conseil'))}${arr}${langue}${pdf}</div>
     ${note}
   </div>`;
 }

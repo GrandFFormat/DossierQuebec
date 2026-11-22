@@ -215,6 +215,23 @@ export const dernierNumero = async ({ ville, type = 'mensuel', arrondissement = 
   return (await q(langue))[0] ?? (langue !== 'fr' ? (await q('fr'))[0] : null) ?? null;
 };
 
+// Le mois du plus récent compte rendu publié d'une ville : décide si le bouton PDF s'affiche.
+export const dernierMois = async (ville) => {
+  const l = await supabase(`/rest/v1/infolettre_numeros?ville=eq.${ville}&type=eq.mensuel&arrondissement=eq.&publie_le=not.is.null&select=mois&order=mois.desc&limit=1`).catch(() => []);
+  return l?.[0]?.mois ?? null;
+};
+
+// Le compte rendu en page web, prêt à enregistrer en PDF : sans bandeau ni lien de désinscription.
+export function pagePdf(numero, langue = 'fr') {
+  const en = langue === 'en';
+  const brut = aUneSection(numero.html) ? choisirVersion(numero.html, false) : numero.html;
+  const corps = brut.replace('<!--BANDEAU-->', '').replace('<!--PROJETS-->', '').replace('<!--DESINSCRIPTION-->', '');
+  const tete = `<meta name="robots" content="noindex"><style>#barre-pdf{position:sticky;top:0;z-index:9;display:flex;gap:12px;align-items:center;justify-content:center;padding:10px;background:#16191D;color:#fff;font:14px Arial,sans-serif}#barre-pdf button{font:inherit;font-weight:700;cursor:pointer;color:#16191D;background:#3ddc84;border:0;border-radius:6px;padding:7px 14px}@media print{#barre-pdf{display:none}body,body *{-webkit-print-color-adjust:exact;print-color-adjust:exact}}</style>`;
+  const barre = `<div id="barre-pdf"><span>${en ? 'Choose “Save as PDF” as the printer.' : 'Choisissez « Enregistrer au format PDF » comme imprimante.'}</span><button type="button" onclick="print()">${en ? 'Save as PDF' : 'Enregistrer en PDF'}</button></div><script>addEventListener('load',function(){setTimeout(print,300)})</script>`;
+  const avecTete = /<\/head>/i.test(corps) ? corps.replace(/<\/head>/i, `${tete}</head>`) : tete + corps;
+  return /<body[^>]*>/i.test(avecTete) ? avecTete.replace(/<body[^>]*>/i, (m) => m + barre) : barre + avecTete;
+}
+
 // Parmi des inscriptions, les comptes dont l'abonnement est actif EN CE MOMENT (même règle
 // qu'api/_stripe.js, estActive). Une inscription sans compte (user_id vide) n'est jamais abonnée.
 export async function abonnesParmi(inscriptions) {
