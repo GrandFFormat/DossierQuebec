@@ -82,7 +82,7 @@ function ligneSite(etat, v, mode) {
 }
 
 // Une ville : son nom, puis ses choix sur une ligne.
-function rangeeVille(etat, v, mode) {
+function rangeeVille(etat, v, mode, precoche = false) {
   const ville = v.cle;
   const langues = languesDe(v);
   const actives = mode === 'boite' ? languesActives(etat, v) : [];
@@ -93,7 +93,7 @@ function rangeeVille(etat, v, mode) {
   const chip = (o) => {
     if (!o) return '';
     const L = libSorte(o);
-    const coche = mode === 'boite' && sorteActive(etat, ville, o.cle, cochees);
+    const coche = (mode === 'boite' && sorteActive(etat, ville, o.cle, cochees)) || (precoche && o.cle === 'mensuel');
     return `<label class="cr-chip" title="${echapper(`${L.nom} — ${L.rythme}. ${L.quoi}`)}">
       <input type="checkbox" class="ab-sorte-ville" data-ville="${echapper(ville)}" data-type="${echapper(o.cle)}"${coche ? ' checked' : ''}><span>${COURT[o.cle]?.() ?? echapper(L.nom)}</span>
     </label>`;
@@ -118,13 +118,13 @@ function rangeeVille(etat, v, mode) {
   </div>`;
 }
 
-function bloc(etat, { site, villes, mode, titre }) {
+function bloc(etat, { site, villes, mode, titre, precoche = false }) {
   const chapeau = villes.length
     ? `<p class="cr-chapeau"><b>${villes.length > 1 ? tr('Vos villes.', 'Your cities.') : tr('La ville.', 'The city.')}</b> ${tr('Ce que la ville a décidé, une fois par mois. En plus, si vous voulez : chaque séance du conseil, votre arrondissement.', 'What the city decided, once a month. On top, if you want: each council meeting, your borough.')}</p>`
     : '';
   return `<header class="cr-tete"><h2 id="crTitre">📬 ${titre}</h2><span class="cr-gratuit">${tr('Gratuit · un clic pour se désinscrire, dans chaque courriel', 'Free · one click to unsubscribe, in every email')}</span></header>
     ${site ? ligneSite(etat, site, mode) : ''}
-    ${chapeau}${villes.map((v) => rangeeVille(etat, v, mode)).join('')}`;
+    ${chapeau}${villes.map((v) => rangeeVille(etat, v, mode, precoche)).join('')}`;
 }
 
 // Les choix cochés (mode formulaire) : langues × sortes × arrondissements, par ville.
@@ -165,14 +165,14 @@ export async function formulaireInfolettre(zone, { ville = null } = {}) {
   const villes = etat.villes.filter((v) => v.cle !== SITE && (!ville || v.cle === ville));
   if (!site && !villes.length) { zone.hidden = true; return; }
   const titre = ville
-    ? tr(`Les courriels de ${echapper(villes[0].nom)}`, `${echapper(villes[0].nom)} emails`)
+    ? tr(`Les décisions de ${echapper(villes[0].nom)} dans vos courriels`, `${echapper(villes[0].nom)} council decisions by email`)
     : tr('Les courriels', 'The emails');
 
   // La même zone a pu porter la boîte connectée (déconnexion) : ses gestionnaires n'ont plus cours.
   zone.onchange = null;
   zone.onclick = null;
   zone.innerHTML = `<form class="cr" novalidate aria-labelledby="crTitre">
-    ${bloc(etat, { site, villes, mode: 'formulaire', titre })}
+    ${bloc(etat, { site, villes, mode: 'formulaire', titre, precoche: Boolean(ville) && villes.length === 1 })}
     <div class="cr-form">
       <input type="email" name="email" required maxlength="200" autocomplete="email" placeholder="${tr('Votre courriel', 'Your email')}" aria-label="${tr('Votre courriel', 'Your email')}" value="${echapper(etat.courriel ?? '')}">
       <input type="text" name="site_web" tabindex="-1" autocomplete="off" aria-hidden="true" class="ab-pot-de-miel">
@@ -182,6 +182,7 @@ export async function formulaireInfolettre(zone, { ville = null } = {}) {
     <p class="cr-pied">${tr('Vous recevez tout de suite le plus récent de chaque sorte cochée. Votre adresse ne sert qu’à ça.', 'You get the latest of each kind right away. Your address is used for nothing else.')}</p>
   </form>`;
   zone.hidden = false;
+  if (location.hash === '#infolettre') zone.scrollIntoView({ block: 'center' });
 
   const form = zone.querySelector('form');
   const etatTexte = form.querySelector('.cr-etat');

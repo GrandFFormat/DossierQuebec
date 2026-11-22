@@ -2870,3 +2870,9 @@ if (VILLE.mesure && !window.__dqMesure) {
   script.defer = true;
   document.head.appendChild(script);
 }
+
+// ========== RAPPEL DES COURRIELS AU BAS DES PAGES (22 nov. 2026) ==========
+// Allumé par `courriels: true` dans ville.js : les visiteurs de Google n'arrivent pas par l'accueil.
+if (VILLE.courriels && document.body.dataset.page !== 'accueil') {
+  document.querySelector('footer')?.insertAdjacentHTML('beforebegin', `<aside class="rappel-courriels"><p><strong>${tr(`Les décisions de ${echapper(VILLE.nom)} dans vos courriels`, `${echapper(VILLE.nom)} council decisions by email`)}</strong> ${tr('Une fois par mois, gratuit.', 'Once a month, free.')}</p><a data-mesure="rappel-courriels" href="./#infolettre">${tr('M’inscrire', 'Subscribe')}</a></aside>`);
+}

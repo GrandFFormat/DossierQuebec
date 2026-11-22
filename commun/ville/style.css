@@ -879,3 +879,9 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 @keyframes haut-envol { 0% { transform: none; opacity: 1; } 15% { transform: translateY(8px) scale(1.1); opacity: 1; } 100% { transform: translateY(var(--envol, -400px)) scale(.6); opacity: 0; } }
 .haut.envol { animation: haut-envol .7s cubic-bezier(.5,0,.2,1) forwards; opacity: 1 !important; pointer-events: none; }
 @media (prefers-reduced-motion: reduce) { .haut.envol { animation: none; } }
+
+/* Rappel des courriels au bas des pages (22 nov. 2026). */
+.rappel-courriels{box-sizing:border-box;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;max-width:1120px;margin:28px auto;padding:14px 18px;border:2px solid var(--accent);border-radius:12px;background:color-mix(in srgb,var(--accent) 11%,var(--carte,#fff))}
+.rappel-courriels p{margin:0}
+.rappel-courriels a{padding:8px 18px;border-radius:6px;font-weight:700;text-decoration:none;color:var(--carte,#fff);background:var(--accent)}
+@media (max-width:1160px){.rappel-courriels{margin-left:16px;margin-right:16px}}
