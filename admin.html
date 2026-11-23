@@ -29,7 +29,10 @@
   .tb-onglets a{font-family:'Archivo',sans-serif; font-size:14px; font-weight:800; padding:7px 12px; color:#fff; text-decoration:none; border-bottom:3px solid transparent;}
   .tb-onglets a:hover{border-bottom-color:var(--gold-pale);}
   .tb-onglets button[aria-pressed="true"]{border-bottom-color:var(--yellow); color:var(--yellow);}
-  @media (max-width:620px){ .tb-onglets{order:3; flex-basis:100%; margin:0;} .tb-onglets button{flex:1;} }
+  @media (max-width:620px){
+    .tb-onglets{order:3; flex-basis:100%; margin:0; display:grid; grid-template-columns:repeat(2, minmax(0, 1fr));}
+    .tb-onglets button, .tb-onglets a{min-width:0; padding:7px 6px; text-align:center; line-height:1.2;}
+  }
 
   /* Onglet « Représentez votre ville » : demandes, enchères, visites. */
   .tb-groupe{margin:0 0 22px;}
