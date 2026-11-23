@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-19T17:29:28.338Z",
+ "generatedAt": "2026-11-23T20:25:59.654Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,45 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-09-20",
+  "depuis": "2026-09-24",
   "plafond": 120
  },
- "nombre": 1872,
- "genereCetteFois": 7,
+ "nombre": 1873,
+ "genereCetteFois": 1,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.2826,
-  "jetonsEntree": 40162,
-  "jetonsSortie": 3271
+  "montant": 0.0478,
+  "jetonsEntree": 6880,
+  "jetonsSortie": 535
  },
  "resumes": [
+  {
+   "id": "DG2026-044.pdf",
+   "numero": "DG2026-044",
+   "date": "2026-11-20",
+   "unite": "Direction générale",
+   "objet": "Adoption de la Politique de gestion d'actifs de la Ville de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/DG2026-044.pdf",
+   "puces": [
+    "La Ville de Québec adopte une nouvelle Politique de gestion d'actifs, qui remplace la Politique de gestion durable des actifs intégrée au Cadre financier 2023-2032.",
+    "La politique couvre maintenant tous les actifs municipaux : routes et infrastructures civiles, bâtiments, actifs industriels, informatiques, culturels, récréatifs, naturels et véhicules.",
+    "Elle met en place un cadre de gouvernance qui précise qui fait quoi aux niveaux stratégique, transversal et sectoriel, avec une reddition de comptes.",
+    "Huit principes directeurs encadrent les décisions : cohérence, connaissance, globalité, harmonisation, durabilité, engagement, innovation et responsabilité.",
+    "La Ville veut gérer ses actifs sur l'ensemble de leur cycle de vie (acquisition, exploitation, entretien, renouvellement, disposition) en tenant compte des coûts, des risques et des niveaux de service à la population.",
+    "La politique poursuit la démarche de gestion des actifs approuvée en 2024, qui prévoyait notamment un plan de gestion d'actifs en eau.",
+    "Le dossier doit être étudié par le conseil de la ville et le conseil d'agglomération le 2 décembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-23T20:25:59.653Z",
+   "jetons": {
+    "entree": 6880,
+    "sortie": 535
+   }
+  },
   {
    "id": "AP2026-360.pdf",
    "numero": "AP2026-360",
