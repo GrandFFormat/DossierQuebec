@@ -2,7 +2,7 @@
 > dossiervillelevis@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 7f9149e — Node v22.23.5
+Code : commit 863ee26 — Node v22.23.5
 
 === Syntaxe du JavaScript du site ===
 
@@ -15,32 +15,6 @@ data/decisions.json porte l'année courante (2026) — rien à archiver.
 
 === Consultations publiques ===
 Consultations : 0 à venir.
-
-=== Membres du conseil ===
-16 membres écrits dans data/elus.json :
-  maire        Steven Blaney                                                                Prospérité Lévis — Équipe Steven Blaney
-  district  1  Anthony Dufour             Saint-Étienne      Chutes-de-la-Chaudière-Ouest   Repensons Lévis — Équipe Serge Bonin
-  district  2  Isabelle Lefebvre          Saint-Nicolas      Chutes-de-la-Chaudière-Ouest   Repensons Lévis — Équipe Serge Bonin
-  district  3  Audrey Bédard              Villieu            Chutes-de-la-Chaudière-Ouest   Repensons Lévis — Équipe Serge Bonin
-  district  4  Benoit Forget-Chiasson     Saint-Rédempteur   Chutes-de-la-Chaudière-Ouest   Lévis Force 10 — Équipe Isabelle Demers
-  district  5  Daniel Saindon             Charny             Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
-  district  6  Karine Lavertu             Breakeyville       Chutes-de-la-Chaudière-Est     Lévis Force 10 — Équipe Isabelle Demers
-  district  7  Alain Quirion              Saint-Jean         Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
-  district  8  Erik Bilodeau              Taniata            Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
-  district  9  Anick Tremblay             Saint-Romuald      Chutes-de-la-Chaudière-Est     Prospérité Lévis — Équipe Steven Blaney
-  district 10  Anne-Marie Tremblay        Notre-Dame         Desjardins                     Prospérité Lévis — Équipe Steven Blaney
-  district 11  Jean Demers                Saint-David        Desjardins                     Prospérité Lévis — Équipe Steven Blaney
-  district 12  Jean Leblond               Christ-Roi         Desjardins                     Prospérité Lévis — Équipe Steven Blaney
-  district 13  Olivier Biron              Bienville          Desjardins                     Prospérité Lévis — Équipe Steven Blaney
-  district 14  Mélanie Sicotte            Lauzon             Desjardins                     Prospérité Lévis — Équipe Steven Blaney
-  district 15  Éric Nadeau                Pintendre          Desjardins                     Repensons Lévis — Équipe Serge Bonin
-Partis : {"Prospérité Lévis — Équipe Steven Blaney":10,"Repensons Lévis — Équipe Serge Bonin":4,"Lévis Force 10 — Équipe Isabelle Demers":2}
-
-=== Districts électoraux ===
-Source : https://www.donneesquebec.ca/recherche/dataset/e53425f2-e4cc-4eec-b978-0b862c7a0c56/resource/ee12484f-cc90-4340-9edc-8e17de3e1422/download/districts-electoraux.json (mise à jour du 2022-07-21)
-15 districts écrits dans data/districts.json
-Contours : 12098 points -> 1158 (498 ko -> 35 ko)
-  ⚠ Contours du jeu ouvert mis à jour le 2022-07-21, antérieurs au Règlement RV-2024-34-65 et aux ajustements annoncés par la Ville : carte indicative.
 
 === robots.txt des sites lus ===
 https://levis.ca/robots.txt : rien qui concerne nos chemins
@@ -58,7 +32,7 @@ https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt : HTTP 403 Fo
 
 === Décisions de l'année ===
 
-2376 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 6 en attente de procès-verbal.
+2376 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 7 en attente de procès-verbal.
 0 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
@@ -81,14 +55,14 @@ Pastilles thématiques :
      17  Immobilier
     155  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-09-24) ===
-Fenêtre depuis 2026-09-24 : 9 séance(s) relue(s), 17 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-09-25) ===
+Fenêtre depuis 2026-09-25 : 9 séance(s) relue(s), 17 vote(s) conservé(s) du fichier précédent.
 
 20 votes nominaux écrits dans data/votes.json (9 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
 
 === Contrats octroyés (SEAO) ===
-Contrats : lecture de hebdo_20261116_20261122.json… 15 octroi(s).
+Contrats : aucun nouveau fichier SEAO (381 octrois connus).
 Contrats : 0 reliés à une décision du conseil (0 décisions).
 Contrats : 381 octrois écrits dans data/contrats.json et data/contrats-page.json.
 
@@ -103,7 +77,7 @@ Votes par décision : 18 décisions, 18 noms.
 ⚠ « Lexique, mesuré sur les procès-verbaux » a échoué (code 1) — on garde les données précédentes, ça attendra.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-09-24 pas encore résumés (plafond : 120)…
+Sommaires depuis 2026-09-25 pas encore résumés (plafond : 120)…
 651 déjà résumés, 0 à faire.
 Rien à générer. (--force pour tout regénérer.)
 
@@ -130,6 +104,6 @@ levis : 30 décisions écrites dans la page des décisions (inchangé).
 --mois=2026-10 → Déjà publié : 2026-10. Rien à faire.
 
 === Bilan ===
-  étapes         : 22
+  étapes         : 20
   échecs         : aucun
   avertissements : Lexique, mesuré sur les procès-verbaux
