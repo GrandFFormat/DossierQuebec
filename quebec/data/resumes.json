@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-23T20:25:59.654Z",
+ "generatedAt": "2026-11-24T19:37:04.298Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,643 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-09-24",
+  "depuis": "2026-09-25",
   "plafond": 120
  },
- "nombre": 1873,
- "genereCetteFois": 1,
+ "nombre": 1898,
+ "genereCetteFois": 25,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.0478,
-  "jetonsEntree": 6880,
-  "jetonsSortie": 535
+  "montant": 0.8973,
+  "jetonsEntree": 126207,
+  "jetonsSortie": 10649
  },
  "resumes": [
+  {
+   "id": "GT2026-349.pdf",
+   "numero": "GT2026-349",
+   "date": "2026-11-23",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 2352, 8e Avenue, lot 1 315 647, quartier de Lairet, district électoral de Maizerets-Lairet, Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-349.pdf",
+   "puces": [
+    "La Ville autorise une clôture de 2 mètres de hauteur au 2352, 8e Avenue, dans le quartier de Lairet (Limoilou), alors que le règlement limite normalement à 1,2 mètre.",
+    "La clôture pourra aussi être installée à moins de 0,5 mètre du trottoir et dans un triangle de visibilité, ce que le règlement d'urbanisme interdit.",
+    "La clôture longe la 8e Avenue et remplace une clôture existante de 1,2 mètre.",
+    "Motif invoqué : l'école Saint-Paul-Apôtre accueille des élèves du primaire ayant un trouble du spectre de l'autisme, et la hauteur actuelle ne permet pas d'assurer leur sécurité.",
+    "Selon l'analyse, aucune propriété résidentielle n'est voisine du secteur visé par les travaux.",
+    "Le comité consultatif d'urbanisme s'est dit favorable à l'unanimité le 27 octobre 2026; la décision revient au conseil d'arrondissement de La Cité-Limoilou."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:29.516Z",
+   "jetons": {
+    "entree": 5372,
+    "sortie": 461
+   }
+  },
+  {
+   "id": "TM2026-207.pdf",
+   "numero": "TM2026-207",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1593 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Sainte-Anne - Arrondissement de La Cité-Limoilou - District du Cap-aux-Diamants",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-207.pdf",
+   "puces": [
+    "La Ville réserve un espace aux voituriers devant l'hôtel Clarendon, au 57, rue Sainte-Anne, dans le Vieux-Québec.",
+    "L'espace couvre 18 mètres du côté sud de la rue Sainte-Anne, entre la rue des Jardins et la rue Pierre-Olivier-Chauveau.",
+    "Le stationnement y est réservé au service de voiturier de 9 h à 23 h.",
+    "Trois espaces de débarcadère disparaissent pour faire place à cette zone.",
+    "Le commerçant paiera 1 $ par année à la Ville pour utiliser la voie publique, selon un bail à signer.",
+    "La demande vient du gestionnaire de l'hôtel, appuyé par la Société de développement commercial du Vieux-Québec."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "1 $ par année",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:28.552Z",
+   "jetons": {
+    "entree": 4009,
+    "sortie": 368
+   }
+  },
+  {
+   "id": "TM2026-222.pdf",
+   "numero": "TM2026-222",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1607 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Châteauguay - Arrondissement de La Cité-Limoilou - District électoral de Saint-Roch-Saint-Sauveur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-222.pdf",
+   "puces": [
+    "La Ville déplace les zones de stationnement sur le côté sud de la rue Châteauguay, entre les rues Signaï et De Mazenod, dans Saint-Roch–Saint-Sauveur.",
+    "La zone de stationnement limité à 10 minutes est rapprochée de la rue Signaï : elle s'étend maintenant de 5 à 17 mètres à l'ouest de cette intersection.",
+    "Au-delà de 17 mètres jusqu'à la rue De Mazenod, le stationnement reste limité à 90 minutes de 9 h à 17 h, sauf pour les détenteurs d'un permis de la zone 16.",
+    "L'interdiction de stationner sur les 5 premiers mètres à partir de la rue Signaï est maintenue.",
+    "Aucune case de stationnement n'est retirée.",
+    "Le changement vise à faciliter le virage à gauche des véhicules lourds vers la rue Signaï, après des dommages répétés à l'immeuble du 540, rue Signaï et des collisions avec des véhicules stationnés.",
+    "La demande vient d'une citoyenne; le Service du transport et de la mobilité intelligente a fait l'analyse."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:30.479Z",
+   "jetons": {
+    "entree": 4886,
+    "sortie": 492
+   }
+  },
+  {
+   "id": "TM2026-258.pdf",
+   "numero": "TM2026-258",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1627 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Durocher - Arrondissement de La Cité-Limoilou - District électoral de Saint-Roch-Saint-Sauveur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-258.pdf",
+   "puces": [
+    "La Ville réserve une place de stationnement aux personnes à mobilité réduite sur la rue Durocher, côté est, en face du 510, rue Durocher.",
+    "La place fait 6 mètres et commence à 15 mètres au sud de la rue Kirouac.",
+    "Avant, cette portion était soumise au stationnement limité à 90 minutes (9 h à 17 h, du lundi au vendredi), sauf pour les détenteurs d'un permis de zone 16.",
+    "Le reste du tronçon, entre Kirouac et Christophe-Colomb Ouest, garde la règle des 90 minutes avec exception pour la zone 16.",
+    "Le changement ne retire aucun espace de stationnement.",
+    "La demande vient d'un résidant du 510, rue Durocher qui détient une vignette de la SAAQ.",
+    "Le secteur touché : quartier Saint-Roch–Saint-Sauveur, arrondissement de La Cité-Limoilou."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:29.733Z",
+   "jetons": {
+    "entree": 4346,
+    "sortie": 417
+   }
+  },
+  {
+   "id": "LS2026-292.pdf",
+   "numero": "LS2026-292",
+   "date": "2026-11-23",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Autorisation de l'ajustement au montant prévu de la compensation financière du Programme Vacances-Été 2026 de quatre organismes pour un montant total de 75 348,15 $",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-292.pdf",
+   "puces": [
+    "L'arrondissement de La Cité-Limoilou verse 75 348,15 $ de plus à quatre organismes qui ont tenu des camps de jour à l'été 2026.",
+    "Le montant versé à chaque organisme a été ajusté selon le nombre réel d'inscriptions, puisque l'entente initiale était basée sur les inscriptions de 2025.",
+    "Le Patro Roc-Amadour reçoit 37 110,18 $ et les Loisirs du Faubourg 31 082,72 $.",
+    "Le Centre récréatif St-François-D'Assise (Centre communautaire Jean-Guy Drolet) reçoit 7 043,98 $ et les Loisirs Montcalm 111,27 $.",
+    "Les quatre organismes ont remis toutes leurs redditions de comptes; il s'agit du dernier versement prévu à l'entente.",
+    "L'argent provient du budget de fonctionnement de l'arrondissement, à l'activité de soutien au Programme Vacances-Été."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "75 348,15 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:36.499Z",
+   "jetons": {
+    "entree": 3568,
+    "sortie": 439
+   }
+  },
+  {
+   "id": "TM2026-217.pdf",
+   "numero": "TM2026-217",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1606 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue De Saint-Vallier Est - Arrondissement de La Cité-Limoilou - District électoral de Saint-Roch-Saint-Sauveur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-217.pdf",
+   "puces": [
+    "La Ville change les règles de stationnement sur la rue De Saint-Vallier Est, entre les rues Narcisse-Belleau et Dorchester, dans Saint-Roch–Saint-Sauveur.",
+    "Deux espaces payants (9 h à 21 h, 7 jours sur 7) deviennent des places à durée limitée de 30 minutes, de 9 h à 21 h, du lundi au vendredi.",
+    "Le changement touche le côté sud de la rue, sur 12 mètres, à partir de 45 mètres à l'est de la rue Narcisse-Belleau.",
+    "Aucun espace de stationnement sur rue n'est retiré.",
+    "La modification fait suite à une demande des commerçants du 291, rue De Saint-Vallier Est, pour la clientèle et les livraisons.",
+    "La décision relève du conseil de l'Arrondissement de La Cité-Limoilou (ordonnance O-1606)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:35.694Z",
+   "jetons": {
+    "entree": 9334,
+    "sortie": 408
+   }
+  },
+  {
+   "id": "GT2026-351.pdf",
+   "numero": "GT2026-351",
+   "date": "2026-11-23",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de permis assujettie à un règlement relatif au PIIA - 1330, 26e Rue, lot 1 316 130, quartier de Maizerets, district électoral de Maizerets-Lairet, Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-351.pdf",
+   "puces": [
+    "La Ville approuve les plans d'un nouvel immeuble isolé de plusieurs logements au 1330, 26e Rue, dans le quartier de Maizerets (arrondissement de La Cité-Limoilou).",
+    "Le promoteur doit respecter une condition : poser de la brique sur toute la surface des deux premiers étages du côté donnant sur l'avenue Perrault.",
+    "Cette condition vise à harmoniser le bâtiment avec les immeubles voisins, dont les façades sont surtout en maçonnerie.",
+    "Si le promoteur ne respecte pas cette condition, la demande est mise en suspens et il devra présenter un autre projet à une séance ultérieure.",
+    "Le comité consultatif d'urbanisme s'est prononcé en faveur du projet, à la majorité, le 27 octobre 2026.",
+    "Le projet prévoit un revêtement de brique et un revêtement léger à l'étage supérieur."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:35.696Z",
+   "jetons": {
+    "entree": 5608,
+    "sortie": 410
+   }
+  },
+  {
+   "id": "TM2026-215.pdf",
+   "numero": "TM2026-215",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1604 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Cadillac - Arrondissement de La Cité-Limoilou - District électoral de Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-215.pdf",
+   "puces": [
+    "La Ville interdit le stationnement en tout temps sur le côté est de la rue Cadillac, dans la portion située près de la rue Royal-Roussillon (à partir de 106 m au nord de la rue Jacques-Cartier).",
+    "La zone de stationnement limité à 60 minutes, de 9 h à 21 h, est raccourcie à 93 m; les détenteurs d'un permis zone 25 restent exemptés.",
+    "Deux espaces de stationnement sont retirés.",
+    "Le changement vise à dégager la vue sur les piétons au passage qui mène au parc Cartier-Brébeuf.",
+    "Le dossier fait suite à la demande d'un citoyen et touche le district de Limoilou, dans l'arrondissement de La Cité-Limoilou."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:36.165Z",
+   "jetons": {
+    "entree": 4241,
+    "sortie": 454
+   }
+  },
+  {
+   "id": "TM2026-267.pdf",
+   "numero": "TM2026-267",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1629 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue de Xi'an - Arrondissement de La Cité-Limoilou - District électoral de Saint-Roch-Saint-Sauveur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-267.pdf",
+   "puces": [
+    "La Ville crée un débarcadère sur la rue de Xi'an, côté nord, entre la rue du Pont et la rue Sainte-Marguerite, dans Saint-Roch–Saint-Sauveur.",
+    "Le débarcadère fera 16 mètres, à partir de 30 mètres à l'est de la rue du Pont, et occupera environ trois cases de stationnement.",
+    "Il remplace une portion de zone où le stationnement était interdit; le stationnement reste interdit avant et après le débarcadère.",
+    "Selon le document, la modification ajoute trois espaces de stationnement sur rue.",
+    "La demande vient de l'organisme Le Pignon Bleu, au 728, rue de Xi'an, pour faciliter ses livraisons.",
+    "La décision revient au conseil d'arrondissement de La Cité-Limoilou (ordonnance O-1629)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:41.013Z",
+   "jetons": {
+    "entree": 3952,
+    "sortie": 391
+   }
+  },
+  {
+   "id": "GT2026-352.pdf",
+   "numero": "GT2026-352",
+   "date": "2026-11-23",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de permis assujettie à un règlement relatif au PIIA - 2160 à 2180, avenue Bergemont, lot projeté 6 751 075, quartier de Maizerets, district électoral de Maizerets-Lairet, Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-352.pdf",
+   "puces": [
+    "La Ville approuve les plans d'un nouvel immeuble isolé de plusieurs logements au 2160 à 2180, avenue Bergemont, dans le quartier de Maizerets (arrondissement de La Cité-Limoilou).",
+    "L'approbation est conditionnelle : le promoteur doit remplacer la brique noire prévue par une teinte plus pâle, par exemple un gris moyen.",
+    "Motif de la condition : les bâtiments voisins ont majoritairement des façades en maçonnerie de couleurs pâles.",
+    "Si le promoteur refuse la condition, la demande est mise en suspens et il devra présenter un autre projet à une séance ultérieure.",
+    "Les analystes de la Ville avaient d'abord recommandé une autre condition : remplacer le bardage de bois par de la brique en façade; le comité consultatif d'urbanisme a plutôt retenu la condition sur la couleur."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:41.616Z",
+   "jetons": {
+    "entree": 5911,
+    "sortie": 403
+   }
+  },
+  {
+   "id": "TM2026-225.pdf",
+   "numero": "TM2026-225",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1610 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue du Roi - Arrondissement de La Cité-Limoilou - District électoral de Saint-Roch-Saint-Sauveur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-225.pdf",
+   "puces": [
+    "La Ville interdit désormais le stationnement en tout temps sur le côté sud de la rue du Roi, sur 20 mètres à partir de la rue Caron vers l'est.",
+    "La zone de stationnement de 10 minutes est déplacée plus à l'est, de l'autre côté de l'entrée de l'immeuble du 201, rue du Roi, sur 26 mètres.",
+    "Un tronçon de 25 mètres devient réservé aux détenteurs de vignette, avec limite de 60 minutes de 9 h à 17 h du lundi au vendredi pour les autres.",
+    "Trois cases de stationnement de 10 minutes disparaîtront; la Ville note que le taux d'occupation du stationnement sur cette rue est élevé.",
+    "Le changement vise la visibilité des personnes qui sortent du 201, rue du Roi et traversent vers le parc situé en face.",
+    "Le secteur touché est le district de Saint-Roch–Saint-Sauveur, dans l'arrondissement de La Cité-Limoilou."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:43.389Z",
+   "jetons": {
+    "entree": 3999,
+    "sortie": 568
+   }
+  },
+  {
+   "id": "TM2026-287.pdf",
+   "numero": "TM2026-287",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnances numéros O-1637 et O-1638 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à l'avenue des Érables et à la rue Sherbrooke - Arrondissement de La Cité-Limoilou - Districts électoraux Montcalm-Saint-Sacrement et du Cap-aux-Diamants",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-287.pdf",
+   "puces": [
+    "Le RTC a retiré trois arrêts d'autobus au printemps 2026 : deux sur l'avenue des Érables et un sur la rue Sherbrooke.",
+    "La Ville transforme ces anciennes zones d'arrêt interdit en espaces de stationnement, ce qui ajoute 12 cases au total.",
+    "Sur l'avenue des Érables (entre la rue Père-Marquette et le boulevard René-Lévesque Ouest, côtés est et ouest), le stationnement est limité à 90 minutes de 9 h à 17 h du lundi au vendredi, sauf avec un permis de la zone 7.",
+    "Sur la rue Sherbrooke (côté est, au nord du chemin Sainte-Foy), même règle de 90 minutes de 9 h à 17 h du lundi au vendredi, sauf avec un permis de la zone 3.",
+    "Les changements touchent l'arrondissement de La Cité-Limoilou, dans les districts Montcalm-Saint-Sacrement et du Cap-aux-Diamants.",
+    "Le conseil d'arrondissement adopte les ordonnances O-1637 et O-1638 pour appliquer ces modifications."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:42.009Z",
+   "jetons": {
+    "entree": 5975,
+    "sortie": 494
+   }
+  },
+  {
+   "id": "GT2026-350.pdf",
+   "numero": "GT2026-350",
+   "date": "2026-11-23",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de permis assujettie à un règlement relatif au PIIA - 1390, avenue Saint-Pascal, lot 1 571 364, quartier de Maizerets, district électoral de Maizerets-Lairet, Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-350.pdf",
+   "puces": [
+    "La Ville approuve les plans d'un revêtement extérieur pour l'agrandissement d'un étage d'un bâtiment au 1390, avenue Saint-Pascal, dans le quartier de Maizerets.",
+    "L'agrandissement se trouve dans la cour avant secondaire du terrain (lot 1 571 364).",
+    "Le revêtement proposé est du vinyle, un matériau déjà présent sur le bâtiment, qui compte aussi de la brique.",
+    "L'analyse conclut que le type de matériau et sa couleur ressemblent à ceux déjà utilisés et s'intègrent à la façade.",
+    "Le comité consultatif d'urbanisme a donné un avis favorable à l'unanimité le 27 octobre 2026; la décision revient au conseil d'arrondissement de La Cité-Limoilou.",
+    "Aucun impact financier n'est indiqué au dossier."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:48.932Z",
+   "jetons": {
+    "entree": 5930,
+    "sortie": 396
+   }
+  },
+  {
+   "id": "LS2026-289.pdf",
+   "numero": "LS2026-289",
+   "date": "2026-11-23",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement de subventions totalisant un montant de 7 200 $ à deux organismes pour des demandes déposées dans le cadre du programme de soutien financier à un événement de proximité pour l'organisation d'événements à l'automne 2026 - Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-289.pdf",
+   "puces": [
+    "L'arrondissement de La Cité-Limoilou verse 7 200 $ à deux organismes pour des événements de quartier à l'automne 2026.",
+    "Le Club d'athlétisme Rouge et Or de l'Université Laval reçoit 5 000 $ pour les Championnats canadiens de cross-country, les 28 et 29 novembre 2026 sur les plaines d'Abraham.",
+    "L'accès au site des championnats est gratuit; les citoyens peuvent s'inscrire à une course de 1 ou 5 km le dimanche pour 25 $.",
+    "Le Patro Laval reçoit 2 200 $ pour l'Illumination du sapin de Noël, le 12 décembre 2026 de 18 h à 21 h dans sa cour.",
+    "Au programme de la soirée du Patro : animations, fanfare, chansonnier, feux de foyer, activités de Noël et présence du Père-Noël.",
+    "La Ville fournit aussi un soutien technique pour la tenue des deux événements, selon les ressources disponibles."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "7 200 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:48.640Z",
+   "jetons": {
+    "entree": 3772,
+    "sortie": 450
+   }
+  },
+  {
+   "id": "GT2026-348.pdf",
+   "numero": "GT2026-348",
+   "date": "2026-11-23",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 1050, boulevard René-Lévesque Est, lot 6 296 440, quartier de Saint-Jean-Baptiste, district électoral du Cap-aux-Diamants, Arrondissement de La Cité-Limoilou",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-348.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure pour le 1050, boulevard René-Lévesque Est, dans le quartier Saint-Jean-Baptiste (arrondissement de La Cité-Limoilou).",
+    "L'étage mécanique au sommet du bâtiment agrandi pourra occuper jusqu'à 55 % de la superficie de l'étage situé sous le toit, au lieu du maximum de 30 % prévu au règlement d'urbanisme.",
+    "La dérogation permet d'agrandir le bâtiment existant par une tour d'habitation ajoutant plus de 200 logements.",
+    "Selon l'analyse, le 27e étage fait environ 370 mètres carrés contre environ 1400 mètres carrés pour un étage type, ce qui fait gonfler la proportion occupée par l'étage mécanique; celui-ci équivaut à 14 % d'un étage type.",
+    "Le comité consultatif d'urbanisme s'est dit favorable à l'unanimité le 27 octobre 2026; la décision revient au conseil d'arrondissement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:48.971Z",
+   "jetons": {
+    "entree": 6003,
+    "sortie": 456
+   }
+  },
+  {
+   "id": "GT2026-372.pdf",
+   "numero": "GT2026-372",
+   "date": "2026-11-23",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement de La Cité-Limoilou sur l'urbanisme relativement à une autorisation personnelle à Touski sur le lot numéro 5 343 729 du cadastre du Québec, R.C.A.1V.Q. 590 (202, rue du Cardinal-Taschereau, quartier de Saint-Sauveur, district électoral",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-372.pdf",
+   "puces": [
+    "La Ville modifie son règlement d'urbanisme pour permettre à l'organisme sans but lucratif Carrefour alimentaire Touski d'occuper tout l'immeuble du 202, rue du Cardinal-Taschereau, dans Saint-Sauveur.",
+    "L'autorisation permet une épicerie sans but lucratif à tarification sociale, une cuisine de production et d'éducation, un espace café et des bureaux.",
+    "Ces usages (services administratifs, vente au détail et services, restaurant) n'étaient pas permis dans la zone 15046Hb, qui n'autorisait que le logement, les lieux de rassemblement et les établissements d'éducation.",
+    "L'autorisation vaut uniquement pour Touski, n'est pas transférable et dure 100 ans.",
+    "Aucune case de stationnement n'est exigée, le secteur étant considéré comme un milieu urbain dense.",
+    "Le conseil de quartier de Saint-Sauveur sera consulté et tiendra une assemblée publique; le règlement n'est pas susceptible d'approbation référendaire.",
+    "L'immeuble abritait le Marché Saint-So, fermé en janvier 2024, et est vacant depuis."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:49.527Z",
+   "jetons": {
+    "entree": 8518,
+    "sortie": 503
+   }
+  },
+  {
+   "id": "TM2026-212.pdf",
+   "numero": "TM2026-212",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1595 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à l'avenue Bergemont - Arrondissement de La Cité-Limoilou - District de Maizerets-Lairet",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-212.pdf",
+   "puces": [
+    "La Ville retire l'interdiction de stationner de 7 h à 17 h, du lundi au vendredi, devant le 1832, avenue Bergemont, dans le quartier Maizerets-Lairet.",
+    "Cette interdiction existait pour permettre les livraisons au commerce Auvents W. Lecours inc., qui a déménagé.",
+    "Sur tout le côté est de l'avenue Bergemont, entre la 18e Rue et la rue Bouchette, le stationnement sera limité à 90 minutes, de 9 h à 18 h, du lundi au vendredi.",
+    "Les véhicules avec un permis de stationnement de la zone 26 échappent à cette limite de 90 minutes.",
+    "Le changement ajoute deux espaces de stationnement sur rue.",
+    "La modification fait suite à la demande d'un résidant de l'avenue Bergemont."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:54.530Z",
+   "jetons": {
+    "entree": 4208,
+    "sortie": 385
+   }
+  },
+  {
+   "id": "A1DA2026-015.pdf",
+   "numero": "A1DA2026-015",
+   "date": "2026-11-23",
+   "unite": "Arrondissement de La Cité-Limoilou",
+   "objet": "Participation de cinq membres du conseil de l'Arrondissement de La Cité-Limoilou aux Assises annuelles de l'Union des municipalités du Québec (UMQ) les 22 et 23 avril 2027",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A1DA2026-015.pdf",
+   "puces": [
+    "L'Arrondissement de La Cité-Limoilou autorise cinq membres de son conseil à participer aux Assises annuelles de l'Union des municipalités du Québec, à Montréal, les 22 et 23 avril 2027.",
+    "Les personnes visées sont la présidente Elainie Lepage, les conseillères Mélissa Coulombe-Leduc, Catherine Vallières-Roland et Marylou Boulianne, et le conseiller Raymond Poirrier.",
+    "Les frais d'inscription s'élèvent à 925 $, plus les taxes applicables.",
+    "Les autres dépenses seront remboursées sur présentation des pièces justificatives, selon le règlement R.C.E.V.Q. 17.",
+    "L'argent provient du budget de l'arrondissement, à l'activité « Soutenir les conseils d'arrondissement »."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "925 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:53.839Z",
+   "jetons": {
+    "entree": 3335,
+    "sortie": 384
+   }
+  },
+  {
+   "id": "TM2026-109.pdf",
+   "numero": "TM2026-109",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnances numéros O-1552, O-1553, O-1554, O-1555, O-1556, O-1557, O-1558, O-1559 et O-1560 concernant des modifications aux règles portant sur le stationnement et la circulation sur le réseau local relativement à la 4e Avenue, la 11e Rue et la 12e Rue - Arrondissement de La Cité-Limoilou - Distric",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-109.pdf",
+   "puces": [
+    "La Ville modifie les règles de stationnement et de circulation sur la 4e Avenue, entre le chemin de la Canardière et la 22e Rue, dans La Cité-Limoilou.",
+    "Des bandes cyclables unidirectionnelles sont aménagées sur ce tronçon et raccordées au réseau cyclable existant.",
+    "Les bandes seront accessibles toute l'année entre le chemin de la Canardière et la 18e Rue, et du 1er mai au 31 octobre entre la 18e Rue et la 22e Rue.",
+    "Environ 158 espaces de stationnement sur rue sont retirés; la Ville juge le taux d'occupation actuel faible à moyen.",
+    "Le virage à droite au feu rouge devient interdit à certains endroits sur la 4e Avenue, la 11e Rue et la 12e Rue.",
+    "De nouveaux passages pour personnes sont implantés sur la 4e Avenue.",
+    "Les districts de Limoilou et de Maizerets-Lairet sont touchés."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:54.442Z",
+   "jetons": {
+    "entree": 8368,
+    "sortie": 441
+   }
+  },
+  {
+   "id": "TM2026-223.pdf",
+   "numero": "TM2026-223",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnances numéros O-1608 et O-1609 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement à l'avenue des Jésuites et à l'avenue Ernest-Gagnon - Arrondissement de La Cité-Limoilou - District électoral de Montcalm - Saint-Sacrement",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-223.pdf",
+   "puces": [
+    "La Ville ajoute des arrêts obligatoires dans le secteur Saint-Sacrement, à Québec (arrondissement de La Cité-Limoilou).",
+    "Nouveaux arrêts aux approches nord et sud de l'avenue des Jésuites, à l'intersection de la rue Louis-Adolphe-Robitaille.",
+    "Nouveaux arrêts aux approches nord et sud de l'avenue Ernest-Gagnon, à la même intersection de la rue Louis-Adolphe-Robitaille.",
+    "L'obligation vise autant les automobilistes que les cyclistes.",
+    "La Ville justifie la mesure par la hausse de circulation attendue avec les projets immobiliers du 1205, rue Louis-Adolphe-Robitaille et du terrain vacant de l'avenue des Jésuites, en plus des déplacements liés aux cliniques et à l'hôpital Jeffery Hale.",
+    "Le secteur est une zone pour aînés; l'objectif annoncé est d'améliorer la sécurité des usagers."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:55.131Z",
+   "jetons": {
+    "entree": 4909,
+    "sortie": 451
+   }
+  },
+  {
+   "id": "TM2026-274.pdf",
+   "numero": "TM2026-274",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1632 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement au boulevard Montmorency - Arrondissement de La Cité-Limoilou - District électoral de Maizerets-Lairet",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-274.pdf",
+   "puces": [
+    "La Ville interdit le virage à droite au feu rouge à l'approche ouest du boulevard Montmorency, à l'intersection de l'avenue D'Estimauville.",
+    "L'interdiction s'applique tous les jours de 7 h à 22 h, aux automobilistes comme aux cyclistes.",
+    "La mesure vise à réduire les conflits avec les piétons et cyclistes qui traversent l'intersection.",
+    "Deux arrêts d'autobus du RTC se trouvent près de l'intersection, ce qui augmente le nombre de traversées de piétons.",
+    "L'intersection est située dans l'arrondissement de La Cité-Limoilou, district de Maizerets-Lairet.",
+    "Selon le document, plus de 10 000 véhicules circulent chaque jour sur D'Estimauville et plus de 4 000 sur Montmorency."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:37:00.067Z",
+   "jetons": {
+    "entree": 4653,
+    "sortie": 382
+   }
+  },
+  {
+   "id": "TM2026-239.pdf",
+   "numero": "TM2026-239",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1616 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Saint-Germain - Arrondissement de La Cité-Limoilou - District électoral de Saint-Roch-Saint-Sauveur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-239.pdf",
+   "puces": [
+    "La Ville retire un espace de stationnement réservé aux personnes à mobilité réduite sur la rue Saint-Germain, dans Saint-Roch–Saint-Sauveur.",
+    "L'espace se trouve du côté ouest, devant le 386, rue Saint-Germain, entre les rues Boisseau et Napoléon.",
+    "La zone supprimée mesure 6 mètres et commence à 14 mètres au sud de la rue Boisseau.",
+    "La demande vient d'un résidant du 386, rue Saint-Germain; l'analyse conclut que l'espace n'est plus requis.",
+    "Le conseil d'arrondissement de La Cité-Limoilou édicte l'ordonnance O-1616 pour appliquer le changement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:37:00.050Z",
+   "jetons": {
+    "entree": 3735,
+    "sortie": 344
+   }
+  },
+  {
+   "id": "TM2026-213.pdf",
+   "numero": "TM2026-213",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1596 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue des Glacis - Arrondissement de La Cité-Limoilou - District du Cap-aux-Diamants",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-213.pdf",
+   "puces": [
+    "La Ville inverse deux zones de stationnement sur la rue des Glacis, côté ouest, entre la rue des Sœurs-de-la-Charité et la rue Richelieu, dans le quartier du Cap-aux-Diamants.",
+    "Le débarcadère pour les véhicules sera désormais situé sur les 15 premiers mètres au sud de la rue des Sœurs-de-la-Charité.",
+    "La zone de stationnement limité à 60 minutes (9 h à 12 h et 13 h 30 à 17 h, du lundi au vendredi) sera déplacée dans les 15 mètres suivants.",
+    "Le changement fait suite à une demande de la Fondation famille Jules-Dallaire, propriétaire du 945, rue des Sœurs-de-la-Charité, qui juge que le débarcadère actuel se trouve dans la partie la plus pentue de la rue.",
+    "Selon le document, aucune place de stationnement sur rue n'est supprimée.",
+    "La décision relève du conseil de l'Arrondissement de La Cité-Limoilou."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:37:00.091Z",
+   "jetons": {
+    "entree": 4213,
+    "sortie": 454
+   }
+  },
+  {
+   "id": "TM2026-265.pdf",
+   "numero": "TM2026-265",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-1628 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Saint-Luc - Arrondissement de La Cité-Limoilou - District électoral de Saint-Roch-Saint-Sauveur",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-265.pdf",
+   "puces": [
+    "La Ville interdit le stationnement sur le côté ouest de la rue Saint-Luc, sur 10 mètres à partir de la rue Saint-Vallier Ouest en direction sud.",
+    "La mesure touche le quartier Saint-Roch–Saint-Sauveur, dans l'arrondissement de La Cité-Limoilou.",
+    "Un espace de stationnement sur rue disparaît à cet endroit.",
+    "Le Service des travaux publics avait signalé que les voitures stationnées près de l'intersection nuisaient aux manœuvres des véhicules d'entretien.",
+    "Selon le document, le changement doit aussi faciliter le passage des véhicules d'urgence.",
+    "Le secteur affiche un taux d'occupation du stationnement de modéré à élevé."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:36:59.839Z",
+   "jetons": {
+    "entree": 3913,
+    "sortie": 356
+   }
+  },
+  {
+   "id": "TM2026-271.pdf",
+   "numero": "TM2026-271",
+   "date": "2026-11-23",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Modification de la résolution CA1-2026-0077 relative à une exemption de l'obligation de fournir des cases de stationnement requises par le Règlement de l'Arrondissement de La Cité-Limoilou sur l'urbanisme R.C.A.1V.4 pour l'immeuble localisé au 304, boulevard Charest Est - District électoral de Saint",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-271.pdf",
+   "puces": [
+    "La Ville réduit de 19 à 17 le nombre de cases de stationnement dont le promoteur du 304, boulevard Charest Est est exempté.",
+    "La compensation financière passe de 37 500 $ à 32 500 $.",
+    "Le changement vient du fait que le promoteur a réduit le nombre de logements de son projet.",
+    "Le promoteur doit payer la compensation au plus tard 30 jours après l'adoption de la résolution du conseil d'arrondissement.",
+    "L'argent sera versé au « Fonds de stationnement ».",
+    "Le projet se trouve dans le quartier Saint-Sauveur, district de Saint-Roch–Saint-Sauveur, arrondissement de La Cité-Limoilou."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "32 500 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-24T19:37:04.298Z",
+   "jetons": {
+    "entree": 3449,
+    "sortie": 342
+   }
+  },
   {
    "id": "DG2026-044.pdf",
    "numero": "DG2026-044",

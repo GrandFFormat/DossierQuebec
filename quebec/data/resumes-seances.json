@@ -1,10 +1,95 @@
 {
- "generatedAt": "2026-11-23T20:26:05.316Z",
+ "generatedAt": "2026-11-24T19:37:52.828Z",
  "modele": "claude-haiku-4-5",
  "genereParIA": true,
  "avertissement": "Phrase de résumé générée par IA à partir des décisions de la séance ; les points marquants sont choisis sans IA. Le procès-verbal officiel fait foi.",
  "page": "decisions-de-la-ville-de-quebec",
  "seances": [
+  {
+   "id": "2026-11-23__Conseil de l'Arrondissement de La Cité-Limoilou",
+   "instance": "Conseil de l'Arrondissement de La Cité-Limoilou",
+   "instanceEn": "Cité-Limoilou borough council",
+   "date": "2026-11-23",
+   "nDecisions": 30,
+   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA1_OR_2026-11-23_00h00.pdf",
+   "votes": [],
+   "themes": [
+    {
+     "theme": "transport",
+     "n": 15
+    },
+    {
+     "theme": "urbanisme",
+     "n": 9
+    },
+    {
+     "theme": "subventions",
+     "n": 1
+    }
+   ],
+   "points": [
+    {
+     "id": "CA1-2026-0268.pdf",
+     "numero": "CA1-2026-0268",
+     "titre": "Modification de la résolution CA1-2026-0077 relative à une exemption de l'obligation de fournir des cases de stationnement requises par le Règlement de l'Arrondissement de La Cité-Limoilou sur l'urbanisme, R.C.A.1V.Q 4 pour l'immeuble localisé au 304, boulevard Charest Est - District électoral de Sa",
+     "titreEn": null,
+     "montant": "32 500 $",
+     "montantEn": "$32,500",
+     "divise": false,
+     "theme": "urbanisme"
+    },
+    {
+     "id": "CA1-2026-0256.pdf",
+     "numero": "CA1-2026-0256",
+     "titre": "Autorisation de l'ajustement au montant prévu de la compensation financière du Programme Vacances-Été 2026 de quatre organismes pour un montant total de 75 348,15 $",
+     "titreEn": null,
+     "montant": "75 348,15 $",
+     "montantEn": "$75,348.15",
+     "divise": false,
+     "theme": "administration"
+    },
+    {
+     "id": "CA1-2026-0255.pdf",
+     "numero": "CA1-2026-0255",
+     "titre": "Versement de subventions totalisant un montant de 7 200 $ à deux organismes pour des demandes déposées dans le cadre du programme de soutien financier à un événement de proximité pour l'organisation d'événements à l'automne 2026",
+     "titreEn": null,
+     "montant": "7 200 $",
+     "montantEn": "$7,200",
+     "divise": false,
+     "theme": "subventions"
+    },
+    {
+     "id": "CA1-2026-0252.pdf",
+     "numero": "CA1-2026-0252",
+     "titre": "Demande de permis assujettie à un règlement relatif au PIIA - 1390, avenue Saint-Pascal, lot 1 571 364, quartier de Maizerets, district électoral de Maizerets-Lairet",
+     "titreEn": null,
+     "montant": null,
+     "montantEn": null,
+     "divise": false,
+     "theme": "urbanisme"
+    }
+   ],
+   "signature": "30:26",
+   "phrase": "Le conseil a versé 75 348,15 $ de plus aux organismes de camps de jour, 7 200 $ à deux organismes pour des événements de quartier, et modifié son règlement d'urbanisme pour permettre à Carrefour alimentaire Touski d'occuper le 202, rue du Cardinal-Taschereau.",
+   "phraseEn": "The council distributed an additional 75 348,15 $ to summer camp organizations, 7 200 $ to two organizations for neighbourhood events, and amended its zoning bylaw to allow Carrefour alimentaire Touski to occupy 202 Cardinal-Taschereau Street.",
+   "motsCles": [
+    "camps de jour",
+    "événements de quartier",
+    "Carrefour alimentaire Touski"
+   ],
+   "motsClesEn": [
+    "summer camp organizations",
+    "neighbourhood events",
+    "Carrefour alimentaire Touski"
+   ],
+   "motsEssais": 1,
+   "genereLe": "2026-11-24T19:37:47.931Z",
+   "motsThemes": [
+    null,
+    "subventions",
+    null
+   ]
+  },
   {
    "id": "2026-11-16__Conseil de l'Arrondissement de La Haute-Saint-Charles",
    "instance": "Conseil de l'Arrondissement de La Haute-Saint-Charles",
@@ -157,6 +242,103 @@
    "motsThemes": [
     "transport",
     "environnement"
+   ]
+  },
+  {
+   "id": "2026-11-11__Comité exécutif",
+   "instance": "Comité exécutif",
+   "instanceEn": "Executive committee",
+   "date": "2026-11-11",
+   "nDecisions": 35,
+   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CE_PL_2026-11-11_00h00.pdf",
+   "votes": [],
+   "themes": [
+    {
+     "theme": "contrats",
+     "n": 7
+    },
+    {
+     "theme": "subventions",
+     "n": 5
+    },
+    {
+     "theme": "rh",
+     "n": 3
+    },
+    {
+     "theme": "economie",
+     "n": 2
+    },
+    {
+     "theme": "urbanisme",
+     "n": 2
+    },
+    {
+     "theme": "culture",
+     "n": 2
+    }
+   ],
+   "points": [
+    {
+     "id": "CE-2026-1369.pdf",
+     "numero": "CE-2026-1369",
+     "titre": "Adoption du Règlement sur la réserve financière destinée à financer des dépenses relatives à la gestion des matières résiduelles, R.V.Q. 3567, affectation d'un montant à la réserve pour l'année 2026 et appropriation d'une somme à même celle-ci afin d'acquitter certaines dépenses afférentes à la gest",
+     "titreEn": null,
+     "montant": "93 567 000 $",
+     "montantEn": "$93,567,000",
+     "divise": false,
+     "theme": "environnement"
+    },
+    {
+     "id": "CE-2026-1368.pdf",
+     "numero": "CE-2026-1368",
+     "titre": "Création de la Réserve financière pour le financement de dépenses liées à la fourniture du service de l'eau, affectation d'un montant à la réserve pour l'année 2026 et appropriation d'une somme à même celle-ci afin d'acquitter certaines dépenses afférentes à la gestion de l'eau",
+     "titreEn": null,
+     "montant": "162 597 000 $",
+     "montantEn": "$162,597,000",
+     "divise": false,
+     "theme": "administration"
+    },
+    {
+     "id": "CE-2026-1351.pdf",
+     "numero": "CE-2026-1351",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Contrat à commandes entre la Ville de Québec et Camions Globocam Québec et Lévis inc. pour le service de réparation de camions lourds et intermédiaires incluant les pièces chez le concessionnaire du fabricant Freightliner (Dossier 96496)",
+     "titreEn": null,
+     "montant": "5 556 624,10 $",
+     "montantEn": "$5,556,624.10",
+     "divise": false,
+     "theme": "contrats"
+    },
+    {
+     "id": "CE-2026-1354.pdf",
+     "numero": "CE-2026-1354",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Attribution d'un contrat à commandes pour la fourniture et la livraison de lubrifiants et de graisses (Appel d'offres public 96128)",
+     "titreEn": null,
+     "montant": "2 203 454,80 $",
+     "montantEn": "$2,203,454.80",
+     "divise": false,
+     "theme": "contrats"
+    }
+   ],
+   "signature": "35:29",
+   "phrase": "Le comité exécutif a approuvé des contrats de réparation de camions lourds pour 5 556 624,10 $, de lubrifiants et graisses pour 2 203 454,80 $ et de services Microsoft pour 856 518,36 $. Il a aussi créé une réserve financière pour le service de l'eau et une autre pour la gestion des matières résiduelles.",
+   "phraseEn": "The executive committee approved contracts for heavy truck repairs for 5 556 624,10 $, lubricants and greases for 2 203 454,80 $ and Microsoft services for 856 518,36 $. It also established a financial reserve for water service and another for waste management.",
+   "motsCles": [
+    "réparation de camions lourds",
+    "lubrifiants et graisses",
+    "services Microsoft"
+   ],
+   "motsClesEn": [
+    "heavy truck repairs",
+    "lubricants and greases",
+    "Microsoft services"
+   ],
+   "motsEssais": 1,
+   "genereLe": "2026-11-24T19:37:52.809Z",
+   "motsThemes": [
+    "contrats",
+    "contrats",
+    "contrats"
    ]
   },
   {
@@ -4637,84 +4819,6 @@
      "resultat": "Rejetée"
     }
    ]
-  },
-  {
-   "id": "2026-08-24__Conseil de l'Arrondissement des Rivières",
-   "instance": "Conseil de l'Arrondissement des Rivières",
-   "instanceEn": "Les Rivières borough council",
-   "date": "2026-08-24",
-   "nDecisions": 10,
-   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA2_OR_2026-08-24_17h30.pdf",
-   "themes": [
-    {
-     "theme": "urbanisme",
-     "n": 4
-    },
-    {
-     "theme": "subventions",
-     "n": 2
-    },
-    {
-     "theme": "transport",
-     "n": 2
-    }
-   ],
-   "points": [
-    {
-     "id": "CA2-2026-0143.pdf",
-     "numero": "CA2-2026-0143",
-     "titre": "Versement de sept (7) subventions totalisant un montant de 56 576 $ à sept (7) organismes pour des demandes déposées dans les programmes de soutien financier du Cadre de soutien aux organismes reconnus, pour la date de dépôt du 15 juin 2026, de même que pour une (1) subvention à verser pour l'an tro",
-     "titreEn": null,
-     "montant": "56 576 $",
-     "montantEn": "$56,576",
-     "divise": false,
-     "theme": "subventions"
-    },
-    {
-     "id": "CA2-2026-0142.pdf",
-     "numero": "CA2-2026-0142",
-     "titre": "Modification de la résolution CA2-2026-0105 liée au versement d'une subvention afin de corriger le nom de l'organisme visé par l'octroi d'un montant de 2 900 $ pour l'événement « Évasion en fête », dans le cadre du Programme de soutien financier à un événement de proximité - Arrondissement des Riviè",
-     "titreEn": null,
-     "montant": "2 900 $",
-     "montantEn": "$2,900",
-     "divise": false,
-     "theme": "subventions"
-    },
-    {
-     "id": "CA2-2026-0141.pdf",
-     "numero": "CA2-2026-0141",
-     "titre": "Approbation du projet de modification intitulé Règlement modifiant le Règlement de l'Arrondissement des Rivières sur l'urbanisme relativement aux zones 22108Cb, 22109Cb, 22112Cb, 22116Ip, 22119Ip, 22125Ip, 22126Ip et 22127Ip, R.C.A.2V.Q. 444 (assouplissements réglementaires - zone industrielle Carre",
-     "titreEn": null,
-     "montant": null,
-     "montantEn": null,
-     "divise": false,
-     "theme": "urbanisme"
-    },
-    {
-     "id": "CA2-2026-0138.pdf",
-     "numero": "CA2-2026-0138",
-     "titre": "Demande de dérogation mineure pour la propriété sise au 6351, rue de la Goutte-de-Lait, lot 6 394 733, quartier de Neufchâtel Est-Lebourgneuf, district électoral de Neufchâtel-Lebourgneuf",
-     "titreEn": null,
-     "montant": null,
-     "montantEn": null,
-     "divise": false,
-     "theme": "urbanisme"
-    }
-   ],
-   "signature": "10:8",
-   "phrase": "Le conseil a accordé une dérogation pour un projet résidentiel de 303 logements au 6351, rue de la Goutte-de-Lait, modifié le zonage du secteur industriel Carrefour-du-Commerce et versé 56 576 $ en subventions à sept organismes.",
-   "phraseEn": "The council approved a waiver for a residential project of 303 units at 6351 rue de la Goutte-de-Lait, modified zoning in the Carrefour-du-Commerce industrial sector and allocated 56 576 $ in subsidies to seven organizations.",
-   "motsCles": [
-    "logements"
-   ],
-   "motsClesEn": [
-    "units"
-   ],
-   "genereLe": "2026-11-13T11:31:21.787Z",
-   "motsThemes": [
-    null
-   ],
-   "votes": []
   }
  ],
  "ordresDuJour": [],
