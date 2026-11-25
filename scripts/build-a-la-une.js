@@ -73,23 +73,26 @@ const PAGES = [
     h1: [deux('Le serment des élus', 'The oath of'), deux('ville par ville.', 'city by city.')],
     sujet: deux('Le serment des élus municipaux', 'Municipal oath of office'),
     chapeau: deux(
-      'Les députés du Québec ont deux serments, dont un au roi qui n’est plus exigé. Les maires et les conseillers, eux, prêtent un serment qui ne nomme pas le roi. Voici son texte exact, ce que la loi exige et la date où chaque conseil l’a prêté après l’élection du 2 novembre 2025.',
-      'Quebec MNAs have two oaths, including one to the King that is no longer required. Mayors and councillors take an oath that does not name the King. Here is its exact wording, what the law requires and the date each council took it after the November 2, 2025 election.'),
+      'Les députés du Québec ont deux serments. Celui au roi n’est plus exigé. Les maires et les conseillers, eux, prêtent un serment qui ne nomme pas le roi. Voici son texte exact, ce que la loi exige et la date où chaque conseil l’a prêté après l’élection du 2 novembre 2025.',
+      'Quebec MNAs have two oaths. The one to the King is no longer required. Mayors and councillors take an oath that does not name the King. Here is its exact wording, what the law requires and the date each council took it after the November 2, 2025 election.'),
     corps: () => `
-    <h2 class="une-h2">${deux('Le texte exact', 'The exact wording')}</h2>
+    <h2 class="une-h2">${deux('Le texte exact, en une phrase', 'The exact wording, in one sentence')}</h2>
     <blockquote class="une-citation">« ${SERMENT_TEXTE} »</blockquote>
     <p class="une-p">${deux(
-      `Loi sur les élections et les référendums dans les municipalités, ${lien(S.lerm, 'annexe II')} (article 313). Ce texte est en vigueur depuis 2010 (2010, c. 27, a. 43).`,
-      `Act respecting elections and referendums in municipalities, ${lien(S.lerm, 'Schedule II')} (section 313). This wording has been in force since 2010 (2010, c. 27, s. 43).`)}</p>
+      `Source : Loi sur les élections et les référendums dans les municipalités, ${lien(S.lerm, 'annexe II')} (article 313).`,
+      `Source: Act respecting elections and referendums in municipalities, ${lien(S.lerm, 'Schedule II')} (section 313).`)}</p>
+    <p class="une-p">${deux('En vigueur depuis 2010 (2010, c. 27, a. 43).', 'In force since 2010 (2010, c. 27, s. 43).')}</p>
 
-    <h2 class="une-h2">${deux('Ce qu’il dit et ce qu’il ne dit pas', 'What it says and what it does not')}</h2>
+    <h2 class="une-h2">${deux('Aucun roi, mais un code d’éthique', 'No King, but a code of ethics')}</h2>
+    <p class="une-p">${deux('Relisez-le. Le roi n’y est pas.', 'Read it again. The King is not in it.')}</p>
     <ul class="une-liste">
       <li>${deux('<b>Pas de roi.</b> Le serment ne nomme ni le souverain, ni la Couronne, ni le Canada.', '<b>No King.</b> The oath names neither the sovereign, nor the Crown, nor Canada.')}</li>
-      <li>${deux('<b>Le code d’éthique de la ville</b> y est nommé, et l’élu s’engage à en respecter certaines règles même après la fin de son mandat.', '<b>The city’s code of ethics</b> is named, and the councillor promises to follow some of its rules even after leaving office.')}</li>
-      <li>${deux('<b>Honnêteté, justice, respect de la loi</b> : c’est tout.', '<b>Honesty, justice, respect for the law</b>: that is all.')}</li>
+      <li>${deux('<b>Le code d’éthique de la ville</b> y est nommé. L’élu s’engage à en respecter certaines règles même après la fin de son mandat.', '<b>The city’s code of ethics</b> is named. The councillor promises to follow some of its rules even after leaving office.')}</li>
+      <li>${deux('<b>Honnêteté, justice, respect de la loi.</b> C’est tout.', '<b>Honesty, justice, respect for the law.</b> That is all.')}</li>
     </ul>
 
-    <h2 class="une-h2">${deux('Ce que la loi exige', 'What the law requires')}</h2>
+    <h2 class="une-h2">${deux('Pas de serment dans les 30 jours, pas de siège', 'No oath within 30 days, no seat')}</h2>
+    <p class="une-p">${deux('Voici ce que la loi prévoit :', 'Here is what the law provides:')}</p>
     <ul class="une-liste">
       <li>${deux(`<b>30 jours</b> pour prêter serment après la proclamation de son élection (${lien(S.lerm, 'art. 313')}).`, `<b>30 days</b> to take the oath after being declared elected (${lien(S.lerm, 's. 313')}).`)}</li>
       <li>${deux(`<b>Pas de serment, pas de mandat</b> : « Son mandat de membre du conseil commence au moment où elle prête le serment » (${lien(S.lerm, 'art. 313')}).`, `<b>No oath, no term</b>: the term of office begins when the oath is taken (${lien(S.lerm, 's. 313')}).`)}</li>
@@ -99,6 +102,7 @@ const PAGES = [
 
     <h2 class="une-h2">${deux('Quand chaque conseil a prêté serment (élection du 2 novembre 2025)', 'When each council took the oath (November 2, 2025 election)')}</h2>
 ${tableauVilles()}
+    <p class="une-p">${deux('Trois villes ont publié la date. Deux, non.', 'Three cities published the date. Two did not.')}</p>
     <p class="une-note">${deux('Une ville sans date n’a rien publié à ce sujet sur son site. Nous avons écrit au greffe de chacune et ajouterons la date dès leur réponse.', 'A city without a date has published nothing on its website. We have written to each clerk and will add the date as soon as we hear back.')}</p>
 ${sources([
       [S.lerm, 'LégisQuébec, chapitre E-2.2 : art. 313, 314.2, 330 et annexe II', 'LégisQuébec, chapter E-2.2: ss. 313, 314.2, 330 and Schedule II'],
@@ -117,30 +121,32 @@ ${sources([
     h1: [deux('Pas de serment,', 'No oath,'), deux('pas de séance.', 'no sitting.')],
     sujet: deux('Le conseil municipal sans serment', 'A council without an oath'),
     chapeau: deux(
-      'À chaque élection générale municipale, votre conseil de ville ne peut presque plus siéger pendant plus d’un mois. Il ne peut siéger que pour une urgence, et seulement pour en parler. C’est l’article 314.2 de la loi électorale municipale.',
-      'At every general municipal election, your city council can barely sit for more than a month. It may sit only for an emergency, and only to deal with it. That is section 314.2 of Quebec’s municipal election act.'),
+      'À chaque élection générale municipale, votre conseil de ville ne peut presque plus siéger pendant plus d’un mois. Une exception : l’urgence. Et même là, il ne peut parler que d’elle. C’est l’article 314.2 de la loi électorale municipale.',
+      'At every general municipal election, your city council can barely sit for more than a month. One exception: an emergency. Even then, it may deal only with that. That is section 314.2 of Quebec’s municipal election act.'),
     corps: () => `
-    <h2 class="une-h2">${deux('Ce que dit la loi', 'What the law says')}</h2>
+    <h2 class="une-h2">${deux('La règle tient en deux phrases', 'The rule fits in two sentences')}</h2>
     <blockquote class="une-citation">« Au cours de la période qui commence à 16 h 30 le trentième jour précédant celui fixé pour le scrutin d’une élection générale et qui se termine au moment où la majorité des candidats élus à un poste de conseiller a prêté le serment, le conseil ne peut siéger que si survient un cas de force majeure nécessitant son intervention. Les délibérations lors de cette séance ne peuvent porter que sur ce cas. »</blockquote>
     <p class="une-p">${deux(`Loi sur les élections et les référendums dans les municipalités, ${lien(S.lerm, 'art. 314.2')}, premier alinéa.`, `Act respecting elections and referendums in municipalities, ${lien(S.lerm, 's. 314.2')}, first paragraph (French text quoted).`)}</p>
 
-    <h2 class="une-h2">${deux('En clair', 'In plain terms')}</h2>
+    <h2 class="une-h2">${deux('En clair : un début, une fin, une soupape', 'In plain terms: a start, an end, a safety valve')}</h2>
     <ul class="une-liste">
-      <li>${deux('<b>Ça commence 30 jours avant le vote</b>, à 16 h 30. Le conseil sortant ne peut plus se réunir, sauf urgence.', '<b>It starts 30 days before election day</b>, at 4:30 p.m. The outgoing council can no longer meet, except in an emergency.')}</li>
-      <li>${deux('<b>Ça finit quand la majorité des nouveaux conseillers a prêté serment.</b> C’est le serment qui rend le nouveau conseil capable de siéger.', '<b>It ends when a majority of the new councillors have taken the oath.</b> The oath is what lets the new council sit.')}</li>
-      <li>${deux('<b>Une soupape de 35 jours</b> : si la majorité n’a pas prêté serment avant le 35e jour après le scrutin, la règle cesse au début de ce jour (deuxième alinéa).', '<b>A 35-day safety valve</b>: if a majority has not taken the oath before the 35th day after election day, the rule stops applying at the start of that day (second paragraph).')}</li>
-      <li>${deux('<b>En cas d’urgence</b>, le conseil peut siéger, mais il ne peut parler que de cette urgence.', '<b>In an emergency</b>, council may sit, but only to deal with that emergency.')}</li>
+      <li>${deux('<b>Le début : 30 jours avant le vote</b>, à 16 h 30. Le conseil sortant ne peut plus se réunir, sauf urgence.', '<b>The start: 30 days before election day</b>, at 4:30 p.m. The outgoing council can no longer meet, except in an emergency.')}</li>
+      <li>${deux('<b>La fin : quand la majorité des nouveaux conseillers a prêté serment.</b> C’est le serment qui rend le nouveau conseil capable de siéger.', '<b>The end: when a majority of the new councillors have taken the oath.</b> The oath is what lets the new council sit.')}</li>
+      <li>${deux('<b>La soupape : 35 jours.</b> Si la majorité n’a pas prêté serment avant le 35e jour après le scrutin, la règle cesse au début de ce jour (deuxième alinéa).', '<b>The safety valve: 35 days.</b> If a majority has not taken the oath before the 35th day after election day, the rule stops applying at the start of that day (second paragraph).')}</li>
+      <li>${deux('<b>L’urgence</b> : le conseil peut siéger, mais il ne peut parler que de cette urgence.', '<b>An emergency</b>: council may sit, but only to deal with that emergency.')}</li>
     </ul>
+    <p class="une-p">${deux('Autrement dit, le serment n’est pas qu’une cérémonie. C’est l’interrupteur.', 'In other words, the oath is not just a ceremony. It is the switch.')}</p>
 
-    <h2 class="une-h2">${deux('Les dates de 2025', 'The 2025 dates')}</h2>
+    <h2 class="une-h2">${deux('En 2025 : du 3 octobre au 7 décembre au plus tard', 'In 2025: October 3 to December 7 at the latest')}</h2>
     <ul class="une-liste">
       <li>${deux(`<b>3 octobre 2025, 16 h 30</b> : début de la période, pour le scrutin du 2 novembre. Le ministère des Affaires municipales l’a rappelé aux villes dans son ${lien(S.muni, 'bulletin Muni-Express du 3 octobre 2025')}.`, `<b>October 3, 2025, 4:30 p.m.</b>: the period begins, for the November 2 election. The Municipal Affairs ministry reminded cities in its ${lien(S.muni, 'Muni-Express bulletin of October 3, 2025')}.`)}</li>
       <li>${deux('<b>2 novembre 2025</b> : jour du scrutin.', '<b>November 2, 2025</b>: election day.')}</li>
       <li>${deux('<b>7 décembre 2025</b> : 35e jour après le scrutin. Au plus tard ce jour-là, la règle tombait d’elle-même.', '<b>December 7, 2025</b>: 35th day after election day. By that day at the latest, the rule lapsed on its own.')}</li>
     </ul>
-    <p class="une-p">${deux('Dans les trois villes qui ont publié la date, les conseils ont prêté serment entre 7 et 11 jours après le scrutin :', 'In the three cities that published the date, councils took the oath 7 to 11 days after election day:')}</p>
+    <p class="une-p">${deux('Combien de jours après le scrutin?', 'How many days after election day?')}</p>
+    <p class="une-p">${deux('Entre 7 et 11 jours après le scrutin, dans les trois villes qui ont publié la date :', 'Between 7 and 11 days after election day, in the three cities that published the date:')}</p>
 ${tableauVilles()}
-    <p class="une-p">${deux(`À Laval, le conseil a prêté serment le dimanche 9 novembre et s’est réuni dès le lendemain, en séance extraordinaire, pour nommer son comité exécutif (${lien(S.laval, 'communiqué de la Ville')}).`, `In Laval, council took the oath on Sunday, November 9 and met the very next day, in a special sitting, to appoint its executive committee (${lien(S.laval, 'City news release')}).`)}</p>
+    <p class="une-p">${deux(`À Laval, le conseil a prêté serment le dimanche 9 novembre. Dès le lendemain, il siégeait en séance extraordinaire pour nommer son comité exécutif (${lien(S.laval, 'communiqué de la Ville')}).`, `In Laval, council took the oath on Sunday, November 9. The very next day, it met in a special sitting to appoint its executive committee (${lien(S.laval, 'City news release')}).`)}</p>
     <p class="une-p">${deux('Pour le texte du serment lui-même, voir <a href="/a-la-une/serment-des-elus-municipaux">Le serment des élus, ville par ville</a>.', 'For the wording of the oath itself, see <a href="/a-la-une/serment-des-elus-municipaux">The oath of office, city by city</a>.')}</p>
 ${sources([
       [S.lerm, 'LégisQuébec, chapitre E-2.2 : art. 313 et 314.2', 'LégisQuébec, chapter E-2.2: ss. 313 and 314.2'],
@@ -159,9 +165,10 @@ ${sources([
     h1: [deux('Le serment au roi,', 'The oath to the King,'), deux('de 1867 à aujourd’hui.', '1867 to today.')],
     sujet: deux('Chronologie du serment au roi', 'Oath to the King timeline'),
     chapeau: deux(
-      'Pendant 155 ans, aucun député du Québec n’a pu siéger sans jurer fidélité au souverain. Voici comment ce serment a cessé d’être exigé, étape par étape, chaque date avec sa source officielle.',
-      'For 155 years, no Quebec member could sit without swearing allegiance to the sovereign. Here is how it stopped being required, step by step, each date with its official source.'),
+      'Pendant 155 ans, aucun député du Québec n’a pu siéger sans jurer fidélité au souverain. Puis, à l’automne 2022, la règle a changé. Voici les étapes, chaque date avec sa source officielle.',
+      'For 155 years, no Quebec member could sit without swearing allegiance to the sovereign. Then, in the fall of 2022, the rule changed. Here are the steps, each date with its official source.'),
     corps: () => `
+    <p class="une-p">${deux('Deux dates fixent le décor : 1867 et 1982. Les six autres tiennent dans l’automne 2022.', 'Two dates set the stage: 1867 and 1982. The other six fit in the fall of 2022.')}</p>
     <ol class="une-chrono">
       <li><b>1867</b> ${deux(`L’article 128 de la Loi constitutionnelle de 1867 oblige les membres du Parlement fédéral et des assemblées provinciales à prêter le serment d’allégeance avant de siéger : « Je, A.B., jure que je serai fidèle et porterai vraie allégeance à Sa Majesté la Reine Victoria » (cinquième annexe). ${lien(S.lc1867, 'Art. 128')} · ${lien(S.lc1867ann, 'cinquième annexe')}`, `Section 128 of the Constitution Act, 1867 requires members of Parliament and of provincial legislatures to take the oath of allegiance before sitting: “I A.B. do swear, That I will be faithful and bear true Allegiance to Her Majesty Queen Victoria” (Fifth Schedule). ${lien(S.lc1867, 's. 128')} · ${lien(S.lc1867ann, 'Fifth Schedule')}`)}</li>
       <li><b>1982</b> ${deux(`La Loi sur l’Assemblée nationale ajoute un second serment, envers le peuple du Québec : « Je, (nom du député), déclare sous serment que je serai loyal envers le peuple du Québec et que j’exercerai mes fonctions de député avec honnêteté et justice dans le respect de la constitution du Québec. » Sans lui, pas de siège (art. 15). ${lien(S.lan, 'Loi sur l’Assemblée nationale, art. 15 et annexe I (1982, c. 62)')}`, `The National Assembly Act adds a second oath: the member swears to be loyal to the people of Quebec and to serve with honesty and justice, respecting Quebec’s constitution. Without it, no seat (s. 15). ${lien(S.lan, 'National Assembly Act, s. 15 and Schedule I (1982, c. 62)')}`)}</li>
@@ -190,9 +197,10 @@ ${sources([
     h1: [deux('Qui jure quoi', 'Who swears what'), deux('au Canada?', 'in Canada?')],
     sujet: deux('Les serments, côte à côte', 'Oaths side by side'),
     chapeau: deux(
-      'Le Québec est la seule province où un député peut siéger sans jurer fidélité au roi. Ses élus municipaux, eux, n’ont pas à le faire. Le portrait, assemblée par assemblée.',
-      'Quebec is the only province where a member may sit without swearing allegiance to the King. Its municipal councillors do not have to. The picture, legislature by legislature.'),
+      'Une province sur dix. C’est la seule où un député peut siéger sans jurer fidélité au roi : le Québec. Ses élus municipaux n’ont pas à le faire non plus. Le portrait, assemblée par assemblée.',
+      'One province out of ten. Quebec is the only one where a member may sit without swearing allegiance to the King. Its municipal councillors do not have to either. The picture, legislature by legislature.'),
     corps: () => `
+    <p class="une-p">${deux('Cinq groupes d’élus. Pour trois d’entre eux, tout part du même article : le 128.', 'Five groups of elected officials. For three of them, it all comes down to the same section: 128.')}</p>
     <div class="une-table-wrap"><table class="fin-table une-table">
       <thead><tr><th>${deux('Élus', 'Elected officials')}</th><th>${deux('À qui ils jurent', 'Sworn to')}</th><th>${deux('Serment au roi', 'Oath to the King')}</th><th>${deux('Loi', 'Law')}</th></tr></thead>
       <tbody>
