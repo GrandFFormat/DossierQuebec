@@ -256,6 +256,14 @@ const PAGES = [
     fil: 'Page introuvable', cle: 'fil.introuvable', frequence: 'yearly', priorite: '0.1',
   },
   {
+    // Les bénévoles (25 nov. 2026, copie de DossierNBrunswick), ouverte par l'icône V de l'en-tête.
+    fichier: 'benevoles.html', vue: 'benevoles', onglet: null, url: '/benevoles',
+    donnees: [],
+    title: 'Bénévoles : résumés de projets de loi — DossierQuébec',
+    desc: "Aidez à remplacer les résumés IA des projets de loi du Québec par des résumés écrits par des personnes, et signalez les documents attendus sur r/DossierCanada.",
+    fil: 'Bénévoles', cle: 'fil.benevoles', frequence: 'monthly', priorite: '0.4',
+  },
+  {
     // Les règles de sources du site (5 oct. 2026), lien dans le pied de page.
     fichier: 'regles.html', vue: 'regles', onglet: null, url: '/regles',
     donnees: [],

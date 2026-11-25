@@ -294,8 +294,28 @@ function boite(p) {
       </li>`;
 }
 
+// La 5e boîte (25 nov. 2026) : le jugement n'est pas publié, alors on le confie aux bénévoles.
+// Elle mène à /benevoles. On n'affirme rien sur le jugement, sauf qu'il n'est pas publié (vérifiable).
+function boiteBenevoles() {
+  const img = imageDe('jugement-cour-superieure');
+  return `      <li class="une-boite">
+        <a class="une-boite-lien" href="/benevoles">
+          <div class="une-boite-visuel" style="--fond:#1c1c1c; --rond:#c64a00">
+            ${img ? `<img src="${img}" alt="" loading="lazy" width="1200" height="630">` : ''}
+            <span class="une-boite-etiquette">${deux('Bénévoles', 'Volunteers')}</span>
+          </div>
+          <div class="une-boite-corps">
+            <span class="une-boite-tag">#benevoles</span>
+            <h2 class="une-boite-titre">${deux('Le jugement de la Cour supérieure : à vous de jouer', 'The Superior Court ruling: your turn')}</h2>
+            <p class="une-boite-resume">${deux('Le jugement n’est pas publié sur CanLII ni sur SOQUIJ. Vous le voyez passer? Signalez-le sur r/DossierCanada avec le lien officiel. Nous l’expliquons et votre nom figure dans l’article.', 'The ruling is not published on CanLII or SOQUIJ. Seen it? Flag it on r/DossierCanada with the official link. We explain it and your name appears in the article.')}</p>
+            <p class="une-boite-date">${deux(MAJ.fr, MAJ.en)}</p>
+          </div>
+        </a>
+      </li>`;
+}
+
 function sectionHub() {
-  const cartes = PAGES.map(boite).join('\n');
+  const cartes = PAGES.map(boite).join('\n') + '\n' + boiteBenevoles();
   const avenir = CARTES_A_VENIR.map((c) => `      <li class="regle une-avenir">
         <h2 class="regle-titre">${c.titre} <span class="une-attente">${deux('À venir', 'Coming')}</span></h2>
         <p>${c.texte}</p>

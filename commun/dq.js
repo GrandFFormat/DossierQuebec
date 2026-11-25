@@ -475,6 +475,22 @@ const translations = {
     'abcode.btn':"Use the code",
     'fil.regles':"The rules",
     'fil.archives':"Archives",
+    'fil.benevoles':"Volunteers",
+    'sujet.benevoles':"DossierQuébec's volunteers",
+    'benevoleshero.l1':"Volunteers,",
+    'benevoleshero.l2':"pick up a pen.",
+    'benevoleshero.sub':"Many bill summaries are still written by AI. The goal is to replace them, one bill at a time, with summaries <b>written and reviewed by people.</b>",
+    'benevoles.1.h':"Pick a bill",
+    'benevoles.1.p':"Choose a bill you care about from the <a href=\"/projets-de-loi\">list of bills</a> and read its official text.",
+    'benevoles.2.h':"Propose your summary",
+    'benevoles.2.p':"Post your summary or correction on <a href=\"https://www.reddit.com/r/DossierCanada/\" target=\"_blank\" rel=\"noopener\">r/DossierCanada</a> with a link to the bill. A few short bullet points are enough. Say what the bill changes and who it affects, without saying whether it is a good idea.",
+    'benevoles.3.h':"We check it, then publish it",
+    'benevoles.3.p':"Your text is compared with the official bill and reviewed by a person. It then replaces the AI summary on the site, with your username.",
+    'benevoles.4.h':"Featured: flag an official document",
+    'benevoles.4.p':"For the <a href=\"/a-la-une\">Featured</a> section, we are waiting for some documents, such as the Superior Court ruling on the oath to the King. Seen it published on CanLII or SOQUIJ? Flag it on r/DossierCanada with the official link. We read it, explain it, and your username appears in the article.",
+    'benevoles.cta':"Go to r/DossierCanada",
+    'benevoles.liste.h':"The volunteers",
+    'benevoles.liste.p':"No names yet. The first accepted contribution will start this list. Volunteers write in their own name and do not speak for the site. You can have your name removed at any time.",
     'fil.alaune':"Featured",'sujet.alaune':"Featured",'unehero.l1':"The news,",'unehero.l2':"with its sources.",
     'unehero.sub':"Reference pages and tools on current topics, every fact linked to its official source. <b>Coming soon: the elected officials' oath, city by city.</b>",
     'sujet.archives':"National Assembly archives",
@@ -5445,8 +5461,8 @@ function toggleVoteCard(id, evt){
    sur une de ces adresses. */
 // /mon-dossier y est aussi : sans lui, la page se prenait pour l'accueil et portait son titre
 // anglais (arrivé avec l'anglais qui suit enfin la navigation, 24 sept. 2026).
-const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', ministre:'/ministres', projets:'/projets-de-loi', votes:'/votes', archives:'/archives', ancien:'/archives', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier', regles:'/regles', abonnement:'/abonnement', alaune:'/a-la-une' };
-const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'ministres/':'ministre', 'projets-de-loi':'projets', 'votes':'votes', 'archives':'archives', 'archives/':'ancien', 'deputes/':'ministre', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier', 'regles':'regles', 'abonnement':'abonnement', 'a-la-une':'alaune' };
+const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', ministre:'/ministres', projets:'/projets-de-loi', votes:'/votes', archives:'/archives', ancien:'/archives', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier', regles:'/regles', benevoles:'/benevoles', abonnement:'/abonnement', alaune:'/a-la-une' };
+const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'ministres/':'ministre', 'projets-de-loi':'projets', 'votes':'votes', 'archives':'archives', 'archives/':'ancien', 'deputes/':'ministre', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier', 'regles':'regles', 'benevoles':'benevoles', 'abonnement':'abonnement', 'a-la-une':'alaune' };
 // Titres ANGLAIS seulement : le français vient du <title> de la page (voir syncTitle).
 const PAGE_META = {
   bd:        { en:"Mission and site updates — DossierQuébec" },
@@ -5466,6 +5482,7 @@ const PAGE_META = {
   introuvable:{ en:"Page not found (404) — DossierQuébec" },
   regles:    { en:"DossierQuébec's sourcing rules — DossierQuébec" },
   abonnement:{ en:"The optional subscription — DossierQuébec" },
+  benevoles: { en:"Volunteers: bill summaries — DossierQuébec" },
 };
 function viewFromPath(){
   // La page 404 est servie à N'IMPORTE quelle adresse inconnue : c'est sa présence qui la désigne,

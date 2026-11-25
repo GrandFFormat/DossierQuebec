@@ -2809,8 +2809,8 @@ body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
 @media (max-width:720px){ .une-boites{grid-template-columns:1fr;} }
 .une-boite{border:3px solid var(--ink); background:var(--paper, #f6f1e6); display:flex;}
 .une-boite-lien{display:flex; flex-direction:column; color:inherit; text-decoration:none; width:100%;}
-.une-boite-visuel{position:relative; aspect-ratio:1200/630; background:var(--fond); overflow:hidden; display:flex; align-items:center; justify-content:center;}
-.une-boite-visuel::after{content:''; position:absolute; right:-14%; top:-30%; width:52%; aspect-ratio:1; border-radius:50%; background:var(--rond);}
+.une-boite-visuel{position:relative; aspect-ratio:1200/630; background:var(--fond, #1c1c1c); overflow:hidden; display:flex; align-items:center; justify-content:center;}
+.une-boite-visuel::after{content:''; position:absolute; right:-14%; top:-30%; width:52%; aspect-ratio:1; border-radius:50%; background:var(--rond, #0E4FC1);}
 .une-boite-visuel img{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:1;}
 .une-boite-etiquette{position:relative; z-index:2; border:2px solid #fff; color:#fff; padding:6px 12px; font-family:'Archivo',sans-serif; font-weight:900; font-size:13px; letter-spacing:.08em; text-transform:uppercase; background:rgba(0,0,0,.25);}
 .une-boite-nouveau{position:absolute; z-index:3; top:12px; left:10px; transform:rotate(-8deg); background:#c64a00; color:#fff; border:2px solid #fff; padding:3px 10px; font-family:'Archivo',sans-serif; font-weight:900; font-size:13px; text-transform:uppercase; letter-spacing:.06em;}
@@ -2822,3 +2822,18 @@ body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
 .une-boite-lien:hover .une-boite-titre{text-decoration:underline; text-underline-offset:3px;}
 .une-banniere{margin:8px 0 12px; max-width:1000px; border:3px solid var(--ink); aspect-ratio:1200/560; overflow:hidden;} .une-banniere img{width:100%; height:100%; object-fit:cover; display:block;}
 .une-table td, .une-table th, .une-table td:last-child{text-align:left; white-space:normal; font-weight:400; padding-left:12px;} .une-table td:first-child{font-weight:700;} .une-table td:nth-child(2){white-space:nowrap;}
+
+/* Les bénévoles et l'icône Reddit (25 nov. 2026, copie de DossierNBrunswick). */
+.header-ctrls > :is(.lien-reddit,.lien-benevoles){display:inline-flex; align-items:center; justify-content:center; width:26px; flex:none; background:none; border:none;}
+.header-ctrls > :is(.lien-reddit,.lien-benevoles):hover{opacity:.8;}
+.header-ctrls > :is(.lien-reddit,.lien-benevoles):focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+@media (max-width:480px){ .font-size-ctrl #fontPct{display:none;} .font-size-ctrl button{padding:6px 7px;} }
+.lien-benevoles img{display:block;}
+.lien-benevoles .paix-sombre{display:none;}
+html[data-theme="dark"] .lien-benevoles .paix-clair{display:none;}
+html[data-theme="dark"] .lien-benevoles .paix-sombre{display:block;}
+.regle p a{color:inherit; font-weight:800; text-decoration:underline; text-underline-offset:3px;}
+.benevoles-action{margin:26px 0 0;}
+.benevoles-action a{display:inline-block; padding:12px 20px; background:var(--gold); color:#fff; font-weight:800; text-decoration:none;}
+.benevoles-action a:hover{opacity:.9;}
+.benevoles-titre{margin:44px 0 0; font-family:'Archivo',sans-serif; font-weight:900; font-size:30px; line-height:1.1; text-transform:uppercase; color:var(--ink);}
