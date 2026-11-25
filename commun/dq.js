@@ -488,7 +488,7 @@ const translations = {
     'benevoles.3.p':"Your text is compared with the official bill and reviewed by a person. It then replaces the AI summary on the site, with your username.",
     'benevoles.4.h':"Featured: flag an official document",
     'benevoles.4.p':"For the <a href=\"/a-la-une\">Featured</a> section, we are waiting for some documents, such as the Superior Court ruling on the oath to the King. Seen it published on CanLII or SOQUIJ? Flag it on r/DossierCanada with the official link. We read it, explain it, and your username appears in the article.",
-    'benevoles.cta':"Go to r/DossierCanada",
+    'benevoles.cta':"r/DossierCanada",
     'benevoles.liste.h':"The volunteers",
     'benevoles.liste.p':"No names yet. The first accepted contribution will start this list. Volunteers write in their own name and do not speak for the site. You can have your name removed at any time.",
     'fil.alaune':"Featured",'sujet.alaune':"Featured",'unehero.l1':"The news,",'unehero.l2':"with its sources.",
