@@ -5445,8 +5445,8 @@ function toggleVoteCard(id, evt){
    sur une de ces adresses. */
 // /mon-dossier y est aussi : sans lui, la page se prenait pour l'accueil et portait son titre
 // anglais (arrivé avec l'anglais qui suit enfin la navigation, 24 sept. 2026).
-const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', ministre:'/ministres', projets:'/projets-de-loi', votes:'/votes', archives:'/archives', ancien:'/archives', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier', regles:'/regles', abonnement:'/abonnement' };
-const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'ministres/':'ministre', 'projets-de-loi':'projets', 'votes':'votes', 'archives':'archives', 'archives/':'ancien', 'deputes/':'ministre', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier', 'regles':'regles', 'abonnement':'abonnement' };
+const VIEW_SLUGS = { apercu:'/', ministres:'/ministres', ministre:'/ministres', projets:'/projets-de-loi', votes:'/votes', archives:'/archives', ancien:'/archives', lexique:'/lexique', promesses:'/promesses', bd:'/sources', mondossier:'/mon-dossier', regles:'/regles', abonnement:'/abonnement', alaune:'/a-la-une' };
+const SLUG_VIEWS = { '':'apercu', 'ministres':'ministres', 'ministres/':'ministre', 'projets-de-loi':'projets', 'votes':'votes', 'archives':'archives', 'archives/':'ancien', 'deputes/':'ministre', 'lexique':'lexique', 'promesses':'promesses', 'sources':'bd', 'mon-dossier':'mondossier', 'regles':'regles', 'abonnement':'abonnement', 'a-la-une':'alaune' };
 // Titres ANGLAIS seulement : le français vient du <title> de la page (voir syncTitle).
 const PAGE_META = {
   bd:        { en:"Mission and site updates — DossierQuébec" },
@@ -5460,6 +5460,7 @@ const PAGE_META = {
   votes:     { en:"Recorded divisions at the National Assembly — DossierQuébec" },
   lexique:   { en:"National Assembly glossary in plain language — DossierQuébec" },
   archives:  { en:"National Assembly archives — DossierQuébec" },
+  alaune:    { get en(){ return document.getElementById('view-alaune')?.dataset.titreEn || 'Featured — DossierQuébec'; } },
   promesses: { en:"2026 Quebec election promises — DossierQuébec" },
   mondossier:{ en:"My file — DossierQuébec" },
   introuvable:{ en:"Page not found (404) — DossierQuébec" },
@@ -5477,6 +5478,8 @@ function viewFromPath(){
   if(seg.startsWith('archives/')) return SLUG_VIEWS['archives/'];
   // Fiche d'un chef de l'opposition (/deputes/charles-milliard) : même vue que celle d'un ministre.
   if(seg.startsWith('deputes/')) return SLUG_VIEWS['deputes/'];
+  // Les pages de la rubrique À la une (/a-la-une/serment-des-elus, scripts/build-a-la-une.js).
+  if(seg.startsWith('a-la-une/')) return 'alaune';
   return SLUG_VIEWS[seg] || 'apercu';
 }
 const _titreFr = document.title;

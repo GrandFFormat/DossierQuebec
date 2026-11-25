@@ -816,3 +816,7 @@ construirePagesChefs();
 // Le journal propre à chaque ville, sur sa page Sources (scripts/journal-villes.js, 12 nov. 2026).
 const { journalDesVilles } = await import('./journal-villes.js');
 journalDesVilles();
+
+// La rubrique À la une (/a-la-une et /a-la-une/<slug>), à partir de a-la-une.html : scripts/build-a-la-une.js.
+const { construireALaUne } = await import('./build-a-la-une.js');
+construireALaUne();
