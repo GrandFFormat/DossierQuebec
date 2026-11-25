@@ -1,17 +1,17 @@
 {
- "generatedAt": "2026-11-24T19:36:20.765Z",
+ "generatedAt": "2026-11-25T18:44:09.630Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "methode": "Extraction par analyse du texte des résolutions (champ « content » de l'index de la Ville). Les noms sont lus dans les passages « Ont voté en faveur / Ont voté contre ». Chaque vote conserve le texte brut et signale tout écart avec le décompte officiel.",
  "parametres": {
   "annee": "2026",
   "max": 1000,
-  "depuis": "2026-09-25"
+  "depuis": "2026-09-26"
  },
- "totalDisponible": 287,
- "documentsAnalyses": 40,
- "nombre": 287,
- "nouveauxDepuisDerniereExecution": 0,
- "avecAvertissement": 10,
+ "totalDisponible": 298,
+ "documentsAnalyses": 51,
+ "nombre": 298,
+ "nouveauxDepuisDerniereExecution": 11,
+ "avecAvertissement": 11,
  "themes": {
   "procedure": {
    "libelle": "Procédure",
@@ -83,6 +83,334 @@
   }
  },
  "votes": [
+  {
+   "id": "CA-2026-0589.pdf",
+   "numero": "CA-2026-0589",
+   "objet": "Attribution d'un contrat à commandes pour le service de réparation sur la route pour les pneus de camions lourds et les équipements de génie civil (Appel d'offres public 96068)",
+   "date": "2026-11-18",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0589.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Elisa Verreault",
+    "Catherine Vallières-Roland",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 5,
+   "decompteContre": 1,
+   "abstention": "Monsieur le vice-président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0590.pdf",
+   "numero": "CA-2026-0590",
+   "objet": "Attribution d'un contrat à commandes pour l'inspection et la certification des équipements de protection contre les chutes (Appel d'offres public 96537)",
+   "date": "2026-11-18",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0590.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Elisa Verreault",
+    "Catherine Vallières-Roland",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 5,
+   "decompteContre": 1,
+   "abstention": "Monsieur le vice-président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0591.pdf",
+   "numero": "CA-2026-0591",
+   "objet": "Entente entre la Ville de Québec et la Communauté allemande Québec relativement au versement d'une subvention et à la fourniture à titre gratuit de services municipaux, à titre d'assistance, dans le cadre de la tenue de l'événement Marché de Noël allemand de Québec, en 2026",
+   "date": "2026-11-18",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0591.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Elisa Verreault",
+    "Catherine Vallières-Roland",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 5,
+   "decompteContre": 1,
+   "abstention": "Monsieur le vice-président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "subventions",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0592.pdf",
+   "numero": "CA-2026-0592",
+   "objet": "Prise d'acte de l'entente intervenue entre la Ville de Québec et le Syndicat canadien de la fonction publique - Section locale 4528 - Secteur aquatique, concernant la modification des articles 5.00, 8.00 et 16.00 de la convention collective en vigueur",
+   "date": "2026-11-18",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0592.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Elisa Verreault",
+    "Catherine Vallières-Roland",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 5,
+   "decompteContre": 1,
+   "abstention": "Monsieur le vice-président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "rh",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0594.pdf",
+   "numero": "CA-2026-0594",
+   "objet": "Contrat à commandes entre la Ville de Québec et Camions Globocam Québec et Lévis inc. pour le service de réparation de camions lourds et intermédiaires incluant les pièces chez le concessionnaire du fabricant Freightliner (Dossier 96496)",
+   "date": "2026-11-18",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0594.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Elisa Verreault",
+    "Catherine Vallières-Roland",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 5,
+   "decompteContre": 1,
+   "abstention": "Monsieur le vice-président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0595.pdf",
+   "numero": "CA-2026-0595",
+   "objet": "Adhésion de la Ville de Québec au regroupement d'achats du Centre d'acquisitions gouvernementales 2027-8095-50 sacs de plastique à déchets (Dossier 96732)",
+   "date": "2026-11-18",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0595.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Elisa Verreault",
+    "Catherine Vallières-Roland",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 5,
+   "decompteContre": 1,
+   "abstention": "Monsieur le vice-président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "administration",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0596.pdf",
+   "numero": "CA-2026-0596",
+   "objet": "Attribution d'un contrat Services de support Microsoft Entreprise (contrat-cadre de prestations de services Microsoft (MSA) U6448699) (Dossier 96862)",
+   "date": "2026-11-18",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0596.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Elisa Verreault",
+    "Catherine Vallières-Roland",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 5,
+   "decompteContre": 1,
+   "abstention": "Monsieur le vice-président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0597.pdf",
+   "numero": "CA-2026-0597",
+   "objet": "Attribution d'un contrat à commandes pour la fourniture et la livraison de lubrifiants et de graisses (Appel d'offres public 96128)",
+   "date": "2026-11-18",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0597.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Elisa Verreault",
+    "Catherine Vallières-Roland",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 5,
+   "decompteContre": 1,
+   "abstention": "Monsieur le vice-président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "contrats",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0600.pdf",
+   "numero": "CA-2026-0600",
+   "objet": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'un immeuble situé en bordure de la rue Saint-Jean et de l'avenue Honoré-Mercier, connu et désigné comme étant le lot 6 581 483 du cadastre du Québec, relativement au projet de réseau structurant de transport en commun de la Vi",
+   "date": "2026-11-18",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0600.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Elisa Verreault",
+    "Catherine Vallières-Roland",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 5,
+   "decompteContre": 1,
+   "abstention": "Monsieur le vice-président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "transport",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CA-2026-0603.pdf",
+   "numero": "CA-2026-0603",
+   "objet": "Mise à jour de la nomenclature des emplois manuels",
+   "date": "2026-11-18",
+   "annee": "2026",
+   "instance": "Conseil d'agglomération de Québec",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CA-2026-0603.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [
+    "Catherine Deschamps",
+    "Elainie Lepage",
+    "Elisa Verreault",
+    "Catherine Vallières-Roland",
+    "Gabriel Dusablon"
+   ],
+   "contre": [
+    "Richard Levesque"
+   ],
+   "decomptePour": 5,
+   "decompteContre": 1,
+   "abstention": "Monsieur le vice-président",
+   "demandeParVote": "Richard Levesque",
+   "texteSourceDegrade": false,
+   "avertissements": [],
+   "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
+   "nouveau": true,
+   "theme": "rh",
+   "themeSource": "objet"
+  },
+  {
+   "id": "CV-2026-0955.pdf",
+   "numero": "CV-2026-0955",
+   "objet": "Autorisation de soumettre au conseil d'agglomération - Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'un immeuble situé en bordure de la rue Saint-Jean et de l'avenue Honoré-Mercier, connu et désigné comme étant le lot 6 581 483 du cadastre du Québec, relativement au proje",
+   "date": "2026-11-17",
+   "annee": "2026",
+   "instance": "Conseil de la ville",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/CV-2026-0955.pdf",
+   "resultat": "Adoptée à la majorité",
+   "pour": [],
+   "contre": [
+    "Mélanie Sauvé",
+    "Stéphane Lachance",
+    "Marc Roussin"
+   ],
+   "decomptePour": 17,
+   "decompteContre": 3,
+   "abstention": "Monsieur le président",
+   "demandeParVote": "Stéphane Lachance",
+   "texteSourceDegrade": true,
+   "avertissements": [
+    "Texte source dégradé (PDF aux glyphes espacés) — noms non extraits, voir le champ « brut »."
+   ],
+   "brut": "Ont voté en faveur : monsieur le maire Bruno Marchand, mesdames les c o n s e i l l è r e s M a r i e - J o s é e A s s e l i n , M a r i e - P i e r r e B o u c h e r , Marylou Boulianne, Mélissa Coulombe-Leduc, Catherine Deschamps, Elainie Lepage, Catherine Vallières-Roland, Elisa Verreault et Marianne White et messieurs les conseillers Clément Bourdeau, Éric Cour t emanche Ba r i l , Max ime E lma leh , Yann i ck Fau t eux , C laude Lavo i e , Raphaë l Leba i l l y e t Raymond Po i r i e r . | Ont voté contre : madame la conseillère Mélanie Sauvé et messieurs les conseillers Stéphane Lachance et Marc Roussin.",
+   "nouveau": true,
+   "theme": "immobilier",
+   "themeSource": "objet"
+  },
   {
    "id": "CA-2026-0561.pdf",
    "numero": "CA-2026-0561",
