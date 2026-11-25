@@ -2840,3 +2840,8 @@ html[data-theme="dark"] .lien-benevoles .paix-sombre{display:block;}
 
 .bill-share-row.une-partage{justify-content:flex-start; margin:16px 0 4px;}
 .une-article .une-partage{margin-top:36px;}
+
+/* 25 nov. 2026 : Reddit et le signe de paix ont fait passer l'en-tete a 1 316 px sur deux rangees. On regagne 44 px pour revenir sur une seule. */
+#dq-topbar header.top{padding-left:16px; padding-right:16px;}
+#dq-topbar .brand{gap:8px;}
+.header-ctrls > .lang-toggle{padding:0 10px;}
