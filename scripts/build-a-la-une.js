@@ -39,6 +39,17 @@ const S = {
   biblio: 'https://premierelecture.bibliotheque.assnat.qc.ca/2026/10/14/les-premiers-pas-dune-legislature-lassermentation-des-parlementaires/',
   o1: 'https://laws-lois.justice.gc.ca/fra/lois/o-1/page-1.html',
   bc: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/96066_01',
+  art45: 'https://laws-lois.justice.gc.ca/fra/const/page-13.html',
+  jd6: 'https://www.assnat.qc.ca/Media/Process.aspx?MediaId=ANQ.Vigie.Bll.DocumentGenerique_186243&process=Original&token=ZyMoxNwUn8ikQ+TRKYwPCjWrKwg+vIv9rjij7p3xLGTZDmLVSmJLoqe%2FvG7%2FYWzz',
+  debats9: 'https://www.assnat.qc.ca/fr/travaux-parlementaires/assemblee-nationale/43-1/journal-debats/20221209/338871.html',
+  ab: 'https://kings-printer.alberta.ca/1266.cfm?display=html&isbncln=9780779753659&leg_type=Acts&page=L09.cfm',
+  mb: 'https://web2.gov.mb.ca/laws/statutes/ccsm/l110.php',
+  ipe: 'https://www.princeedwardisland.ca/sites/default/files/legislation/l-7-1-legislative_assembly_act.pdf',
+  tnl: 'https://www.assembly.nl.ca/legislation/sr/statutes/h10-1.htm',
+  on: 'https://www.ontario.ca/laws/statute/90l10',
+  nb: 'https://laws.gnb.ca/en/showfulldoc/cs/2014-c.116/',
+  ne: 'https://nslegislature.ca/about/legislative-ceremonies/swearing-in',
+  sk: 'https://www.legassembly.sk.ca/about/how-the-legislative-assembly-works/election-of-a-member/',
 };
 
 // Les villes suivies par DossierQuébec. `date` = null : aucune date publiée par la Ville (demande au greffe en cours).
@@ -150,6 +161,8 @@ const PAGES = [
     <h2 class="une-h2">${deux('Quand chaque conseil a prêté serment (élection du 2 novembre 2025)', 'When each council took the oath (November 2, 2025 election)')}</h2>
 ${tableauVilles()}
     <p class="une-p">${deux('Neuf villes ont publié le jour exact. Une autre confirme seulement que c’était fait au 17 novembre. Quatre, rien.', 'Nine cities published the exact day. One more only confirms it was done by November 17. Four published nothing.')}</p>
+    <p class="une-p">${deux('Parmi les villes qui ont publié le jour exact, les premières : Drummondville et Victoriaville, le 7 novembre. Cinq jours après le scrutin.', 'Among cities that published the exact day, the first: Drummondville and Victoriaville, on November 7. Five days after the vote.')}</p>
+    <p class="une-p">${deux('Saint-Hyacinthe est un cas à part. Le procès-verbal du 17 novembre dit seulement que « tous les membres du Conseil ont dûment été assermentés ». Le jour exact n’y est pas, d’où le « au plus tard ».', 'Saint-Hyacinthe is a special case. The November 17 minutes only say that all council members had been duly sworn in (French text). The exact day is not given, hence “by”.')}</p>
     <p class="une-note">${deux('Une ville sans date n’a rien publié à ce sujet sur son site. Nous avons écrit aux greffes de Québec et de Lévis et ajouterons la date dès leur réponse.', 'A city without a date has published nothing on its website. We have written to the Québec City and Lévis clerks and will add the date as soon as we hear back.')}</p>
 ${sources([
       [S.lerm, 'LégisQuébec, chapitre E-2.2 : art. 313, 314.2, 330, 335, 337, 339, 653 et annexe II', 'LégisQuébec, chapter E-2.2: ss. 313, 314.2, 330, 335, 337, 339, 653 and Schedule II'],
@@ -164,6 +177,9 @@ ${sources([
       [srcVille('Saint-Jean-sur-Richelieu'), 'Ville de Saint-Jean-sur-Richelieu, communiqué du 11 nov. 2025', 'City of Saint-Jean-sur-Richelieu, news release, Nov. 11, 2025'],
       [srcVille('Trois-Rivières'), 'Ville de Trois-Rivières, page des membres du conseil', 'City of Trois-Rivières, council members page'],
       [srcVille('Gatineau'), 'Ville de Gatineau, communiqué de juin 2025', 'City of Gatineau, June 2025 news release'],
+      [srcVille('Victoriaville'), 'Ville de Victoriaville, communiqué du 7 nov. 2025 (PDF)', 'City of Victoriaville, news release, Nov. 7, 2025 (PDF)'],
+      [srcVille('Saint-Hyacinthe'), 'Ville de Saint-Hyacinthe, procès-verbal du 17 nov. 2025 (PDF)', 'City of Saint-Hyacinthe, minutes of Nov. 17, 2025 (PDF)'],
+      [srcVille('Saguenay'), 'Ville de Saguenay, communiqué du 7 nov. 2025 (PDF)', 'City of Saguenay, news release, Nov. 7, 2025 (PDF)'],
     ])}`,
   },
   {
@@ -248,9 +264,31 @@ ${sources([
       <li><b>${deux('1er novembre 2022', 'November 1, 2022')}</b> ${deux(`Le président sortant, François Paradis, décide que les élus qui refusent l’allégeance au roi ne peuvent pas siéger. Les élus de Québec solidaire prêtent alors le serment au roi. ${lien(S.chrono2022, 'Chronologie de l’Assemblée nationale')}`, `Outgoing Speaker François Paradis rules that members who refuse allegiance to the King cannot sit. Québec solidaire members then take the oath to the King. ${lien(S.chrono2022, 'National Assembly timeline')}`)}</li>
       <li><b>${deux('1er décembre 2022', 'December 1, 2022')}</b> ${deux(`Les trois élus du Parti québécois se voient refuser l’entrée de la Salle de l’Assemblée par la sergente d’armes. ${lien(S.chrono2022, 'Chronologie de l’Assemblée nationale')}`, `The three Parti Québécois members are refused entry to the Assembly Chamber by the Sergeant-at-Arms. ${lien(S.chrono2022, 'National Assembly timeline')}`)}</li>
       <li><b>${deux('1er décembre 2022', 'December 1, 2022')}</b> ${deux(`Sol Zanetti, député de Jean-Lesage, dépose le projet de loi n° 190, Loi visant à reconnaître le serment des députés envers le peuple du Québec comme seul serment obligatoire à leur entrée en fonction. ${lien(S.chrono2022, 'Chronologie de l’Assemblée nationale')}`, `Sol Zanetti, member for Jean-Lesage, introduces Bill 190, An Act to recognize the members’ oath to the people of Quebec as the only mandatory oath on taking office. ${lien(S.chrono2022, 'National Assembly timeline')}`)}</li>
-      <li><b>${deux('6 décembre 2022', 'December 6, 2022')}</b> ${deux(`Le ministre Jean-François Roberge présente le projet de loi n° 4, Loi visant à reconnaître le serment prévu par la Loi sur l’Assemblée nationale comme seul serment obligatoire pour y siéger. ${lien(S.pl4, 'Fiche du projet de loi')}`, `Minister Jean-François Roberge introduces Bill 4, making the National Assembly Act oath the only mandatory oath to sit. ${lien(S.pl4, 'Bill page')}`)}</li>
-      <li><b>${deux('9 décembre 2022', 'December 9, 2022')}</b> ${deux(`Le projet de loi est adopté et sanctionné le même jour (L.Q. 2022, c. 30). Il ajoute à la Loi constitutionnelle de 1867 : « 128Q.1. L’article 128 ne s’applique pas au Québec. » Le serment au roi n’est plus exigé pour siéger. ${lien(S.loi2022, 'Loi de 2022, chapitre 30 (PDF officiel)')}`, `The bill is passed and assented to the same day (S.Q. 2022, c. 30). It adds to the Constitution Act, 1867: “128Q.1. Section 128 does not apply to Quebec.” The oath to the King is no longer required to sit. ${lien(S.loi2022, '2022 Act, chapter 30 (official PDF)')}`)}</li>
+      <li><b>${deux('6 décembre 2022', 'December 6, 2022')}</b> ${deux(`Le ministre Jean-François Roberge présente le projet de loi n° 4, Loi visant à reconnaître le serment prévu par la Loi sur l’Assemblée nationale comme seul serment obligatoire pour y siéger. L’Assemblée accepte d’en être saisie. ${lien(S.pl4, 'Fiche du projet de loi')} · ${lien(S.jd6, 'Journal des débats, 6 déc. 2022')}`, `Minister Jean-François Roberge introduces Bill 4, making the National Assembly Act oath the only mandatory oath to sit. The Assembly agrees to take it up. ${lien(S.pl4, 'Bill page')} · ${lien(S.jd6, 'Journal des débats, Dec. 6, 2022')}`)}</li>
+      <li><b>${deux('9 décembre 2022', 'December 9, 2022')}</b> ${deux(`Le projet de loi est adopté sans vote nominal et sanctionné le même jour (L.Q. 2022, c. 30). Il ajoute à la Loi constitutionnelle de 1867 : « 128Q.1. L’article 128 ne s’applique pas au Québec. » Le serment au roi n’est plus exigé pour siéger. ${lien(S.loi2022, 'Loi de 2022, chapitre 30 (PDF officiel)')}`, `The bill is passed without a recorded division and assented to the same day (S.Q. 2022, c. 30). It adds to the Constitution Act, 1867: “128Q.1. Section 128 does not apply to Quebec.” The oath to the King is no longer required to sit. ${lien(S.loi2022, '2022 Act, chapter 30 (official PDF)')}`)}</li>
     </ol>
+
+    <h2 class="une-h2">${deux('La voie invoquée par le gouvernement : l’article 45 de 1982', 'The route the government invoked: section 45 of 1982')}</h2>
+    <p class="une-p">${deux('Le serment au roi est écrit dans la Constitution du Canada. Pourtant, Québec l’a retiré par sa propre loi, en 2022.', 'The oath to the King is written in Canada’s Constitution. Yet Quebec removed it through its own act, in 2022.')}</p>
+    <p class="une-p">${deux('Sur quelle base?', 'On what basis?')}</p>
+    <p class="une-p">${deux(`Le gouvernement s’appuie sur une phrase de la Loi constitutionnelle de 1982 : « Sous réserve de l’article 41, une législature a compétence exclusive pour modifier la constitution de sa province. » (${lien(S.art45, 'art. 45')})`, `The government relies on one sentence of the Constitution Act, 1982: subject to section 41, a legislature has exclusive power to amend the constitution of its province (${lien(S.art45, 's. 45')}, French text paraphrased).`)}</p>
+    <p class="une-p">${deux('La loi de 2022, elle, ne nomme pas cet article.', 'The 2022 act itself does not name that section.')}</p>
+    <p class="une-p">${deux(`Elle n’a pas de préambule. Ses notes explicatives disent seulement qu’elle a pour objet « d’abolir l’obligation de prêter et de souscrire le serment d’allégeance au roi prévue par la Loi constitutionnelle de 1867 » pour siéger à l’Assemblée nationale (${lien(S.loi2022, 'loi de 2022, notes explicatives')}).`, `It has no preamble. Its explanatory notes only say its purpose is to abolish the obligation, set out in the Constitution Act, 1867, to take and subscribe the oath of allegiance to the King in order to sit in the National Assembly (${lien(S.loi2022, '2022 act, explanatory notes')}, French text paraphrased).`)}</p>
+    <p class="une-p">${deux(`C’est le ministre qui l’a nommé, en Chambre, le jour de l’adoption. Il disait agir « en invoquant l’article 45 de la Loi constitutionnelle de 1982, laquelle nous permet, dans certaines circonstances, circonstances qu’on rencontre aujourd’hui, de modifier unilatéralement la section de la Constitution » en cause. Il citait aussi la loi n° 96 comme exemple de la même voie (${lien(S.debats9, 'Journal des débats, 9 déc. 2022')}).`, `The minister named it, in the Chamber, on the day the bill passed. He said he was acting by invoking section 45 of the Constitution Act, 1982, which in certain circumstances, met that day, allows that part of the Constitution to be amended unilaterally. He also cited Bill 96 as following the same route (${lien(S.debats9, 'Journal des débats, Dec. 9, 2022')}, French text paraphrased).`)}</p>
+
+    <h2 class="une-h2">${deux('Ce qu’ils ont dit en Chambre le 9 décembre 2022', 'What they said in the Chamber on December 9, 2022')}</h2>
+    <p class="une-p">${deux('Voici ce qu’ont dit trois élus, tels que leurs mots figurent au Journal des débats.', 'Here is what three members said, as recorded in the Journal des débats (French text, paraphrased in English).')}</p>
+    <p class="une-p"><b>${deux('Le gouvernement (CAQ), par le ministre Jean-François Roberge', 'The government (CAQ), through Minister Jean-François Roberge')}</b></p>
+    <blockquote class="une-citation">${deux('« au Québec nous sommes des démocrates, nous ne sommes pas un peuple de monarchistes. »', 'In Quebec, we are democrats, we are not a people of monarchists (French text paraphrased).')}</blockquote>
+    <p class="une-p">${deux('Les députés, ajoutait-il, « n’auront plus à prêter serment au roi d’un autre pays. » Il y voyait « un geste d’affirmation nationale, un geste de modernité ».', 'Members, he added, would no longer have to swear an oath to the king of another country. He called it an act of national affirmation and of modernity.')}</p>
+    <p class="une-p"><b>${deux('L’opposition officielle (PLQ), par Monsef Derraji', 'The Official Opposition (Quebec Liberal Party), through Monsef Derraji')}</b></p>
+    <blockquote class="une-citation">${deux('« nous sommes d’accord qu’il est temps de passer à autre chose. Toutefois, nous déplorons, nous déplorons l’approche juridique du gouvernement d’amender unilatéralement la Constitution sans consultation. »', 'We agree it is time to move on. However, we deplore the government’s legal approach of amending the Constitution unilaterally without consultation (French text paraphrased).')}</blockquote>
+    <p class="une-p">${deux('Il ajoutait : « Le gouvernement n’est pas à l’abri de contestations judiciaires. » Puis : « le Parti libéral du Québec va appuyer ce projet de loi. »', 'He added that the government was not shielded from court challenges. Then: the Quebec Liberal Party would back the bill.')}</p>
+    <p class="une-p"><b>${deux('Québec solidaire, par Sol Zanetti', 'Québec solidaire, through Sol Zanetti')}</b></p>
+    <blockquote class="une-citation">${deux('« c’est un grand pas pour la liberté de conscience. Ce n’est pas normal et c’est antidémocratique de forcer des gens, qui ont été élus par leurs concitoyens pour porter certaines valeurs, de se piler sur le coeur pour devoir les exprimer. »', 'It is a big step for freedom of conscience. It is not normal and it is undemocratic to force people elected to carry certain values to go against their conscience in order to express them (French text paraphrased).')}</blockquote>
+    <p class="une-p">${deux('Et pour finir : « C’était une journée d’unité nationale, et je suis vraiment content de vivre ça avec vous. »', 'And to close: it was a day of national unity, and he was truly glad to share it with them.')}</p>
+    <p class="une-p">${deux('Et le vote?', 'And the vote?')}</p>
+    <p class="une-p">${deux(`À chaque étape (principe, commission plénière, adoption), le Journal note « Des voix : Adopté. » Le projet de loi a donc été adopté sans vote nominal (${lien(S.debats9, 'Journal des débats, 9 déc. 2022')}).`, `At each stage (principle, committee of the whole, passage), the Journal records voices saying “Adopté.” The bill was therefore passed without a recorded division (${lien(S.debats9, 'Journal des débats, Dec. 9, 2022')}).`)}</p>
 
     <h2 class="une-h2">${deux('Aujourd’hui : un seul serment obligatoire pour siéger', 'Today: one mandatory oath to sit')}</h2>
     <p class="une-p">${deux('Deux serments exigés pendant 40 ans. Un seul aujourd’hui.', 'Two oaths required for 40 years. Only one today.')}</p>
@@ -263,6 +301,9 @@ ${sources([
       [S.chrono2022, 'Assemblée nationale, Chronologie parlementaire (2022)', 'National Assembly, parliamentary timeline (2022)'],
       [S.pl4, 'Assemblée nationale, projet de loi n° 4 (43-1)', 'National Assembly, Bill 4 (43-1)'],
       [S.loi2022, 'Publications du Québec, Lois du Québec 2022, chapitre 30', 'Publications du Québec, Statutes of Quebec 2022, chapter 30'],
+      [S.art45, 'Justice Canada, Loi constitutionnelle de 1982, art. 45', 'Justice Canada, Constitution Act, 1982, s. 45'],
+      [S.jd6, 'Assemblée nationale, Journal des débats du 6 déc. 2022', 'National Assembly, Journal des débats, Dec. 6, 2022'],
+      [S.debats9, 'Assemblée nationale, Journal des débats du 9 déc. 2022', 'National Assembly, Journal des débats, Dec. 9, 2022'],
       [S.biblio, 'Bibliothèque de l’Assemblée nationale, billet du 14 oct. 2026 (mis à jour le 5 nov. 2026)', 'National Assembly Library, post of Oct. 14, 2026 (updated Nov. 5, 2026)'],
     ])}`,
   },
@@ -289,7 +330,7 @@ ${sources([
         <tr><td><b>${deux('Élus municipaux du Québec', 'Quebec municipal councillors')}</b></td><td>${deux('À personne : ils jurent d’exercer leurs fonctions avec honnêteté et justice, dans le respect de la loi et du code d’éthique', 'No one: they swear to serve with honesty and justice, respecting the law and the code of ethics')}</td><td>${deux('Absent : le serment ne nomme pas le roi', 'None: the oath does not name the King')}</td><td>${lien(S.lerm, deux('LERM, art. 313 et annexe II', 'Municipal elections act, s. 313 and Schedule II'))}</td></tr>
       </tbody>
     </table></div>
-    <p class="une-note">${deux('Ce tableau s’en tient à l’article 128, qui s’applique partout sauf au Québec. Certaines provinces peuvent exiger un serment de plus par leur propre loi. Nous ne les avons pas encore toutes lues et le dirons ici quand ce sera fait.', 'This table sticks to section 128, which applies everywhere except Quebec. Some provinces may require an additional oath under their own law. We have not read them all yet and will say so here when we have.')}</p>
+    <p class="une-note">${deux('Ce tableau s’en tient à l’article 128, qui s’applique partout sauf au Québec. Certaines provinces peuvent exiger un serment de plus par leur propre loi. Le détail, province par province, suit plus bas.', 'This table sticks to section 128, which applies everywhere except Quebec. Some provinces may require an additional oath under their own law. The province-by-province detail follows below.')}</p>
 
     <h2 class="une-h2">${deux('Le texte exact du serment fédéral nomme encore Elizabeth II', 'The exact wording of the federal oath still names Elizabeth II')}</h2>
     <p class="une-p">${deux('Le voici, tel qu’il est codifié :', 'Here it is, as codified:')}</p>
@@ -306,7 +347,28 @@ ${sources([
       <li>${deux(`<b>Affirmation solennelle permise</b> (${lien(S.bc, 'art. 24(2)')}).`, `<b>Solemn affirmation allowed</b> (${lien(S.bc, 's. 24(2)')}).`)}</li>
       <li>${deux('<b>Aucun autre serment de député</b> dans cette loi.', '<b>No other member’s oath</b> in this act.')}</li>
     </ul>
-    <p class="une-note">${deux('Les lois des huit autres provinces : pas encore lues. Nous le dirons ici quand ce sera fait.', 'The laws of the other eight provinces: not read yet. We will say so here when we have.')}</p>
+
+    <h2 class="une-h2">${deux('Province par province : Terre-Neuve-et-Labrador ajoute un serment d’office', 'Province by province: Newfoundland and Labrador adds an oath of office')}</h2>
+    <p class="une-p">${deux('On a ouvert la loi de chaque province (ou, à défaut, la page de son assemblée). Voici ce qu’on y trouve :', 'We opened each province’s act (or, failing that, its legislature’s page). Here is what we found:')}</p>
+    <div class="une-table-wrap"><table class="fin-table une-table">
+      <thead><tr><th>${deux('Province', 'Province')}</th><th>${deux('Loi et article', 'Act and section')}</th><th>${deux('Serment', 'Oath')}</th><th>${deux('Affirmation permise', 'Affirmation allowed')}</th></tr></thead>
+      <tbody>
+        <tr><td><b>Alberta</b></td><td>${lien(S.ab, deux('Legislative Assembly Act, RSA 2000, c. L-9, art. 23', 'Legislative Assembly Act, RSA 2000, c. L-9, s. 23'))}</td><td>« I, _____, do swear that I will be faithful and bear true allegiance to His Majesty King Charles III »</td><td>${deux('Oui (art. 23(2))', 'Yes (s. 23(2))')}</td></tr>
+        <tr><td><b>${deux('Colombie-Britannique', 'British Columbia')}</b></td><td>${lien(S.bc, deux('Constitution Act, RSBC 1996, c. 66, art. 24', 'Constitution Act, RSBC 1996, c. 66, s. 24'))}</td><td>« ... to Her Majesty Queen Elizabeth II [or her successor] »</td><td>${deux('Oui (art. 24(2))', 'Yes (s. 24(2))')}</td></tr>
+        <tr><td><b>Manitoba</b></td><td>${lien(S.mb, deux('Loi sur l’Assemblée législative, C.P.L.M. c. L110, art. 10', 'Legislative Assembly Act, C.C.S.M. c. L110, s. 10'))}</td><td>« I, A.B., do swear (or affirm) that I will be faithful and bear true allegiance to His Majesty King Charles the Third »</td><td>${deux('Oui (« or affirm »)', 'Yes (“or affirm”)')}</td></tr>
+        <tr><td><b>${deux('Île-du-Prince-Édouard', 'Prince Edward Island')}</b></td><td>${lien(S.ipe, deux('Legislative Assembly Act, RSPEI c. L-7.1, art. 25', 'Legislative Assembly Act, RSPEI c. L-7.1, s. 25'))}</td><td>« I, A.B., swear that I will be faithful and bear true allegiance to His Majesty King Charles III »</td><td>${deux('Oui (art. 25 b))', 'Yes (s. 25(b))')}</td></tr>
+        <tr><td><b>${deux('Terre-Neuve-et-Labrador', 'Newfoundland and Labrador')}</b></td><td>${lien(S.tnl, deux('SNL 2007, c. H-10.1, art. 5', 'SNL 2007, c. H-10.1, s. 5'))}</td><td>${deux('Allégeance au roi, plus un serment d’office : « I affirm, ascribe to and agree to follow the Code of Conduct of Members »', 'Allegiance to the King, plus an oath of office: “I affirm, ascribe to and agree to follow the Code of Conduct of Members”')}</td><td>${deux('Non vérifié', 'Not checked')}</td></tr>
+        <tr><td><b>Ontario</b></td><td>${lien(S.on, deux('Loi sur l’Assemblée législative, L.R.O. 1990, chap. L.10', 'Legislative Assembly Act, R.S.O. 1990, c. L.10'))}</td><td>${deux('Aucun serment de député écrit dans cette loi (l’art. 101 vise les employés du Bureau de l’Assemblée). Le serment vient alors de l’art. 128 de 1867 (voir le tableau plus haut).', 'No member’s oath written in this act (s. 101 covers employees of the Office of the Assembly). The oath then comes from s. 128 of 1867 (see the table above).')}</td><td>${deux('Sans objet dans cette loi', 'Not addressed in this act')}</td></tr>
+        <tr><td><b>${deux('Nouveau-Brunswick', 'New Brunswick')}</b></td><td>${lien(S.nb, deux('Loi sur l’Assemblée législative, L.R.N.-B. 2014, chap. 116', 'Legislative Assembly Act, R.S.N.B. 2014, c. 116'))}</td><td>${deux('Aucun serment d’allégeance des députés dans cette loi. Le serment vient alors de l’art. 128 de 1867 (voir le tableau plus haut).', 'No members’ oath of allegiance in this act. The oath then comes from s. 128 of 1867 (see the table above).')}</td><td>${deux('Sans objet dans cette loi', 'Not addressed in this act')}</td></tr>
+        <tr><td><b>${deux('Nouvelle-Écosse', 'Nova Scotia')}</b></td><td>${lien(S.ne, deux('Page de l’Assemblée sur l’assermentation (cite l’art. 128 de 1867)', 'Legislature page on swearing-in (cites s. 128 of 1867)'))}</td><td>« I, (Member’s full name), do swear that I will be faithful and bear true allegiance to His Majesty King Charles the Third »</td><td>${deux('Loi provinciale non lue', 'Provincial act not read')}</td></tr>
+        <tr><td><b>Saskatchewan</b></td><td>${lien(S.sk, deux('Page de l’Assemblée législative (loi non lue)', 'Legislative Assembly page (act not read)'))}</td><td>${deux('Selon l’Assemblée, les députés sont « sworn in by taking an oath or making an affirmation of allegiance »', 'According to the Assembly, members are “sworn in by taking an oath or making an affirmation of allegiance”')}</td><td>${deux('Oui, selon l’Assemblée', 'Yes, according to the Assembly')}</td></tr>
+      </tbody>
+    </table></div>
+    <p class="une-p">${deux('Ce qui saute aux yeux : Terre-Neuve-et-Labrador.', 'What stands out: Newfoundland and Labrador.')}</p>
+    <p class="une-p">${deux(`Parmi les lois lues, c’est la seule où le député prête aussi un serment d’office. Il y affirme qu’il suivra le Code de conduite des membres (${lien(S.tnl, 'SNL 2007, c. H-10.1, art. 5')}).`, `Among the acts we read, it is the only one where members also take an oath of office. They affirm they will follow the Code of Conduct of Members (${lien(S.tnl, 'SNL 2007, c. H-10.1, s. 5')}).`)}</p>
+    <p class="une-p">${deux('Autre détail : le nom du souverain change d’une loi à l’autre.', 'Another detail: the sovereign’s name varies from one act to another.')}</p>
+    <p class="une-p">${deux(`Les lois de l’Alberta, du Manitoba et de l’Île-du-Prince-Édouard nomment Charles III. Celle de la Colombie-Britannique et la loi fédérale O-1 nomment encore Elizabeth II (${lien(S.bc, 'RSBC c. 66')} · ${lien(S.o1, 'O-1')}).`, `The Alberta, Manitoba and Prince Edward Island acts name Charles III. The British Columbia act and the federal O-1 act still name Elizabeth II (${lien(S.bc, 'RSBC c. 66')} · ${lien(S.o1, 'O-1')}).`)}</p>
+    <p class="une-note">${deux('À garder en tête : ce sont des versions codifiées, sans valeur officielle (l’Île-du-Prince-Édouard l’écrit dans son PDF). Les lois de l’Ontario et du Nouveau-Brunswick, lues, n’écrivent pas le serment des députés. Pour la Nouvelle-Écosse et la Saskatchewan, nous n’avons pas lu la loi, seulement la page de l’Assemblée.', 'Keep in mind: these are consolidated versions with no official status (Prince Edward Island says so in its PDF). The Ontario and New Brunswick acts, which we read, do not set out the members’ oath. For Nova Scotia and Saskatchewan, we read only the legislature’s page, not the act.')}</p>
 
     <p class="une-p">${deux('Voir aussi : <a href="/a-la-une/serment-des-elus-municipaux">le serment des élus municipaux, ville par ville</a> et <a href="/a-la-une/serment-au-roi-chronologie">la chronologie du serment au roi</a>.', 'See also: <a href="/a-la-une/serment-des-elus-municipaux">the municipal oath, city by city</a> and <a href="/a-la-une/serment-au-roi-chronologie">the oath to the King timeline</a>.')}</p>
 ${sources([
@@ -317,6 +379,14 @@ ${sources([
       [S.lerm, 'LégisQuébec, Loi sur les élections et les référendums dans les municipalités, art. 313 et annexe II', 'LégisQuébec, municipal elections act, s. 313 and Schedule II'],
       [S.o1, 'Justice Canada, Loi sur les serments d’allégeance (O-1), art. 2(1) et 3, à jour au 29 oct. 2026', 'Justice Canada, Oaths of Allegiance Act (O-1), ss. 2(1) and 3, current to Oct. 29, 2026'],
       [S.bc, 'BC Laws, Constitution Act, RSBC 1996, c. 66, art. 24', 'BC Laws, Constitution Act, RSBC 1996, c. 66, s. 24'],
+      [S.ab, 'Alberta King’s Printer, Legislative Assembly Act, RSA 2000, c. L-9, art. 23 (à jour au 11 déc. 2025)', 'Alberta King’s Printer, Legislative Assembly Act, RSA 2000, c. L-9, s. 23 (current to Dec. 11, 2025)'],
+      [S.mb, 'Manitoba, Loi sur l’Assemblée législative, C.P.L.M. c. L110, art. 10 (à jour au 23 nov. 2026)', 'Manitoba, Legislative Assembly Act, C.C.S.M. c. L110, s. 10 (current to Nov. 23, 2026)'],
+      [S.ipe, 'Île-du-Prince-Édouard, Legislative Assembly Act, RSPEI c. L-7.1, art. 25 (PDF)', 'Prince Edward Island, Legislative Assembly Act, RSPEI c. L-7.1, s. 25 (PDF)'],
+      [S.tnl, 'Terre-Neuve-et-Labrador, SNL 2007, c. H-10.1, art. 5', 'Newfoundland and Labrador, SNL 2007, c. H-10.1, s. 5'],
+      [S.on, 'Ontario, Loi sur l’Assemblée législative, L.R.O. 1990, chap. L.10', 'Ontario, Legislative Assembly Act, R.S.O. 1990, c. L.10'],
+      [S.nb, 'Nouveau-Brunswick, Loi sur l’Assemblée législative, L.R.N.-B. 2014, chap. 116', 'New Brunswick, Legislative Assembly Act, R.S.N.B. 2014, c. 116'],
+      [S.ne, 'Assemblée de la Nouvelle-Écosse, page sur l’assermentation', 'Nova Scotia Legislature, swearing-in page'],
+      [S.sk, 'Assemblée législative de la Saskatchewan, page sur l’élection d’un député', 'Legislative Assembly of Saskatchewan, election of a member page'],
     ])}`,
   },
 ];
