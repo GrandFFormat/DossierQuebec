@@ -328,6 +328,26 @@ function remplacer(h, motif, valeur) {
   return h.replace(motif, () => valeur);
 }
 
+// Boutons de partage, copiés de ceux des projets de loi (commun/dq.js, shareCtrls) le 25 nov. 2026.
+const BOUTONS_PARTAGE = [
+  ['x', 'X', `<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M18.9 1.15h3.68l-8.04 9.19L24 22.85h-7.41l-5.8-7.58-6.64 7.58H.47l8.6-9.83L0 1.15h7.59l5.24 6.93zm-1.29 19.5h2.04L6.49 3.24H4.3z"/></svg>`],
+  ['fb', 'Facebook', `<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M13.6 24V13.1h3.7l.55-4.3H13.6V6.1c0-1.24.35-2.09 2.13-2.09H18V.17A30 30 0 0 0 14.7 0C11.4 0 9.2 2 9.2 5.66v3.14H5.5v4.3h3.7V24z"/></svg>`],
+  ['li', 'LinkedIn', `<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M5.34 7.43a2.47 2.47 0 1 1 0-4.94 2.47 2.47 0 0 1 0 4.94zM7.48 20.45H3.2V9h4.28zM20.45 20.45h-4.26v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H7.94V9h4.1v1.56h.06c.57-1.08 1.96-2.22 4.04-2.22 4.32 0 5.12 2.84 5.12 6.54z"/></svg>`],
+  ['reddit', 'Reddit', `<svg width="15" height="15" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="11.5" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="7.6" cy="11" r="1.1" fill="currentColor"/><circle cx="12.4" cy="11" r="1.1" fill="currentColor"/><path d="M7.4 13.7c1.5 1 3.7 1 5.2 0" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M10 5l1-3.3 3 .8" fill="none" stroke="currentColor" stroke-width="1.4"/><circle cx="15.3" cy="2.8" r="1.3" fill="currentColor"/></svg>`],
+  ['threads', 'Threads', `<svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.2 11.2c-.4-3-2.3-4.4-5-4.4-2 0-3.5.9-4.3 2.3M16.8 11.3c-2.6-.6-7.3-.5-7.3 2.2 0 2.6 4.6 2.7 6 .3 1-1.6 1.1-4 .6-5.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M17 11.4c3.2 1.3 3.6 5 1.2 7.3-2.6 2.5-8.9 2.7-11.7-.9C4 14.7 4.2 7.6 7.3 4.6c2.6-2.6 8.3-2.8 11.2.3 1 1 1.6 2.2 1.9 3.4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>`],
+  ['bsky', 'Bluesky', `<svg width="15" height="14" viewBox="0 0 24 22" aria-hidden="true"><path fill="currentColor" d="M12 9.6C10.6 6.9 6.8 1.9 3.6 1.3 1.3.9 1 3 1 4.4c0 1.3.8 6.2 1.3 7.1 1 1.9 3.5 2.4 5.9 2-4 .8-5.6 3-3 5.4 3.6 3.3 5.6-.6 6.8-3.2.1.2 0 0 0 0 1.2 2.6 3.2 6.5 6.8 3.2 2.6-2.4 1-4.6-3-5.4 2.4.4 4.9-.1 5.9-2 .5-.9 1.3-5.8 1.3-7.1 0-1.4-.3-3.5-2.6-3.1-3.2.6-7 5.6-8.4 8.3z"/></svg>`],
+];
+
+// La rangée de partage d'un article : même allure que celle des projets de loi (.bill-share-row).
+// partagerPage() (commun/dq.js) prend l'adresse canonique et le titre de la page.
+function rangeePartage() {
+  const btn = ([r, nom, svg]) => `<button class="bill-share-btn ic" onclick="partagerPage('${r}', event)" aria-label="Partager sur ${nom}" data-reseau="${r}">${svg}</button>`;
+  return `<div class="bill-share-row une-partage">
+      <span class="bill-share-label">${deux('Partager :', 'Share:')}</span>
+      ${BOUTONS_PARTAGE.map(btn).join('')}<button class="bill-share-btn ic" onclick="partagerPage('copy', event)" aria-label="Copier le lien">⧉</button>
+    </div>`;
+}
+
 function enTete(p) {
   return `<p class="une-maj">${deux(`Mis à jour le ${MAJ.fr}`, `Updated ${MAJ.en}`)}</p>`;
 }
@@ -343,9 +363,11 @@ function sectionPage(p) {
       </h1>
       <p class="view-hero-sub">${p.chapeau}</p>
       ${enTete(p)}
+      ${rangeePartage()}
     </div>
     ${imageDe(p.slug) ? `<figure class="une-banniere"><img src="${imageDe(p.slug)}" alt="" width="1536" height="1024" fetchpriority="high"></figure>` : ''}
     <article class="une-article">${p.corps()}
+    ${rangeePartage()}
     </article>
   </section>`;
 }

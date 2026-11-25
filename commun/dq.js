@@ -4886,6 +4886,24 @@ function shareBill(billId, platform, evt){
   }
 }
 
+// Partage d'une page entière (rubrique À la une, scripts/build-a-la-une.js, 25 nov. 2026) :
+// l'adresse canonique de la page et son titre, sans « — DossierQuébec ».
+function partagerPage(platform, evt){
+  if(evt) evt.stopPropagation();
+  const isEn = currentLang === 'en';
+  const canon = document.querySelector('link[rel="canonical"]');
+  const url = (canon ? canon.href : location.href.split('#')[0]) + paramLangue(true);
+  const text = document.title.replace(/\s+—\s+DossierQuébec$/, '');
+  const ouvrir = (u, w, h) => window.open(u, '_blank', `noopener,width=${w || 600},height=${h || 560}`);
+  if(platform === 'x') ouvrir('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url));
+  else if(platform === 'fb') ouvrir('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url));
+  else if(platform === 'li') ouvrir('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url));
+  else if(platform === 'reddit') ouvrir('https://www.reddit.com/submit?url=' + encodeURIComponent(url) + '&title=' + encodeURIComponent(text), 760, 640);
+  else if(platform === 'threads') ouvrir('https://www.threads.net/intent/post?text=' + encodeURIComponent(text + ' ' + url), 600, 640);
+  else if(platform === 'bsky') ouvrir('https://bsky.app/intent/compose?text=' + encodeURIComponent(text + ' ' + url), 600, 640);
+  else copierLien(text + ' ' + url, evt, isEn);
+}
+
 // Lien profond : /projets-de-loi?pl=NUM → ouvre directement ce projet.
 function openBillFromQuery(){
   const params = new URLSearchParams(location.search);
