@@ -51,6 +51,9 @@ const VILLES = [
   { ville: 'Brossard', date: '9 novembre 2025', dateEn: 'November 9, 2025', jours: 7, note: deux('Au centre socioculturel Alphonse-Lepage. Communiqué de la Ville du 10 nov. 2025', 'At the Alphonse-Lepage community centre. City news release, Nov. 10, 2025'), src: 'https://brossard.ca/actualites/le-nouveau-conseil-de-brossard-entre-officiellement-en-fonction/' },
   { ville: 'Saint-Jean-sur-Richelieu', date: '10 novembre 2025', dateEn: 'November 10, 2025', jours: 8, note: deux('11 élus sur 13 ce soir-là. Les deux autres devaient prêter serment plus tard. Communiqué du 11 nov. 2025', '11 of 13 members that evening. The other two were to be sworn in later. News release, Nov. 11, 2025'), src: 'https://sjsr.ca/communiques-2025/ceremonie-dassermentation-debut-officiel-du-mandat-pour-le-nouveau-conseil-municipal/' },
   { ville: 'Trois-Rivières', date: '13 novembre 2025', dateEn: 'November 13, 2025', jours: 11, note: deux('« Les 15 membres du nouveau conseil » : page des membres du conseil', '“The 15 members of the new council”: council members page'), src: 'https://www.v3r.net/a-propos-de-la-ville/vie-democratique/conseil-municipal/maire-et-conseillers-municipaux' },
+  { ville: 'Victoriaville', date: '7 novembre 2025', dateEn: 'November 7, 2025', jours: 5, note: deux('Communiqué de la Ville du 7 nov. 2025', 'City news release, Nov. 7, 2025'), src: 'https://d16k40le270owi.cloudfront.net/Nouvelles/communiques/2025-11-07-Assermentation.pdf' },
+  { ville: 'Saint-Hyacinthe', date: 'Au plus tard le 17 novembre 2025', dateEn: 'By November 17, 2025', jours: null, note: deux('Jour exact non publié. Procès-verbal du 17 nov. 2025 : « tous les membres du Conseil ont dûment été assermentés »', 'Exact day not published. Minutes of Nov. 17, 2025: all council members had been duly sworn in'), src: 'https://www.st-hyacinthe.ca/medias/ville/vie-democratique/seances-publiques/2025/PVSE251117.pdf' },
+  { ville: 'Saguenay', date: null, note: deux('Le 7 nov. 2025, la date était « encore à déterminer ». Aucune confirmation publiée depuis.', 'On Nov. 7, 2025, the date was still to be determined. No confirmation published since.'), src: 'https://elections.saguenay.ca/files/documents/avis_publics/%C3%89lection-Saguenay-communiqu%C3%A9-de-presse-2025-11-07.pdf' },
   { ville: 'Gatineau', date: null, note: deux('Prévue le 10 nov. 2025 dans un communiqué de juin 2025. Aucune confirmation publiée depuis.', 'Scheduled for Nov. 10, 2025 in a June 2025 release. No confirmation published since.'), src: 'https://www.gatineau.ca/portail/default.aspx?p=nouvelles_annonces%2Fcommuniques%2Fcommunique_2015&id=200531233' },
   { ville: 'Québec', date: null, note: deux('Aucune date publiée par la Ville. Demande faite au greffe le 25 nov. 2026.', 'No date published by the City. Request sent to the clerk on Nov. 25, 2026.'), src: null },
   { ville: 'Lévis', date: null, note: deux('Aucune date publiée. Le procès-verbal de la première séance (24 nov. 2025) n’en parle pas.', 'No date published. The minutes of the first sitting (Nov. 24, 2025) do not mention it.'), src: S.levisPv },
@@ -146,7 +149,7 @@ const PAGES = [
 
     <h2 class="une-h2">${deux('Quand chaque conseil a prêté serment (élection du 2 novembre 2025)', 'When each council took the oath (November 2, 2025 election)')}</h2>
 ${tableauVilles()}
-    <p class="une-p">${deux('Huit villes ont publié la date. Trois, non.', 'Eight cities published the date. Three did not.')}</p>
+    <p class="une-p">${deux('Neuf villes ont publié le jour exact. Une autre confirme seulement que c’était fait au 17 novembre. Quatre, rien.', 'Nine cities published the exact day. One more only confirms it was done by November 17. Four published nothing.')}</p>
     <p class="une-note">${deux('Une ville sans date n’a rien publié à ce sujet sur son site. Nous avons écrit aux greffes de Québec et de Lévis et ajouterons la date dès leur réponse.', 'A city without a date has published nothing on its website. We have written to the Québec City and Lévis clerks and will add the date as soon as we hear back.')}</p>
 ${sources([
       [S.lerm, 'LégisQuébec, chapitre E-2.2 : art. 313, 314.2, 330, 335, 337, 339, 653 et annexe II', 'LégisQuébec, chapter E-2.2: ss. 313, 314.2, 330, 335, 337, 339, 653 and Schedule II'],
@@ -195,7 +198,7 @@ ${sources([
       <li>${deux('<b>7 décembre 2025</b> : 35e jour après le scrutin. Au plus tard ce jour-là, la règle tombait d’elle-même.', '<b>December 7, 2025</b>: 35th day after election day. By that day at the latest, the rule lapsed on its own.')}</li>
     </ul>
     <p class="une-p">${deux('Combien de jours après le scrutin?', 'How many days after election day?')}</p>
-    <p class="une-p">${deux('Entre 5 et 11 jours après le scrutin, dans les huit villes qui ont publié la date :', 'Between 5 and 11 days after election day, in the eight cities that published the date:')}</p>
+    <p class="une-p">${deux('Entre 5 et 11 jours après le scrutin, dans les neuf villes qui ont publié le jour :', 'Between 5 and 11 days after election day, in the nine cities that published the day:')}</p>
 ${tableauVilles()}
     <p class="une-p">${deux(`À Laval, le conseil a prêté serment le dimanche 9 novembre. Dès le lendemain, il siégeait en séance extraordinaire pour nommer son comité exécutif (${lien(S.laval, 'communiqué de la Ville')}).`, `In Laval, council took the oath on Sunday, November 9. The very next day, it met in a special sitting to appoint its executive committee (${lien(S.laval, 'City news release')}).`)}</p>
 
