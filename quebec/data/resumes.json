@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-24T19:37:04.298Z",
+ "generatedAt": "2026-11-25T18:44:46.767Z",
  "modele": "claude-opus-5",
  "genereParIA": true,
  "avertissement": "Résumés produits automatiquement à partir du texte du sommaire décisionnel, sans jugement de valeur et sans ajout extérieur au document. En cas d'écart, le PDF officiel fait foi.",
@@ -7,19 +7,573 @@
   "annee": "2026",
   "max": 40,
   "batch": false,
-  "depuis": "2026-09-25",
+  "depuis": "2026-09-26",
   "plafond": 120
  },
- "nombre": 1898,
- "genereCetteFois": 25,
+ "nombre": 1920,
+ "genereCetteFois": 22,
  "echecs": [],
  "cout": {
   "devise": "USD",
-  "montant": 0.8973,
-  "jetonsEntree": 126207,
-  "jetonsSortie": 10649
+  "montant": 0.7666,
+  "jetonsEntree": 106489,
+  "jetonsSortie": 9367
  },
  "resumes": [
+  {
+   "id": "TM2026-263.pdf",
+   "numero": "TM2026-263",
+   "date": "2026-11-24",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-593 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue Bernier Est - Arrondissement de Charlesbourg - District électoral des Monts",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-263.pdf",
+   "puces": [
+    "La Ville interdit le stationnement en tout temps sur le côté est de la rue Bernier Est, entre le boulevard Henri-Bourassa et la rue Sigouin, dans Charlesbourg.",
+    "Du côté ouest, le stationnement devient interdit en tout temps sur les 42 premiers mètres au nord du boulevard Henri-Bourassa.",
+    "Toujours du côté ouest, sur les 78 mètres suivants, le stationnement est interdit du 15 novembre au 31 mars.",
+    "Ces changements retirent environ 20 espaces de stationnement.",
+    "La Ville dit que la rue est étroite (7 à 9 mètres) et comporte une courbe prononcée, ce qui force des automobilistes à rouler à contresens.",
+    "La demande vient d'une citoyenne; la Ville indique peu d'impact sur les résidants, qui ont du stationnement hors rue."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:16.977Z",
+   "jetons": {
+    "entree": 4282,
+    "sortie": 399
+   }
+  },
+  {
+   "id": "TM2026-277.pdf",
+   "numero": "TM2026-277",
+   "date": "2026-11-24",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnances numéros O-627, O-628 et O-629 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement aux rues Claisse, Robitaille et Antonin-Marquis - Arrondissement des Rivières - District électoral de Vanier-Duberger",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-277.pdf",
+   "puces": [
+    "La Ville interdit le stationnement en tout temps sur plusieurs tronçons autour de l'école primaire Jean-XXIII, dans le district de Vanier-Duberger (arrondissement des Rivières).",
+    "Rue Claisse : l'interdiction, côté ouest, s'étend maintenant à tout le tronçon entre la rue Robitaille et la rue Antonin-Marquis.",
+    "Rue Robitaille : interdiction sur 32 m, côté nord, près de l'intersection des rues Jean et Antonin-Marquis, le long du gonflement de trottoir.",
+    "Rue Antonin-Marquis : interdiction côté est entre le boulevard Père-Lelièvre et la rue Claisse, et sur 29 m côté ouest au nord de la rue Claisse.",
+    "Environ 75 cases de stationnement sont retirées; la Ville indique que les résidants du secteur ont accès à des stationnements privés.",
+    "Ces changements suivent l'ajout de trottoirs et d'intersections surélevées, qui ont réduit la chaussée à 9 mètres, dans le cadre de la Stratégie de sécurité routière 2025-2029."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:17.696Z",
+   "jetons": {
+    "entree": 6117,
+    "sortie": 490
+   }
+  },
+  {
+   "id": "LS2026-285.pdf",
+   "numero": "LS2026-285",
+   "date": "2026-11-24",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement de neuf (9) subventions totalisant un montant de 39 651 $ à huit (8) organismes pour des demandes déposées dans les programmes de soutien financier du Cadre de soutien aux organismes reconnus, pour la date de dépôt du 15 septembre 2026 - arrondissement de Charlesbourg",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-285.pdf",
+   "puces": [
+    "L'arrondissement de Charlesbourg verse 39 651 $ en neuf subventions à huit organismes communautaires et de loisirs, pour les demandes déposées au 15 septembre 2026.",
+    "Le Centre de plein air Lasallien reçoit 10 000 $ pour l'accompagnement de personnes vivant avec une incapacité à son camp de jour spécialisé en plein air.",
+    "Loisirs Brio obtient deux subventions : 10 000 $ pour la 3e année du projet « Club sénior » et 5 000 $ pour du mobilier et des jeux.",
+    "Le Club de gymnastique Québec Performance reçoit 5 000 $ pour de l'équipement de gymnastique et le Club aquatique de Charlesbourg 844 $ pour du matériel d'entraînement.",
+    "Vivre Grand touche 5 000 $ et l'Association canadienne pour la santé mentale 2 807 $ pour des articles promotionnels.",
+    "Le Cercle de fermières Charlesbourg et la Maison de la famille D.A.C. reçoivent 500 $ chacun pour des soirées réunissant bénévoles et employés.",
+    "L'argent provient du budget de fonctionnement de l'arrondissement; la décision est prévue au conseil d'arrondissement du 24 novembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "39 651 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:17.821Z",
+   "jetons": {
+    "entree": 5782,
+    "sortie": 547
+   }
+  },
+  {
+   "id": "A2DA2026-007.pdf",
+   "numero": "A2DA2026-007",
+   "date": "2026-11-24",
+   "unite": "Arrondissement des Rivières",
+   "objet": "Participation de trois membres du conseil de l'Arrondissement des Rivières aux Assises annuelles 2027 de l'Union des municipalités du Québec (UMQ) les 22 et 23 avril 2027",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A2DA2026-007.pdf",
+   "puces": [
+    "L'Arrondissement des Rivières autorise trois élus à assister aux Assises annuelles de l'Union des municipalités du Québec, à Montréal, les 22 et 23 avril 2027.",
+    "Les personnes visées sont la présidente Catherine Deschamps et les conseillers Clément Bourdeau et Maxime Elmaleh.",
+    "La Ville paie ou rembourse les frais d'inscription : 460 $ plus taxes pour Mme Deschamps et M. Bourdeau, 925 $ plus taxes pour M. Elmaleh.",
+    "Les autres dépenses liées au déplacement seront remboursées sur présentation des pièces justificatives.",
+    "L'argent provient du budget de l'Arrondissement des Rivières, à l'activité « Soutenir les conseils d'arrondissement »."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:16.477Z",
+   "jetons": {
+    "entree": 3360,
+    "sortie": 371
+   }
+  },
+  {
+   "id": "LS2026-283.pdf",
+   "numero": "LS2026-283",
+   "date": "2026-11-24",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement de onze (11) subventions totalisant un montant de 48 280 $ à dix (10) organismes pour des demandes déposées dans les programmes de soutien financier du Cadre de soutien aux organismes reconnus, pour la date de dépôt du 15 septembre 2026 - arrondissement des Rivières",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-283.pdf",
+   "puces": [
+    "L'arrondissement des Rivières verse 48 280 $ en subventions à 10 organismes, répartis en 11 demandes déposées le 15 septembre 2026.",
+    "Adaptavie et la Maison des jeunes l'Antidote de Duberger reçoivent 10 000 $ chacun pour poursuivre un projet entamé l'an dernier.",
+    "Loisirs Lebourgneuf obtient 10 000 $ et Loisirs Duberger-Les Saules 4 715 $ pour l'accompagnement de personnes vivant avec une incapacité (natation, relâche, camp de jour).",
+    "La Boîte à science et la Corporation Jeunesse L'Évasion l'Ormière reçoivent 5 000 $ chacune pour des outils de communication et des articles promotionnels.",
+    "Trois organismes touchent 500 $ chacun pour des activités de reconnaissance des bénévoles ou d'accueil des membres; le Casting club du Québec reçoit 1 960 $ pour des cannes à mouche et L'Odyssée vocale 105 $ pour une formation.",
+    "L'argent provient du budget de fonctionnement de l'arrondissement, poste « Soutien aux organismes ».",
+    "La décision doit être prise par le conseil d'arrondissement le 24 novembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "48 280 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:24.225Z",
+   "jetons": {
+    "entree": 5944,
+    "sortie": 542
+   }
+  },
+  {
+   "id": "A4DA2026-006.pdf",
+   "numero": "A4DA2026-006",
+   "date": "2026-11-24",
+   "unite": "Arrondissement de Charlesbourg",
+   "objet": "Participation de trois membres du conseil de l'Arrondissement de Charlesbourg aux Assises annuelles de l'Union des municipalités du Québec (UMQ) les 22 et 23 avril 2027",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A4DA2026-006.pdf",
+   "puces": [
+    "L'arrondissement de Charlesbourg autorise trois de ses élus à assister aux Assises annuelles de l'Union des municipalités du Québec, à Montréal, les 22 et 23 avril 2027.",
+    "Les personnes visées sont le président Claude Lavoie, la conseillère Marie-Pierre Boucher et le conseiller Raphaël Lebailly.",
+    "Les frais d'inscription autorisés sont de 925 $, plus les taxes applicables.",
+    "Les autres dépenses liées au déplacement seront remboursées sur présentation des pièces justificatives.",
+    "L'argent provient du budget de l'Arrondissement de Charlesbourg, à l'activité « Soutenir les conseils d'arrondissement »."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "925 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:21.835Z",
+   "jetons": {
+    "entree": 3241,
+    "sortie": 345
+   }
+  },
+  {
+   "id": "TM2026-270.pdf",
+   "numero": "TM2026-270",
+   "date": "2026-11-24",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-626 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la rue de Dakar - Arrondissement des Rivières - District électoral de Neufchâtel-Lebourgneuf",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-270.pdf",
+   "puces": [
+    "La Ville retire une interdiction de stationner sur la rue de Dakar, dans l'Arrondissement des Rivières (district de Neufchâtel-Lebourgneuf).",
+    "L'interdiction visée s'appliquait de 7 h à 18 h, du lundi au vendredi, sur le côté est de la rue, entre le boulevard Johnny-Parent et la rue de Kyoto.",
+    "Le tronçon concerné commence à 102 m au sud du boulevard Johnny-Parent et s'étend sur 28 m.",
+    "Le changement récupère un espace de stationnement.",
+    "L'analyse conclut que cette zone interdite n'était pas nécessaire pour la collecte des matières résiduelles au 9960, rue de Dakar.",
+    "Le stationnement demeure interdit en tout temps sur le côté intérieur de la courbe à l'intersection des rues de Dakar et de Kyoto."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:22.321Z",
+   "jetons": {
+    "entree": 3826,
+    "sortie": 401
+   }
+  },
+  {
+   "id": "GT2026-367.pdf",
+   "numero": "GT2026-367",
+   "date": "2026-11-24",
+   "unite": "Gestion du territoire",
+   "objet": "Nomination d'un membre et désignation du président et du vice-président pour siéger au sein du comité consultatif d'urbanisme de l'Arrondissement de Charlesbourg",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-367.pdf",
+   "puces": [
+    "L'Arrondissement de Charlesbourg renouvelle une partie de son comité consultatif d'urbanisme, le groupe qui conseille le conseil d'arrondissement en matière d'urbanisme.",
+    "Patrick Chouinard devient membre du comité, à titre de résident de l'arrondissement, du 24 novembre 2026 au 23 novembre 2028.",
+    "Il remplace Stéphan Gilbert, dont le mandat de membre et de président se terminait le 13 décembre 2026.",
+    "Le conseiller Raphaël Lebailly devient président du comité, du 24 novembre 2026 au 25 novembre 2027.",
+    "Jean Claude Simo devient vice-président, du 24 novembre 2026 au 25 avril 2027, en remplacement de Raphaël Lebailly.",
+    "La candidature de M. Chouinard a été retenue à la suite d'un appel de candidatures lancé en juin 2026.",
+    "Aucun impact financier n'est indiqué au document."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:22.512Z",
+   "jetons": {
+    "entree": 3126,
+    "sortie": 430
+   }
+  },
+  {
+   "id": "LS2026-290.pdf",
+   "numero": "LS2026-290",
+   "date": "2026-11-24",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Autorisation de l'ajustement au montant prévu de la compensation financière du Programme Vacances-Été 2026 pour Loisirs et Sports Neufchâtel inc. pour un montant de 569,05 $",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-290.pdf",
+   "puces": [
+    "La Ville verse 569,05 $ de plus à Loisirs et Sports Neufchâtel inc. pour son camp de jour de l'été 2026.",
+    "Ce montant correspond au dernier versement du Programme Vacances-Été 2026.",
+    "L'ajustement s'explique par le nombre réel d'inscriptions : la compensation avait d'abord été calculée à partir des inscriptions de 2025.",
+    "Le total réel atteint 395 270,55 $, contre 394 701,50 $ prévus à l'entente, pour 2 387 semaines au régulier et 204 en intégration.",
+    "L'organisme a remis toutes les redditions de comptes demandées.",
+    "L'argent provient du budget de fonctionnement de l'Arrondissement des Rivières.",
+    "Le conseil d'arrondissement a adopté la décision le 24 novembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "569,05 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:29.566Z",
+   "jetons": {
+    "entree": 3654,
+    "sortie": 386
+   }
+  },
+  {
+   "id": "TM2026-218.pdf",
+   "numero": "TM2026-218",
+   "date": "2026-11-24",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnances numéros O-621 et O-622 concernant des modifications aux règles portant sur la circulation et le stationnement sur le réseau local relativement à la rue de la Griotte - Arrondissement des Rivières - District électoral de Neufchâtel - Lebourgneuf",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-218.pdf",
+   "puces": [
+    "Un projet immobilier amènera une nouvelle rue dans le secteur de la rue de la Griotte, à Neufchâtel–Lebourgneuf (Arrondissement des Rivières).",
+    "La voie de droite de la rue de la Griotte, à l'approche nord du boulevard Lebourgneuf, devient réservée au virage à droite.",
+    "Du côté ouest, la zone de stationnement interdit en tout temps est prolongée : l'interdiction s'étendra sur 72 mètres à partir du boulevard Lebourgneuf, au lieu de 32 mètres.",
+    "Les zones où il est interdit de stationner de 00 h 01 à 6 h du 15 novembre au 31 mars sont raccourcies, des deux côtés de la rue.",
+    "Environ dix espaces de stationnement seront retirés; la Ville indique que le taux d'occupation du stationnement dans le secteur est modéré.",
+    "Le conseil d'arrondissement édicte les ordonnances O-621 (direction des voies) et O-622 (stationnement)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:29.655Z",
+   "jetons": {
+    "entree": 7989,
+    "sortie": 452
+   }
+  },
+  {
+   "id": "LS2026-293.pdf",
+   "numero": "LS2026-293",
+   "date": "2026-11-24",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Autorisation de l'ajustement au montant prévu de la compensation financière du Programme Vacances-Été 2026 de quatre organismes pour un montant total de 128 315,11 $",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-293.pdf",
+   "puces": [
+    "L'arrondissement de Charlesbourg verse 128 315,11 $ de plus à quatre organismes qui ont organisé les camps de jour de l'été 2026.",
+    "Le montant versé au départ était calculé selon les inscriptions de 2025; il est maintenant ajusté au nombre réel d'inscriptions de 2026.",
+    "Les ajustements : Loisirs Brio 55 752,87 $, Patro de Charlesbourg 34 649,84 $, Les Loisirs Bourassa 27 399,79 $, Loisirs du Trait-Carré 10 512,61 $.",
+    "Au total, les camps ont compté 11 970 semaines-enfants au régulier et 1 005 en intégration.",
+    "La compensation réelle passe de 1 622 033,60 $ à 1 750 348,71 $.",
+    "Les organismes ont remis toutes leurs redditions de comptes; il s'agit du dernier versement prévu à l'entente."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "128 315,11 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:29.247Z",
+   "jetons": {
+    "entree": 3491,
+    "sortie": 420
+   }
+  },
+  {
+   "id": "TM2026-220.pdf",
+   "numero": "TM2026-220",
+   "date": "2026-11-24",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-589 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à l'avenue des Grenats - Arrondissement de Charlesbourg - District électoral de Louis-XIV",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-220.pdf",
+   "puces": [
+    "La Ville interdit le stationnement en tout temps sur 36 mètres du côté nord de l'avenue des Grenats, près de la rue des Calcédoines, dans Charlesbourg (district Louis-XIV).",
+    "Environ trois places de stationnement disparaissent avec ce changement.",
+    "La demande vient de la Garderie de Charlesbourg inc., au 750, avenue des Grenats, qui signalait un manque de visibilité à la sortie de son stationnement.",
+    "Le Service du transport note qu'une borne d'incendie à l'est de l'entrée pousse les automobilistes à se garer plus près de l'accès, ce qui nuit à la visibilité.",
+    "Selon l'analyse, l'impact sera faible parce que le taux d'occupation des places de stationnement du secteur est relativement bas.",
+    "La décision revient au conseil d'arrondissement, qui doit édicter l'ordonnance O-589."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:29.158Z",
+   "jetons": {
+    "entree": 3801,
+    "sortie": 405
+   }
+  },
+  {
+   "id": "TM2026-269.pdf",
+   "numero": "TM2026-269",
+   "date": "2026-11-24",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnance numéro O-625 concernant des modifications aux règles portant sur le stationnement sur le réseau local relativement à la côte des Érables - Arrondissement des Rivières - District électoral de Neufchâtel-Lebourgneuf",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-269.pdf",
+   "puces": [
+    "La Ville interdit le stationnement en tout temps du côté sud de la côte des Érables, du boulevard Bastien jusqu'à la rue des Graviers.",
+    "La zone d'interdiction, qui s'arrêtait après 195 mètres, est prolongée jusqu'à la rue des Graviers.",
+    "Environ 26 cases de stationnement disparaissent.",
+    "Le secteur touché est dans l'Arrondissement des Rivières, district de Neufchâtel-Lebourgneuf.",
+    "La chaussée à l'est du corridor des Cheminots rétrécit à environ 6,5 mètres : quand des véhicules se stationnent des deux côtés, la circulation est bloquée.",
+    "Le document indique que les résidants du secteur ont accès à des espaces de stationnement privés.",
+    "Le changement fait suite à une requête d'un citoyen et à une analyse du Service du transport et de la mobilité intelligente."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:34.430Z",
+   "jetons": {
+    "entree": 3849,
+    "sortie": 407
+   }
+  },
+  {
+   "id": "AP2026-386.pdf",
+   "numero": "AP2026-386",
+   "date": "2026-11-24",
+   "unite": "Approvisionnements",
+   "objet": "Conclusion d'une entente entre la Ville de Québec et Le Partage des Laurentides inc. relativement à l'accès gratuit des lieux et équipements récréatifs au centre de ski de fond Charlesbourg pour les résidents de la Ville de Québec (Dossier 96882)",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/AP2026-386.pdf",
+   "puces": [
+    "La Ville de Québec paiera 102 708,67 $ (plus TPS et TVQ) à l'organisme Le Partage des Laurentides inc. pour l'hiver 2026-2027.",
+    "En échange, l'accès au centre de ski de fond Charlesbourg, au 375, rue de l'Aventure, sera gratuit pour les résidents de la Ville.",
+    "La gratuité couvre le ski de fond, la raquette, la marche, les infrastructures et le stationnement du site.",
+    "L'entente court du 1er décembre 2026 au 30 avril 2027.",
+    "La dépense nette pour la Ville, après récupération de la TVQ, est de 107 831,27 $, prise dans le budget de l'Arrondissement de Charlesbourg.",
+    "Le versement dépend de l'approbation du budget 2027 par les autorités compétentes.",
+    "L'entente précédente avec l'organisme s'était terminée le 31 mai 2025."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "102 708,67 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:35.242Z",
+   "jetons": {
+    "entree": 7279,
+    "sortie": 418
+   }
+  },
+  {
+   "id": "GT2026-366.pdf",
+   "numero": "GT2026-366",
+   "date": "2026-11-24",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise aux 294, 45e Rue Ouest et 4480, 3e Avenue Ouest, lot 1 035 443, quartier 4-6, district électoral de Saint-Rodrigue, Arrondissement de Charlesbourg",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-366.pdf",
+   "puces": [
+    "La Ville refuse une demande de dérogation pour une clôture installée aux 294, 45e Rue Ouest et 4480, 3e Avenue Ouest, dans Charlesbourg (district Saint-Rodrigue).",
+    "Le propriétaire voulait faire accepter sa clôture située à 1,3 mètre du trottoir, alors que le règlement d'urbanisme en exige 3 mètres.",
+    "L'ancienne clôture était conforme parce qu'elle était ajourée à plus de 80 %; la nouvelle, plus opaque, ne respecte plus cette exigence.",
+    "Motif du refus : le règlement ne cause pas de préjudice sérieux au propriétaire, puisqu'un projet conforme reste possible.",
+    "Pour se conformer, la clôture peut être rendue ajourée à plus de 80 % ou être déplacée à 3 mètres du trottoir.",
+    "Le comité consultatif d'urbanisme a recommandé le refus à l'unanimité le 4 novembre 2026; le conseil d'arrondissement devait trancher le 24 novembre 2026."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:35.346Z",
+   "jetons": {
+    "entree": 6790,
+    "sortie": 466
+   }
+  },
+  {
+   "id": "A2DA2026-009.pdf",
+   "numero": "A2DA2026-009",
+   "date": "2026-11-24",
+   "unite": "Arrondissement des Rivières",
+   "objet": "Versement d'une subvention de 100 $ àl'organisme Corporation de développement communautaire Les Rivières",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A2DA2026-009.pdf",
+   "puces": [
+    "L'arrondissement des Rivières verse 100 $ à la Corporation de développement communautaire Les Rivières.",
+    "L'argent sert à soutenir le projet de distribution alimentaire de l'organisme.",
+    "La demande vient de la Table de concertation Duberger-Les Saules, qui dit faire face à des demandes en hausse.",
+    "Les fonds proviennent du budget du conseil d'arrondissement, à l'activité « Soutenir les conseils d'arrondissements ».",
+    "Le conseil d'arrondissement a tranché le 24 novembre 2026 (résolution CA2-2026-0198)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "100 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:33.537Z",
+   "jetons": {
+    "entree": 3093,
+    "sortie": 302
+   }
+  },
+  {
+   "id": "GT2026-365.pdf",
+   "numero": "GT2026-365",
+   "date": "2026-11-24",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 2817, avenue de Colmar, lot 1 026 735, quartier d'Orsainville, district électoral de Louis-XIV, Arrondissement de Charlesbourg",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-365.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure pour la maison du 2817, avenue de Colmar, dans le quartier d'Orsainville à Charlesbourg.",
+    "La largeur combinée des cours latérales est de 4,4 mètres, alors que le règlement d'urbanisme en exige 5,5 mètres; cette largeur est maintenant jugée conforme.",
+    "La demande sert à régulariser l'implantation du bâtiment dans le cadre d'une vente de la propriété.",
+    "L'écart vient d'un agrandissement (ajout d'un solarium sur fondation de béton) réalisé après un permis délivré en 1983, et constaté par un arpenteur-géomètre en juin 2026.",
+    "Sans la dérogation, une partie du solarium aurait dû être démolie.",
+    "Le comité consultatif d'urbanisme a recommandé la dérogation à l'unanimité le 4 novembre 2026; aucune plainte de voisins n'a été formulée."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:41.094Z",
+   "jetons": {
+    "entree": 5272,
+    "sortie": 417
+   }
+  },
+  {
+   "id": "TM2026-242.pdf",
+   "numero": "TM2026-242",
+   "date": "2026-11-24",
+   "unite": "Transport et mobilité intelligente",
+   "objet": "Ordonnances numéros O-590 et O-591 concernant des modifications aux règles portant sur la circulation sur le réseau local relativement aux rues des Bécassines, des Éperviers et des Courlis - Arrondissement de Charlesbourg - District électoral de Louis-XIV",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/TM2026-242.pdf",
+   "puces": [
+    "La Ville déplace l'arrêt obligatoire à l'intersection en « Y » des rues des Bécassines, des Éperviers et des Courlis, dans Charlesbourg (district Louis-XIV).",
+    "L'arrêt sur la rue des Éperviers, à l'approche sud, est retiré.",
+    "Un nouvel arrêt est installé sur la rue des Bécassines, à l'approche ouest.",
+    "L'obligation d'arrêt vise autant les automobilistes que les cyclistes.",
+    "Le changement fait suite à la demande d'un citoyen : la Ville a constaté des conflits entre véhicules qui tournent à gauche, avec une visibilité réduite par une végétation opaque du côté nord de la rue.",
+    "La décision revient au conseil d'arrondissement de Charlesbourg."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:40.155Z",
+   "jetons": {
+    "entree": 4430,
+    "sortie": 368
+   }
+  },
+  {
+   "id": "GT2026-361.pdf",
+   "numero": "GT2026-361",
+   "date": "2026-11-24",
+   "unite": "Gestion du territoire",
+   "objet": "Adoption du Règlement modifiant le Règlement de l'Arrondissement des Rivières sur l'urbanisme relativement aux zones 22108Cb, 22109Cb, 22112Cb, 22116Ip, 22119Ip, 22125Ip, 22126Ip et 22127Ip, R.C.A.2V.Q. 444 (Assouplissements réglementaires Carrefour du Commerce, quartier de Duberger-Les Saules, dist",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-361.pdf",
+   "puces": [
+    "L'arrondissement des Rivières modifie son règlement d'urbanisme pour huit zones du secteur Carrefour du Commerce, dans le quartier de Duberger-Les Saules (district des Saules-Les Méandres).",
+    "Les industries de haute technologie deviennent permises dans les zones 22108Cb et 22109Cb, situées près du boulevard Wilfrid-Hamel et de l'autoroute Henri-IV.",
+    "Dans les huit zones visées, les centres de traitement ou d'hébergement de données de plus de 200 mètres carrés de plancher sont interdits.",
+    "L'entreposage extérieur de type G, qui vise tout bien ou matériau, est autorisé dans les zones 22112Cb, 22116Ip, 22119Ip et 22127Ip.",
+    "Après la consultation publique du 13 octobre 2026 et l'avis du conseil de quartier, la Ville a retiré l'ajout de l'entreposage de type G dans les zones 22125Ip et 22126Ip.",
+    "Le règlement contient des dispositions susceptibles d'approbation référendaire.",
+    "Des zones voisines relevant du conseil de la ville font l'objet d'une modification distincte (dossier GT2026-244)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:41.382Z",
+   "jetons": {
+    "entree": 8440,
+    "sortie": 513
+   }
+  },
+  {
+   "id": "A2DA2026-008.pdf",
+   "numero": "A2DA2026-008",
+   "date": "2026-11-24",
+   "unite": "Arrondissement des Rivières",
+   "objet": "Versement d'une subvention de 350 $ àl'organisme Amélie et Frédérick, Service d'entraide",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/A2DA2026-008.pdf",
+   "puces": [
+    "L'arrondissement des Rivières verse 350 $ à l'organisme Amélie et Frédérick, Service d'entraide.",
+    "L'argent provient du budget du conseil d'arrondissement, à même les fonds de la Ville.",
+    "La demande de l'organisme vise sa campagne de paniers de Noël 2026, dont l'objectif est d'amasser 100 000 $.",
+    "L'organisme prévoit préparer 224 paniers cette année, contre 188 familles soutenues en 2025.",
+    "Les dons servent à acheter des denrées fraîches (fruits, légumes, viandes, poissons) et des produits d'hygiène et d'entretien.",
+    "La décision relève du conseil d'arrondissement (résolution CA2-2026-0195)."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "350 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:41.079Z",
+   "jetons": {
+    "entree": 3454,
+    "sortie": 453
+   }
+  },
+  {
+   "id": "LS2026-288.pdf",
+   "numero": "LS2026-288",
+   "date": "2026-11-24",
+   "unite": "Loisirs, sports et vie communautaire",
+   "objet": "Versement d'une subvention de 7 700 $ à l'organisme « Corporation du Moulin des Jésuites » dans le cadre du programme de soutien financier à un événement de proximité pour l'organisation de l'événement « Marche aux flambeaux du Trait-Carré 2026 », le samedi 19 décembre 2026, sur un trajet allant de",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/LS2026-288.pdf",
+   "puces": [
+    "La Ville verse 7 700 $ à la Corporation du Moulin des Jésuites pour organiser la « Marche aux flambeaux du Trait-Carré 2026 ».",
+    "L'événement se tient le samedi 19 décembre 2026, de 16 h 30 à 19 h 30, beau temps mauvais temps.",
+    "Le trajet va de la maison Joseph-Pierre-Lefebvre jusqu'au parc de la Commune, dans l'arrondissement de Charlesbourg.",
+    "Au programme : marche avec flambeaux dans les rues décorées, Père-Noël, animations hivernales et chocolat chaud au parc de la Commune.",
+    "Il s'agit de la première édition réalisée par ce promoteur, sous la thématique « Noël en lumières ».",
+    "L'argent vient du budget de fonctionnement de l'Arrondissement de Charlesbourg; la Ville fournit aussi un soutien technique selon les ressources disponibles.",
+    "Les Services de police et de protection contre l'incendie se disent favorables à la tenue de l'événement."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": "7 700 $",
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:46.766Z",
+   "jetons": {
+    "entree": 3545,
+    "sortie": 462
+   }
+  },
+  {
+   "id": "GT2026-359.pdf",
+   "numero": "GT2026-359",
+   "date": "2026-11-24",
+   "unite": "Gestion du territoire",
+   "objet": "Demande de dérogation mineure pour la propriété sise au 2885, rue de la Broussaille, lot 1 144 646, quartier de Neufchâtel Est-Lebourgneuf, district électoral des Saules-Les Méandres, Arrondissement des Rivières",
+   "pdf": "https://gpddocs.ville.quebec.qc.ca/gpdblob/GT2026-359.pdf",
+   "puces": [
+    "La Ville accorde une dérogation mineure au 2885, rue de la Broussaille, dans le quartier Neufchâtel Est–Lebourgneuf (Arrondissement des Rivières).",
+    "La propriétaire veut agrandir sa maison en ajoutant un deuxième étage pour en faire une maison bigénérationnelle.",
+    "La dérogation permet une largeur combinée des cours latérales de 3,9 mètres au lieu des 5,6 mètres exigés.",
+    "Elle permet aussi au stationnement d'empiéter jusqu'à 3,5 mètres devant la façade, au lieu de 3 mètres, pour aménager une deuxième case de stationnement.",
+    "Le comité consultatif d'urbanisme s'est dit favorable à la demande le 2 novembre 2026, à l'unanimité."
+   ],
+   "sansContenuSubstantiel": false,
+   "montantPrincipal": null,
+   "genereParIA": true,
+   "modele": "claude-opus-5",
+   "genereLe": "2026-11-25T18:44:46.231Z",
+   "jetons": {
+    "entree": 5724,
+    "sortie": 373
+   }
+  },
   {
    "id": "GT2026-349.pdf",
    "numero": "GT2026-349",

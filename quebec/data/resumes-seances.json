@@ -1,10 +1,186 @@
 {
- "generatedAt": "2026-11-24T19:37:52.828Z",
+ "generatedAt": "2026-11-25T18:45:36.803Z",
  "modele": "claude-haiku-4-5",
  "genereParIA": true,
  "avertissement": "Phrase de résumé générée par IA à partir des décisions de la séance ; les points marquants sont choisis sans IA. Le procès-verbal officiel fait foi.",
  "page": "decisions-de-la-ville-de-quebec",
  "seances": [
+  {
+   "id": "2026-11-24__Conseil de l'Arrondissement de Charlesbourg",
+   "instance": "Conseil de l'Arrondissement de Charlesbourg",
+   "instanceEn": "Charlesbourg borough council",
+   "date": "2026-11-24",
+   "nDecisions": 17,
+   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA4_OR_2026-11-24_17h30.pdf",
+   "votes": [],
+   "themes": [
+    {
+     "theme": "urbanisme",
+     "n": 5
+    },
+    {
+     "theme": "transport",
+     "n": 4
+    },
+    {
+     "theme": "subventions",
+     "n": 2
+    },
+    {
+     "theme": "contrats",
+     "n": 1
+    }
+   ],
+   "points": [
+    {
+     "id": "CA4-2026-0114.pdf",
+     "numero": "CA4-2026-0114",
+     "titre": "Autorisation de l'ajustement au montant prévu de la compensation financière du Programme Vacances-Été 2026 de quatre (4) organismes pour un montant total de 128 315,11 $",
+     "titreEn": null,
+     "montant": "128 315,11 $",
+     "montantEn": "$128,315.11",
+     "divise": false,
+     "theme": "administration"
+    },
+    {
+     "id": "CA4-2026-0118.pdf",
+     "numero": "CA4-2026-0118",
+     "titre": "Conclusion d'une entente entre la Ville de Québec et Le Partage des Laurentides inc. relativement à l'accès gratuit des lieux et équipements récréatifs au centre de ski de fond Charlesbourg pour les résidents de la Ville de Québec (Dossier 96882)",
+     "titreEn": null,
+     "montant": "102 708,67 $",
+     "montantEn": "$102,708.67",
+     "divise": false,
+     "theme": "contrats"
+    },
+    {
+     "id": "CA4-2026-0112.pdf",
+     "numero": "CA4-2026-0112",
+     "titre": "Versement de neuf (9) subventions totalisant un montant de 39 651 $ à huit (8) organismes pour des demandes déposées dans les programmes de soutien financier du Cadre de soutien aux organismes reconnus, pour la date de dépôt du 15 septembre 2026",
+     "titreEn": null,
+     "montant": "39 651 $",
+     "montantEn": "$39,651",
+     "divise": false,
+     "theme": "subventions"
+    },
+    {
+     "id": "CA4-2026-0113.pdf",
+     "numero": "CA4-2026-0113",
+     "titre": "Versement d'une subvention de 7 700 $ à l'organisme Corporation du Moulin des Jésuites dans le cadre du programme de soutien financier à un événement de proximité pour l'organisation de l'événement « Marche aux flambeaux du Trait-Carré 2026 », le samedi 19 décembre 2026, sur un trajet allant de la m",
+     "titreEn": null,
+     "montant": "7 700 $",
+     "montantEn": "$7,700",
+     "divise": false,
+     "theme": "subventions"
+    }
+   ],
+   "signature": "17:13",
+   "phrase": "Le conseil de l'Arrondissement de Charlesbourg a versé 128 315,11 $ de plus aux organismes des camps de jour d'été 2026 et 102 708,67 $ au centre de ski de fond pour l'accès gratuit des résidents.",
+   "phraseEn": "The Charlesbourg district council allocated an additional 128 315,11 $ to summer day camp organizations for 2026 and 102 708,67 $ to the cross-country ski centre for free resident access.",
+   "motsCles": [
+    "camps de jour d'été 2026",
+    "centre de ski de fond",
+    "accès gratuit"
+   ],
+   "motsClesEn": [
+    "summer day camp organizations for 2026",
+    "cross-country ski centre",
+    "free resident access"
+   ],
+   "motsEssais": 1,
+   "genereLe": "2026-11-25T18:45:24.548Z",
+   "motsThemes": [
+    null,
+    "contrats",
+    "contrats"
+   ]
+  },
+  {
+   "id": "2026-11-24__Conseil de l'Arrondissement des Rivières",
+   "instance": "Conseil de l'Arrondissement des Rivières",
+   "instanceEn": "Les Rivières borough council",
+   "date": "2026-11-24",
+   "nDecisions": 17,
+   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CA2_OR_2026-11-24_17h30.pdf",
+   "votes": [],
+   "themes": [
+    {
+     "theme": "transport",
+     "n": 5
+    },
+    {
+     "theme": "urbanisme",
+     "n": 4
+    },
+    {
+     "theme": "subventions",
+     "n": 3
+    },
+    {
+     "theme": "loisirs",
+     "n": 1
+    },
+    {
+     "theme": "honneurs",
+     "n": 1
+    }
+   ],
+   "points": [
+    {
+     "id": "CA2-2026-0189.pdf",
+     "numero": "CA2-2026-0189",
+     "titre": "Versement de onze (11) subventions totalisant un montant de 48 280 $ à dix (10) organismes pour des demandes déposées dans les programmes de soutien financier du Cadre de soutien aux organismes reconnus, pour la date de dépôt du 15 septembre 2026 - arrondissement des Rivières",
+     "titreEn": null,
+     "montant": "48 280 $",
+     "montantEn": "$48,280",
+     "divise": false,
+     "theme": "subventions"
+    },
+    {
+     "id": "CA2-2026-0190.pdf",
+     "numero": "CA2-2026-0190",
+     "titre": "Autorisation de l'ajustement au montant prévu de la compensation financière du Programme Vacances-Été 2026 pour Loisirs et Sports Neufchâtel inc. pour un montant de 569,05 $",
+     "titreEn": null,
+     "montant": "569,05 $",
+     "montantEn": "$569.05",
+     "divise": false,
+     "theme": "loisirs"
+    },
+    {
+     "id": "CA2-2026-0199.pdf",
+     "numero": "CA2-2026-0199",
+     "titre": "Adoption du projet du Règlement modifiant le Règlement de l'Arrondissement des Rivières sur l'urbanisme relativement aux zones 22108Cb, 22109Cb, 22112Cb, 22116Ip, 22119Ip, 22125Ip, 22126Ip et 22127Ip, R.C.A.2V.Q. 444 (Assouplissements réglementaires Carrefour du Commerce, quartier de Duberger-Les Sa",
+     "titreEn": null,
+     "montant": null,
+     "montantEn": null,
+     "divise": false,
+     "theme": "urbanisme"
+    },
+    {
+     "id": "CA2-2026-0201.pdf",
+     "numero": "CA2-2026-0201",
+     "titre": "Adoption du Règlement modifiant le Règlement de l'Arrondissement des Rivières sur le stationnement dans un garage, un parc de stationnement et sur un terrain géré par la Ville relativement à une case de stationnement pour laquelle un tarif est imposé par un parcomètre, R.C.A.2V.Q. 440",
+     "titreEn": null,
+     "montant": null,
+     "montantEn": null,
+     "divise": false,
+     "theme": "transport"
+    }
+   ],
+   "signature": "17:11",
+   "phrase": "Le conseil a adopté des modifications de zonage pour huit zones du Carrefour du Commerce, accordé 48 280 $ en subventions à 10 organismes et modifié les règles de stationnement pour trois heures gratuites aux personnes handicapées.",
+   "phraseEn": "Council approved zoning modifications for eight zones at Carrefour du Commerce, allocated 48 280 $ in grants to 10 organizations, and modified parking rules to provide three hours of free parking for persons with disabilities.",
+   "motsCles": [
+    "modifications de zonage"
+   ],
+   "motsClesEn": [
+    "zoning modifications"
+   ],
+   "motsEssais": 1,
+   "genereLe": "2026-11-25T18:45:28.068Z",
+   "motsThemes": [
+    "transport"
+   ]
+  },
   {
    "id": "2026-11-23__Conseil de l'Arrondissement de La Cité-Limoilou",
    "instance": "Conseil de l'Arrondissement de La Cité-Limoilou",
@@ -89,6 +265,248 @@
     "subventions",
     null
    ]
+  },
+  {
+   "id": "2026-11-18__Conseil d'agglomération de Québec",
+   "instance": "Conseil d'agglomération de Québec",
+   "instanceEn": "Québec agglomeration council",
+   "date": "2026-11-18",
+   "nDecisions": 21,
+   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CAG_PL_2026-11-18_13h00.pdf",
+   "votes": [
+    {
+     "numero": "CA-2026-0589",
+     "titre": "Attribution d'un contrat à commandes pour le service de réparation sur la route pour les pneus de camions lourds et les équipements de génie civil (Appel d'offres public 96068)",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0590",
+     "titre": "Attribution d'un contrat à commandes pour l'inspection et la certification des équipements de protection contre les chutes (Appel d'offres public 96537)",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0591",
+     "titre": "Entente entre la Ville de Québec et la Communauté allemande Québec relativement au versement d'une subvention et à la fourniture à titre gratuit de services municipaux, à titre d'assistance, dans le cadre de la tenue de l'événement Marché de Noël allemand de Québec, en 2026",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0592",
+     "titre": "Prise d'acte de l'entente intervenue entre la Ville de Québec et le Syndicat canadien de la fonction publique - Section locale 4528 - Secteur aquatique, concernant la modification des articles 5.00, 8.00 et 16.00 de la convention collective en vigueur",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0594",
+     "titre": "Contrat à commandes entre la Ville de Québec et Camions Globocam Québec et Lévis inc. pour le service de réparation de camions lourds et intermédiaires incluant les pièces chez le concessionnaire du fabricant Freightliner (Dossier 96496)",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0595",
+     "titre": "Adhésion de la Ville de Québec au regroupement d'achats du Centre d'acquisitions gouvernementales 2027-8095-50 sacs de plastique à déchets (Dossier 96732)",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0596",
+     "titre": "Attribution d'un contrat Services de support Microsoft Entreprise (contrat-cadre de prestations de services Microsoft (MSA) U6448699) (Dossier 96862)",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0597",
+     "titre": "Attribution d'un contrat à commandes pour la fourniture et la livraison de lubrifiants et de graisses (Appel d'offres public 96128)",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0600",
+     "titre": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'un immeuble situé en bordure de la rue Saint-Jean et de l'avenue Honoré-Mercier, connu et désigné comme étant le lot 6 581 483 du cadastre du Québec, relativement au projet de réseau structurant de transport en commun de la Vi",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    },
+    {
+     "numero": "CA-2026-0603",
+     "titre": "Mise à jour de la nomenclature des emplois manuels",
+     "pour": 5,
+     "contre": 1,
+     "resultat": "Adoptée à la majorité"
+    }
+   ],
+   "themes": [
+    {
+     "theme": "contrats",
+     "n": 6
+    },
+    {
+     "theme": "subventions",
+     "n": 3
+    },
+    {
+     "theme": "rh",
+     "n": 2
+    },
+    {
+     "theme": "economie",
+     "n": 2
+    },
+    {
+     "theme": "transport",
+     "n": 2
+    }
+   ],
+   "points": [
+    {
+     "id": "CA-2026-0594.pdf",
+     "numero": "CA-2026-0594",
+     "titre": "Contrat à commandes entre la Ville de Québec et Camions Globocam Québec et Lévis inc. pour le service de réparation de camions lourds et intermédiaires incluant les pièces chez le concessionnaire du fabricant Freightliner (Dossier 96496)",
+     "titreEn": null,
+     "montant": "5 556 624,10 $",
+     "montantEn": "$5,556,624.10",
+     "divise": false,
+     "theme": "contrats"
+    },
+    {
+     "id": "CA-2026-0597.pdf",
+     "numero": "CA-2026-0597",
+     "titre": "Attribution d'un contrat à commandes pour la fourniture et la livraison de lubrifiants et de graisses (Appel d'offres public 96128)",
+     "titreEn": null,
+     "montant": "2 203 454,80 $",
+     "montantEn": "$2,203,454.80",
+     "divise": false,
+     "theme": "contrats"
+    },
+    {
+     "id": "CA-2026-0600.pdf",
+     "numero": "CA-2026-0600",
+     "titre": "Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'un immeuble situé en bordure de la rue Saint-Jean et de l'avenue Honoré-Mercier, connu et désigné comme étant le lot 6 581 483 du cadastre du Québec, relativement au projet de réseau structurant de transport en commun de la Vi",
+     "titreEn": null,
+     "montant": "1 480 000 $",
+     "montantEn": "$1,480,000",
+     "divise": false,
+     "theme": "transport"
+    },
+    {
+     "id": "CA-2026-0596.pdf",
+     "numero": "CA-2026-0596",
+     "titre": "Attribution d'un contrat Services de support Microsoft Entreprise (contrat-cadre de prestations de services Microsoft (MSA) U6448699) (Dossier 96862)",
+     "titreEn": null,
+     "montant": "856 518,36 $",
+     "montantEn": "$856,518.36",
+     "divise": false,
+     "theme": "contrats"
+    }
+   ],
+   "signature": "21:16",
+   "rejets": 1,
+   "phrase": null,
+   "phraseEn": null,
+   "motsThemes": []
+  },
+  {
+   "id": "2026-11-17__Conseil de la ville",
+   "instance": "Conseil de la ville",
+   "instanceEn": "City council",
+   "date": "2026-11-17",
+   "nDecisions": 39,
+   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CV_OR_2026-11-17_00h00.pdf",
+   "votes": [
+    {
+     "numero": "CV-2026-0955",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Acquisition, de gré à gré ou par expropriation, à des fins municipales, d'un immeuble situé en bordure de la rue Saint-Jean et de l'avenue Honoré-Mercier, connu et désigné comme étant le lot 6 581 483 du cadastre du Québec, relativement au proje",
+     "pour": 17,
+     "contre": 3,
+     "resultat": "Adoptée à la majorité"
+    }
+   ],
+   "themes": [
+    {
+     "theme": "contrats",
+     "n": 7
+    },
+    {
+     "theme": "urbanisme",
+     "n": 5
+    },
+    {
+     "theme": "honneurs",
+     "n": 5
+    },
+    {
+     "theme": "subventions",
+     "n": 4
+    },
+    {
+     "theme": "rh",
+     "n": 2
+    },
+    {
+     "theme": "environnement",
+     "n": 1
+    }
+   ],
+   "points": [
+    {
+     "id": "CV-2026-0936.pdf",
+     "numero": "CV-2026-0936",
+     "titre": "Création de la Réserve financière pour le financement de dépenses liées à la fourniture du service de l'eau, affectation d'un montant à la réserve pour l'année 2026 et appropriation d'une somme à même celle-ci afin d'acquitter certaines dépenses afférentes à la gestion de l'eau",
+     "titreEn": null,
+     "montant": "162 597 000 $",
+     "montantEn": "$162,597,000",
+     "divise": false,
+     "theme": "administration"
+    },
+    {
+     "id": "AM-2026-0960.pdf",
+     "numero": "AM-2026-0960",
+     "titre": "Avis de motion relatif au Règlement sur la réserve financière destinée à financer des dépenses relatives à la gestion des matières résiduelles, R.V.Q. 3567, et dépôt du projet de règlement",
+     "titreEn": null,
+     "montant": "93 567 000 $",
+     "montantEn": "$93,567,000",
+     "divise": false,
+     "theme": "environnement"
+    },
+    {
+     "id": "CV-2026-0948.pdf",
+     "numero": "CV-2026-0948",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Contrat à commandes entre la Ville de Québec et Camions Globocam Québec et Lévis inc. pour le service de réparation de camions lourds et intermédiaires incluant les pièces chez le concessionnaire du fabricant Freightliner (Dossier 96496)",
+     "titreEn": null,
+     "montant": "5 556 624,10 $",
+     "montantEn": "$5,556,624.10",
+     "divise": false,
+     "theme": "contrats"
+    },
+    {
+     "id": "CV-2026-0951.pdf",
+     "numero": "CV-2026-0951",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Attribution d'un contrat à commandes pour la fourniture et la livraison de lubrifiants et de graisses (Appel d'offres public 96128)",
+     "titreEn": null,
+     "montant": "2 203 454,80 $",
+     "montantEn": "$2,203,454.80",
+     "divise": false,
+     "theme": "contrats"
+    }
+   ],
+   "signature": "39:26",
+   "phrase": "Le conseil a créé une réserve financière pour les matières résiduelles de 160 000 000 $ et une réserve pour l'eau de 190 000 000 $. Il a aussi accordé 2 166 855 $ à trois organismes pour restaurer des églises de valeur patrimoniale exceptionnelle.",
+   "phraseEn": "The council created a financial reserve for waste management of 160 000 000 $ and a water reserve of 190 000 000 $. It also granted 2 166 855 $ to three organizations to restore churches of exceptional heritage value.",
+   "motsCles": [],
+   "motsClesEn": [],
+   "motsEssais": 1,
+   "genereLe": "2026-11-25T18:45:33.731Z",
+   "motsThemes": []
   },
   {
    "id": "2026-11-16__Conseil de l'Arrondissement de La Haute-Saint-Charles",
@@ -242,6 +660,74 @@
    "motsThemes": [
     "transport",
     "environnement"
+   ]
+  },
+  {
+   "id": "2026-11-13__Comité exécutif",
+   "instance": "Comité exécutif",
+   "instanceEn": "Executive committee",
+   "date": "2026-11-13",
+   "nDecisions": 3,
+   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CE_SP_2026-11-13_00h00.pdf",
+   "votes": [],
+   "themes": [
+    {
+     "theme": "urbanisme",
+     "n": 1
+    },
+    {
+     "theme": "subventions",
+     "n": 1
+    }
+   ],
+   "points": [
+    {
+     "id": "CE-2026-1388.pdf",
+     "numero": "CE-2026-1388",
+     "titre": "Ententes relatives aux versements de subventions entre la Ville de Québec et trois organismes, dans le cadre de la Mesure d'aide financière pour les églises de valeur patrimoniale exceptionnelle",
+     "titreEn": null,
+     "montant": "2 166 855 $",
+     "montantEn": "$2,166,855",
+     "divise": false,
+     "theme": "subventions"
+    },
+    {
+     "id": "CE-2026-1387.pdf",
+     "numero": "CE-2026-1387",
+     "titre": "Disposition de certains biens et équipements en surplus provenant des Jeux du Canada 2027",
+     "titreEn": null,
+     "montant": "10 000 $",
+     "montantEn": "$10,000",
+     "divise": false,
+     "theme": "administration"
+    },
+    {
+     "id": "CE-2026-1386.pdf",
+     "numero": "CE-2026-1386",
+     "titre": "Autorisation d'un projet immobilier dérogatoire sur les lots 1 479 009, 1 479 010 et 1 623 117 du cadastre du Québec (310, rue Saint-Roch, quartier de Saint-Roch, district électoral de Saint-Roch¿Saint-Sauveur), en vertu de l'article 145.45 de la Loi sur l'aménagement et l'urbanisme (RLRQ, c. A-19.1",
+     "titreEn": null,
+     "montant": null,
+     "montantEn": null,
+     "divise": false,
+     "theme": "urbanisme"
+    }
+   ],
+   "signature": "3:2",
+   "phrase": "Le comité exécutif a autorisé un projet immobilier dérogatoire rue Saint-Roch et a accordé 2 166 855 $ à trois organismes pour restaurer des églises de valeur patrimoniale exceptionnelle.",
+   "phraseEn": "The executive committee authorized a derogatory real estate project on Saint-Roch Street and allocated 2 166 855 $ to three organizations to restore churches of exceptional heritage value.",
+   "motsCles": [
+    "projet immobilier dérogatoire",
+    "valeur patrimoniale"
+   ],
+   "motsClesEn": [
+    "derogatory real estate project",
+    "heritage value"
+   ],
+   "motsEssais": 1,
+   "genereLe": "2026-11-25T18:45:36.783Z",
+   "motsThemes": [
+    "urbanisme",
+    "subventions"
    ]
   },
   {
@@ -4698,125 +5184,6 @@
      "pour": 7,
      "contre": 1,
      "resultat": "Adoptée à la majorité"
-    }
-   ]
-  },
-  {
-   "id": "2026-08-25__Conseil de la ville",
-   "instance": "Conseil de la ville",
-   "instanceEn": "City council",
-   "date": "2026-08-25",
-   "nDecisions": 83,
-   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CV_OR_2026-08-25_00h00.pdf",
-   "themes": [
-    {
-     "theme": "urbanisme",
-     "n": 20
-    },
-    {
-     "theme": "contrats",
-     "n": 12
-    },
-    {
-     "theme": "subventions",
-     "n": 11
-    },
-    {
-     "theme": "finances",
-     "n": 7
-    },
-    {
-     "theme": "honneurs",
-     "n": 6
-    },
-    {
-     "theme": "environnement",
-     "n": 4
-    }
-   ],
-   "points": [
-    {
-     "id": "CV-2026-0694.pdf",
-     "numero": "CV-2026-0694",
-     "titre": "Autorisation de soumettre au conseil d'agglomération - Fermeture de règlements d'emprunt, réduction des pouvoirs de dépenser et annulation des soldes résiduaires de pouvoir d'emprunt - Règlements d'emprunt de compétence d'agglomération",
-     "titreEn": null,
-     "montant": "136 136 071,00 $",
-     "montantEn": "$136,136,071.00",
-     "divise": false,
-     "theme": "finances"
-    },
-    {
-     "id": "CV-2026-0695.pdf",
-     "numero": "CV-2026-0695",
-     "titre": "Autorisation de soumettre au conseil d'agglomération - Fermeture de règlements d'emprunt, réduction des pouvoirs de dépenser et annulation des soldes résiduaires de pouvoir d'emprunt - Règlements d'emprunt d'agglomération pour des dépenses de nature mixte",
-     "titreEn": null,
-     "montant": "66 743 900,00 $",
-     "montantEn": "$66,743,900.00",
-     "divise": false,
-     "theme": "finances"
-    },
-    {
-     "id": "CV-2026-0672.pdf",
-     "numero": "CV-2026-0672",
-     "titre": "Fermeture de règlements d'emprunt, réduction des pouvoirs de dépenser et annulation des soldes résiduaires de pouvoir d'emprunt ¿ Règlements d'emprunt de compétence de proximité",
-     "titreEn": null,
-     "montant": "41 314 900,00 $",
-     "montantEn": "$41,314,900.00",
-     "divise": false,
-     "theme": "finances"
-    },
-    {
-     "id": "CV-2026-0743.pdf",
-     "numero": "CV-2026-0743",
-     "titre": "Règlement sur des travaux d'installation, d'entretien et de restauration d'oeuvres d'art public et de commémoration et sur l'emprunt nécessaire au paiement des coûts qui y sont rattachés, R.V.Q. 3550",
-     "titreEn": null,
-     "montant": "820 000 $",
-     "montantEn": "$820,000",
-     "divise": false,
-     "theme": "finances"
-    }
-   ],
-   "signature": "83:67",
-   "phrase": "Le conseil a approuvé la modification du zonage du Vieux-Québec et de la colline Parlementaire pour favoriser les logements et limiter les nouveaux hôtels, la reconstruction du pont d'étagement ferroviaire de la 4e Avenue pour 25 656 000 $, et l'entretien de passages à niveau CN pour 404 203,96 $ et 453 062,81 $.",
-   "phraseEn": "Council approved modification of zoning in Old Quebec and Parliament Hill to promote housing and limit new hotels, reconstruction of the 4th Avenue railway overpass bridge for 25 656 000 $, and maintenance of CN level crossings for 404 203,96 $ and 453 062,81 $.",
-   "motsCles": [
-    "passages à niveau"
-   ],
-   "motsClesEn": [
-    "level crossings"
-   ],
-   "genereLe": "2026-11-13T11:31:19.464Z",
-   "motsThemes": [
-    "environnement"
-   ],
-   "votes": [
-    {
-     "numero": "CV-2026-0719",
-     "titre": "Autorisation de soumettre au conseil d'agglomération - Adoption du Règlement de l'agglomération de nature mixte sur des interventions relatives à la mise en place d'une stratégie de suivi de la qualité de l'air du territoire de la ville de Québec et sur l'emprunt nécessaire au paiement des coûts qui",
-     "pour": 18,
-     "contre": 3,
-     "resultat": "Adoptée à la majorité"
-    },
-    {
-     "numero": "CV-2026-0721",
-     "titre": "Autorisation de soumettre au conseil d'agglomération - Adoption du Règlement modifiant le Règlement de l'agglomération sur les ormes malades et le Règlement de l'agglomération sur le programme de soutien à l'abattage et la disposition des ormes dans le cadre de la lutte à la propagation de la maladi",
-     "pour": 18,
-     "contre": 3,
-     "resultat": "Adoptée à la majorité"
-    },
-    {
-     "numero": "CV-2026-0745",
-     "titre": "Avis de proposition déposé par monsieur le conseiller Stéphane Lachance, lors de la séance du conseil de la ville tenue le 7 juillet 2026, demandant que la Ville manifeste officiellement son intérêt à acquérir ou à recevoir la statue de Samuel de Champlain appartenant à la Ville d'Orillia",
-     "pour": 3,
-     "contre": 18,
-     "resultat": "Rejetée"
-    },
-    {
-     "numero": "CV-2026-0746",
-     "titre": "Avis de proposition déposé par monsieur le conseiller Marc Roussin, lors de la séance du conseil de la ville tenue le 7 juillet 2026, demandant le plan d'action mis en place à la suite des problèmes de débordement d'égouts dans le secteur Chauveau",
-     "pour": 3,
-     "contre": 18,
-     "resultat": "Rejetée"
     }
    ]
   }
