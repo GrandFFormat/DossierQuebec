@@ -35,6 +35,10 @@ const S = {
   loi2022: 'https://www.publicationsduquebec.gouv.qc.ca/fileadmin/Fichiers_client/lois_et_reglements/LoisAnnuelles/fr/2022/2022C30F.PDF',
   pl4: 'https://www.assnat.qc.ca/fr/travaux-parlementaires/projets-loi/projet-loi-4-43-1.html',
   communes: 'https://www.noscommunes.ca/procedure-and-practice-4/ch04-6-f.html',
+  sjsr: 'https://sjsr.ca/communiques-2025/ceremonie-dassermentation-debut-officiel-du-mandat-pour-le-nouveau-conseil-municipal/',
+  biblio: 'https://premierelecture.bibliotheque.assnat.qc.ca/2026/10/14/les-premiers-pas-dune-legislature-lassermentation-des-parlementaires/',
+  o1: 'https://laws-lois.justice.gc.ca/fra/lois/o-1/page-1.html',
+  bc: 'https://www.bclaws.gov.bc.ca/civix/document/id/complete/statreg/96066_01',
 };
 
 // Les villes suivies par DossierQuébec. `date` = null : aucune date publiée par la Ville (demande au greffe en cours).
@@ -42,6 +46,12 @@ const VILLES = [
   { ville: 'Montréal', date: '13 novembre 2025', dateEn: 'November 13, 2025', jours: 11, note: deux('Communiqué de la Ville du 13 nov. 2025', 'City news release, Nov. 13, 2025'), src: S.montreal },
   { ville: 'Laval', date: '9 novembre 2025', dateEn: 'November 9, 2025', jours: 7, note: deux('Au Collège Letendre. Communiqué de la Ville du 11 nov. 2025', 'At Collège Letendre. City news release, Nov. 11, 2025'), src: S.laval },
   { ville: 'Longueuil', date: '9 novembre 2025', dateEn: 'November 9, 2025', jours: 7, note: deux('« Assermentés dimanche » : communiqué du lundi 10 nov. 2025', '“Sworn in on Sunday”: news release of Monday, Nov. 10, 2025'), src: S.longueuil },
+  { ville: 'Drummondville', date: '7 novembre 2025', dateEn: 'November 7, 2025', jours: 5, note: deux('À l’hôtel de ville. Communiqué de la Ville du 7 nov. 2025', 'At City Hall. City news release, Nov. 7, 2025'), src: 'https://www.drummondville.ca/entree-en-poste-officielle-des-membres-du-nouveau-conseil-municipal-2/' },
+  { ville: 'Repentigny', date: '8 novembre 2025', dateEn: 'November 8, 2025', jours: 6, note: deux('À l’hôtel de ville. Communiqué de la Ville du 12 nov. 2025', 'At City Hall. City news release, Nov. 12, 2025'), src: 'https://repentigny.ca/actualites-publications/assermentation-du-conseil-municipal-de-repentigny-nicolas-dufour-et-son' },
+  { ville: 'Brossard', date: '9 novembre 2025', dateEn: 'November 9, 2025', jours: 7, note: deux('Au centre socioculturel Alphonse-Lepage. Communiqué de la Ville du 10 nov. 2025', 'At the Alphonse-Lepage community centre. City news release, Nov. 10, 2025'), src: 'https://brossard.ca/actualites/le-nouveau-conseil-de-brossard-entre-officiellement-en-fonction/' },
+  { ville: 'Saint-Jean-sur-Richelieu', date: '10 novembre 2025', dateEn: 'November 10, 2025', jours: 8, note: deux('11 élus sur 13 ce soir-là. Les deux autres devaient prêter serment plus tard. Communiqué du 11 nov. 2025', '11 of 13 members that evening. The other two were to be sworn in later. News release, Nov. 11, 2025'), src: 'https://sjsr.ca/communiques-2025/ceremonie-dassermentation-debut-officiel-du-mandat-pour-le-nouveau-conseil-municipal/' },
+  { ville: 'Trois-Rivières', date: '13 novembre 2025', dateEn: 'November 13, 2025', jours: 11, note: deux('« Les 15 membres du nouveau conseil » : page des membres du conseil', '“The 15 members of the new council”: council members page'), src: 'https://www.v3r.net/a-propos-de-la-ville/vie-democratique/conseil-municipal/maire-et-conseillers-municipaux' },
+  { ville: 'Gatineau', date: null, note: deux('Prévue le 10 nov. 2025 dans un communiqué de juin 2025. Aucune confirmation publiée depuis.', 'Scheduled for Nov. 10, 2025 in a June 2025 release. No confirmation published since.'), src: 'https://www.gatineau.ca/portail/default.aspx?p=nouvelles_annonces%2Fcommuniques%2Fcommunique_2015&id=200531233' },
   { ville: 'Québec', date: null, note: deux('Aucune date publiée par la Ville. Demande faite au greffe le 25 nov. 2026.', 'No date published by the City. Request sent to the clerk on Nov. 25, 2026.'), src: null },
   { ville: 'Lévis', date: null, note: deux('Aucune date publiée. Le procès-verbal de la première séance (24 nov. 2025) n’en parle pas.', 'No date published. The minutes of the first sitting (Nov. 24, 2025) do not mention it.'), src: S.levisPv },
 ];
@@ -49,11 +59,13 @@ const VILLES = [
 // ---------------------------------------------------------------- les pages
 const SERMENT_TEXTE = 'Je, (nom de la personne élue), déclare sous serment que j’exercerai mes fonctions de (maire ou conseiller) avec honnêteté et justice dans le respect de la loi et du Code d’éthique et de déontologie des élus municipaux de (nom de la municipalité) et que je m’engage à respecter les règles de ce code applicables après la fin de mon mandat.';
 
+const srcVille = (nom) => { const v = VILLES.find((x) => x.ville === nom); if (!v?.src) throw new Error(`build-a-la-une : ville sans source : ${nom}`); return v.src; };
+
 const tableauVilles = () => `
     <div class="une-table-wrap"><table class="fin-table une-table une-table-villes">
       <thead><tr><th>${deux('Ville', 'City')}</th><th>${deux('Serment prêté le', 'Oath taken on')}</th><th>${deux('Jours après le scrutin', 'Days after election day')}</th><th>${deux('Source', 'Source')}</th></tr></thead>
       <tbody>
-${VILLES.map((v) => `        <tr><td><b>${v.ville}</b></td><td>${v.date ? deux(v.date, v.dateEn) : `<span class="une-attente">${deux('Non publiée', 'Not published')}</span>`}</td><td>${v.jours ?? '—'}</td><td>${v.src ? lien(v.src, v.note) : v.note}</td></tr>`).join('\n')}
+${[...VILLES].sort((a, b) => (a.jours ?? 99) - (b.jours ?? 99)).map((v) => `        <tr><td><b>${v.ville}</b></td><td>${v.date ? deux(v.date, v.dateEn) : `<span class="une-attente">${deux('Non publiée', 'Not published')}</span>`}</td><td>${v.jours ?? '—'}</td><td>${v.src ? lien(v.src, v.note) : v.note}</td></tr>`).join('\n')}
       </tbody>
     </table></div>`;
 
@@ -100,16 +112,55 @@ const PAGES = [
       <li>${deux(`<b>Le conseil ne peut presque pas siéger</b> à partir de 30 jours avant le scrutin et tant que la majorité des conseillers n’a pas prêté serment (${lien(S.lerm, 'art. 314.2')}). <a href="/a-la-une/conseil-sans-serment">Lire l’explication</a>.`, `<b>Council can barely sit</b> from 30 days before election day until a majority of councillors have taken the oath (${lien(S.lerm, 's. 314.2')}). <a href="/a-la-une/conseil-sans-serment">Read the explainer</a>.`)}</li>
     </ul>
 
+    <h2 class="une-h2">${deux('Devant qui on jure : le maire, le greffier ou toute personne autorisée', 'Who administers the oath: the mayor, the clerk or any authorized person')}</h2>
+    <p class="une-p">${deux('La liste est plus longue qu’on le pense.', 'The list is longer than you might think.')}</p>
+    <p class="une-p">${deux(`La loi la donne en une phrase : « Le serment requis par la présente loi peut être fait devant le maire ou le greffier ou greffier-trésorier de la municipalité, un membre du personnel électoral ou référendaire, un responsable du registre visé au chapitre IV du titre II ou toute autre personne autorisée par la loi à faire prêter un serment. » (${lien(S.lerm, 'art. 653')})`, `The law gives it in one sentence: the oath may be taken before the mayor, the clerk or secretary-treasurer of the municipality, a member of the election or referendum staff, a person in charge of a register under the act, or anyone else authorized by law to administer an oath (${lien(S.lerm, 's. 653')}, French text).`)}</p>
+    <p class="une-p">${deux(`Cette personne doit aussi, « sur demande et sans frais, faire prêter le serment et délivrer un certificat attestant la prestation » (${lien(S.lerm, 'art. 653')}).`, `That person must also, on request and free of charge, administer the oath and issue a certificate showing it was taken (${lien(S.lerm, 's. 653')}).`)}</p>
+    <p class="une-p">${deux('Dans les faits, les villes ont pris des chemins différents :', 'In practice, cities took different routes:')}</p>
+    <ul class="une-liste">
+      <li>${deux('<b>Drummondville et Repentigny</b> : devant le président ou la présidente d’élection.', '<b>Drummondville and Repentigny</b>: before the returning officer.')}</li>
+      <li>${deux('<b>Brossard</b> : devant la greffière, Me Joanne Skelling, au centre socioculturel Alphonse-Lepage.', '<b>Brossard</b>: before the clerk, Joanne Skelling, at the Alphonse-Lepage community centre.')}</li>
+    </ul>
+    <p class="une-note">${deux('Sources : les communiqués des villes, liés dans le tableau plus bas.', 'Sources: the city news releases, linked in the table below.')}</p>
+
+    <h2 class="une-h2">${deux('Et si un élu ne jure pas? Le poste devient vacant et une nouvelle élection suit', 'What if a councillor does not take the oath? The seat is vacated and a new election follows')}</h2>
+    <p class="une-p">${deux(`Le guide du ministère aux nouveaux élus le dit sans détour : « À défaut de prêter serment dans le délai de 30 jours, il y a vacance à ce poste et une nouvelle élection doit avoir lieu. » (${lien(S.guide, 'Guide d’accueil des élus municipaux, oct. 2026')})`, `The ministry’s guide for new councillors puts it plainly: if the oath is not taken within 30 days, the seat becomes vacant and a new election must be held (${lien(S.guide, 'MAMH welcome guide for municipal councillors, Oct. 2026')}, in French).`)}</p>
+    <p class="une-p">${deux('Voici la suite, étape par étape :', 'Here is what happens next, step by step:')}</p>
+    <ol class="une-liste">
+      <li>${deux(`<b>Le poste devient vacant</b> le jour où l’élu est en défaut de prêter serment (${lien(S.lerm, 'art. 330')}).`, `<b>The seat becomes vacant</b> on the day the councillor fails to take the oath (${lien(S.lerm, 's. 330')}).`)}</li>
+      <li>${deux(`<b>Vacance constatée plus de 12 mois avant la prochaine élection générale</b> : elle est comblée par une élection partielle (${lien(S.lerm, 'art. 335')}).`, `<b>Vacancy noted more than 12 months before the next general election</b>: it is filled by a by-election (${lien(S.lerm, 's. 335')}).`)}</li>
+      <li>${deux(`<b>La date du vote</b> : le président d’élection la fixe dans les 30 jours de l’avis de vacance, « parmi les dimanches compris dans les quatre mois » de cet avis (${lien(S.lerm, 'art. 339')}).`, `<b>The voting date</b>: the returning officer sets it within 30 days of the notice of vacancy, on a Sunday within four months of that notice (${lien(S.lerm, 's. 339')}).`)}</li>
+      <li>${deux(`<b>Dans les 12 derniers mois</b> avant l’élection générale : le conseil peut, dans les 15 jours de l’avis, décréter une élection partielle (${lien(S.lerm, 'art. 335')}). Sans élection partielle décrétée, un poste de conseiller est comblé seulement à l’élection générale, sous réserve du pouvoir du ministre (${lien(S.lerm, 'art. 337')}).`, `<b>In the last 12 months</b> before the general election: council may, within 15 days of the notice, order a by-election (${lien(S.lerm, 's. 335')}). If no by-election is ordered, a councillor’s seat is filled only at the general election, subject to the minister’s power (${lien(S.lerm, 's. 337')}).`)}</li>
+    </ol>
+    <p class="une-p">${deux('Autrement dit, un serment oublié peut mener à une élection partielle, un dimanche.', 'In other words, one missed oath can lead to a by-election, on a Sunday.')}</p>
+
+    <h2 class="une-h2">${deux('Le code d’éthique nommé dans le serment : 5 valeurs, des interdits et une formation obligatoire', 'The code of ethics named in the oath: 5 values, prohibitions and mandatory training')}</h2>
+    <p class="une-p">${deux('Le serment renvoie au code. Alors, qu’est-ce qu’il contient?', 'The oath points to the code. So what is in it?')}</p>
+    <p class="une-p">${deux(`Le ${lien(S.guide, 'guide du ministère')} résume la Loi sur l’éthique et la déontologie en matière municipale (chapitre E-15.1.0.1) :`, `The ${lien(S.guide, 'ministry’s guide')} (in French) sums up the Municipal Ethics and Good Conduct Act (chapter E-15.1.0.1):`)}</p>
+    <ul class="une-liste">
+      <li>${deux('<b>Les valeurs (art. 4)</b> : « l’intégrité, l’honneur, le respect, la civilité et l’équité ».', '<b>The values (s. 4)</b>: integrity, honour, respect, civility and fairness.')}</li>
+      <li>${deux('<b>Les règles obligatoires (art. 6)</b> : elles interdisent notamment les comportements irrespectueux, les conflits d’intérêts, le favoritisme, l’utilisation des ressources de la municipalité et la violation de la confidentialité.', '<b>The mandatory rules (s. 6)</b>: among other things, they prohibit disrespectful conduct, conflicts of interest, favouritism, use of municipal resources and breaches of confidentiality.')}</li>
+      <li>${deux('<b>Une révision après chaque élection générale (art. 13)</b> : le code doit être adopté « avant le 1er mai suivant une élection générale ».', '<b>A review after every general election (s. 13)</b>: the code must be adopted before May 1 following a general election.')}</li>
+      <li>${deux('<b>Une formation obligatoire (art. 15)</b> : « dans les six mois suivant le début de chaque mandat » (9 mois pour les personnes réélues).', '<b>Mandatory training (s. 15)</b>: within six months of the start of each term (9 months for re-elected members).')}</li>
+    </ul>
+
     <h2 class="une-h2">${deux('Quand chaque conseil a prêté serment (élection du 2 novembre 2025)', 'When each council took the oath (November 2, 2025 election)')}</h2>
 ${tableauVilles()}
-    <p class="une-p">${deux('Trois villes ont publié la date. Deux, non.', 'Three cities published the date. Two did not.')}</p>
-    <p class="une-note">${deux('Une ville sans date n’a rien publié à ce sujet sur son site. Nous avons écrit au greffe de chacune et ajouterons la date dès leur réponse.', 'A city without a date has published nothing on its website. We have written to each clerk and will add the date as soon as we hear back.')}</p>
+    <p class="une-p">${deux('Huit villes ont publié la date. Trois, non.', 'Eight cities published the date. Three did not.')}</p>
+    <p class="une-note">${deux('Une ville sans date n’a rien publié à ce sujet sur son site. Nous avons écrit aux greffes de Québec et de Lévis et ajouterons la date dès leur réponse.', 'A city without a date has published nothing on its website. We have written to the Québec City and Lévis clerks and will add the date as soon as we hear back.')}</p>
 ${sources([
-      [S.lerm, 'LégisQuébec, chapitre E-2.2 : art. 313, 314.2, 330 et annexe II', 'LégisQuébec, chapter E-2.2: ss. 313, 314.2, 330 and Schedule II'],
+      [S.lerm, 'LégisQuébec, chapitre E-2.2 : art. 313, 314.2, 330, 335, 337, 339, 653 et annexe II', 'LégisQuébec, chapter E-2.2: ss. 313, 314.2, 330, 335, 337, 339, 653 and Schedule II'],
+      [S.guide, 'MAMH, Guide d’accueil des élus municipaux, oct. 2026 (PDF)', 'MAMH, welcome guide for municipal councillors, Oct. 2026 (PDF, French)'],
       [S.montreal, 'Ville de Montréal, communiqué du 13 nov. 2025', 'City of Montréal, news release, Nov. 13, 2025'],
       [S.laval, 'Ville de Laval, communiqué du 11 nov. 2025', 'City of Laval, news release, Nov. 11, 2025'],
       [S.longueuil, 'Ville de Longueuil, communiqué du 10 nov. 2025', 'City of Longueuil, news release, Nov. 10, 2025'],
       [S.levisPv, 'Ville de Lévis, procès-verbal de la séance du 24 nov. 2025', 'City of Lévis, minutes of the Nov. 24, 2025 sitting'],
+      [srcVille('Drummondville'), 'Ville de Drummondville, communiqué du 7 nov. 2025', 'City of Drummondville, news release, Nov. 7, 2025'],
+      [srcVille('Repentigny'), 'Ville de Repentigny, communiqué du 12 nov. 2025', 'City of Repentigny, news release, Nov. 12, 2025'],
+      [srcVille('Brossard'), 'Ville de Brossard, communiqué du 10 nov. 2025', 'City of Brossard, news release, Nov. 10, 2025'],
+      [srcVille('Saint-Jean-sur-Richelieu'), 'Ville de Saint-Jean-sur-Richelieu, communiqué du 11 nov. 2025', 'City of Saint-Jean-sur-Richelieu, news release, Nov. 11, 2025'],
+      [srcVille('Trois-Rivières'), 'Ville de Trois-Rivières, page des membres du conseil', 'City of Trois-Rivières, council members page'],
+      [srcVille('Gatineau'), 'Ville de Gatineau, communiqué de juin 2025', 'City of Gatineau, June 2025 news release'],
     ])}`,
   },
   {
@@ -144,12 +195,29 @@ ${sources([
       <li>${deux('<b>7 décembre 2025</b> : 35e jour après le scrutin. Au plus tard ce jour-là, la règle tombait d’elle-même.', '<b>December 7, 2025</b>: 35th day after election day. By that day at the latest, the rule lapsed on its own.')}</li>
     </ul>
     <p class="une-p">${deux('Combien de jours après le scrutin?', 'How many days after election day?')}</p>
-    <p class="une-p">${deux('Entre 7 et 11 jours après le scrutin, dans les trois villes qui ont publié la date :', 'Between 7 and 11 days after election day, in the three cities that published the date:')}</p>
+    <p class="une-p">${deux('Entre 5 et 11 jours après le scrutin, dans les huit villes qui ont publié la date :', 'Between 5 and 11 days after election day, in the eight cities that published the date:')}</p>
 ${tableauVilles()}
     <p class="une-p">${deux(`À Laval, le conseil a prêté serment le dimanche 9 novembre. Dès le lendemain, il siégeait en séance extraordinaire pour nommer son comité exécutif (${lien(S.laval, 'communiqué de la Ville')}).`, `In Laval, council took the oath on Sunday, November 9. The very next day, it met in a special sitting to appoint its executive committee (${lien(S.laval, 'City news release')}).`)}</p>
+
+    <h2 class="une-h2">${deux('Un vrai cas : 11 élus sur 13 à Saint-Jean-sur-Richelieu', 'A real case: 11 of 13 members in Saint-Jean-sur-Richelieu')}</h2>
+    <p class="une-p">${deux('Un conseil ne jure pas toujours d’un seul bloc.', 'A council does not always swear in all at once.')}</p>
+    <p class="une-p">${deux(`Le soir du 10 novembre 2025, 11 des 13 élus de Saint-Jean-sur-Richelieu ont prêté serment. Les deux autres devaient le faire plus tard (${lien(S.sjsr, 'communiqué de la Ville du 11 nov. 2025')}).`, `On the evening of November 10, 2025, 11 of Saint-Jean-sur-Richelieu’s 13 members took the oath. The other two were to do so later (${lien(S.sjsr, 'City news release, Nov. 11, 2025')}).`)}</p>
+    <p class="une-p">${deux('Pourquoi deux temps? Le communiqué ne le dit pas.', 'Why two steps? The release does not say.')}</p>
+    <p class="une-p">${deux('Pour l’article 314.2, ce qui compte est la majorité des conseillers élus, pas l’unanimité.', 'For section 314.2, what counts is a majority of the elected councillors, not all of them.')}</p>
+
+    <h2 class="une-h2">${deux('Quand le conseil change de forme, le serment fixe aussi le début du mandat', 'When council changes shape, the oath also sets when the term begins')}</h2>
+    <p class="une-p">${deux(`Un cas plus rare, prévu à l’${lien(S.lerm, 'article 314.1')} :`, `A rarer case, covered by ${lien(S.lerm, 'section 314.1')}:`)}</p>
+    <ul class="une-liste">
+      <li>${deux('<b>La situation</b> : la composition du conseil change à une élection générale (moins de postes, nouveau découpage, etc.).', '<b>The situation</b>: council’s composition changes at a general election (fewer seats, new boundaries, etc.).')}</li>
+      <li>${deux('<b>La règle</b> : le mandat des conseillers commence quand la majorité des élus a prêté serment.', '<b>The rule</b>: councillors’ terms begin when a majority of those elected have taken the oath.')}</li>
+      <li>${deux('<b>Le filet</b> : si la majorité ne l’a pas fait avant le 35e jour après le scrutin, le mandat commence ce jour-là.', '<b>The backstop</b>: if a majority has not done so before the 35th day after election day, the term begins on that day.')}</li>
+    </ul>
+    <p class="une-p">${deux('Encore le 35e jour. Les articles 314.1 et 314.2 fixent la même limite.', 'The 35th day again. Sections 314.1 and 314.2 set the same limit.')}</p>
+    <p class="une-note">${deux('La loi ne définit pas la « force majeure » de l’article 314.2. Nous n’en proposons donc pas de définition.', 'The act does not define the “force majeure” of section 314.2. So we do not offer a definition.')}</p>
     <p class="une-p">${deux('Pour le texte du serment lui-même, voir <a href="/a-la-une/serment-des-elus-municipaux">Le serment des élus, ville par ville</a>.', 'For the wording of the oath itself, see <a href="/a-la-une/serment-des-elus-municipaux">The oath of office, city by city</a>.')}</p>
 ${sources([
-      [S.lerm, 'LégisQuébec, chapitre E-2.2 : art. 313 et 314.2', 'LégisQuébec, chapter E-2.2: ss. 313 and 314.2'],
+      [S.lerm, 'LégisQuébec, chapitre E-2.2 : art. 313, 314.1 et 314.2', 'LégisQuébec, chapter E-2.2: ss. 313, 314.1 and 314.2'],
+      [S.sjsr, 'Ville de Saint-Jean-sur-Richelieu, communiqué du 11 nov. 2025', 'City of Saint-Jean-sur-Richelieu, news release, Nov. 11, 2025'],
       [S.muni, 'MAMH, Muni-Express n° 19 du 3 octobre 2025', 'MAMH, Muni-Express no. 19, October 3, 2025'],
       [S.laval, 'Ville de Laval, communiqué du 11 nov. 2025', 'City of Laval, news release, Nov. 11, 2025'],
       [S.montreal, 'Ville de Montréal, communiqué du 13 nov. 2025', 'City of Montréal, news release, Nov. 13, 2025'],
@@ -168,7 +236,7 @@ ${sources([
       'Pendant 155 ans, aucun député du Québec n’a pu siéger sans jurer fidélité au souverain. Puis, à l’automne 2022, la règle a changé. Voici les étapes, chaque date avec sa source officielle.',
       'For 155 years, no Quebec member could sit without swearing allegiance to the sovereign. Then, in the fall of 2022, the rule changed. Here are the steps, each date with its official source.'),
     corps: () => `
-    <p class="une-p">${deux('Deux dates fixent le décor : 1867 et 1982. Les six autres tiennent dans l’automne 2022.', 'Two dates set the stage: 1867 and 1982. The other six fit in the fall of 2022.')}</p>
+    <p class="une-p">${deux('Deux dates fixent le décor : 1867 et 1982. Les sept autres tiennent dans l’automne 2022.', 'Two dates set the stage: 1867 and 1982. The other seven fit in the fall of 2022.')}</p>
     <ol class="une-chrono">
       <li><b>1867</b> ${deux(`L’article 128 de la Loi constitutionnelle de 1867 oblige les membres du Parlement fédéral et des assemblées provinciales à prêter le serment d’allégeance avant de siéger : « Je, A.B., jure que je serai fidèle et porterai vraie allégeance à Sa Majesté la Reine Victoria » (cinquième annexe). ${lien(S.lc1867, 'Art. 128')} · ${lien(S.lc1867ann, 'cinquième annexe')}`, `Section 128 of the Constitution Act, 1867 requires members of Parliament and of provincial legislatures to take the oath of allegiance before sitting: “I A.B. do swear, That I will be faithful and bear true Allegiance to Her Majesty Queen Victoria” (Fifth Schedule). ${lien(S.lc1867, 's. 128')} · ${lien(S.lc1867ann, 'Fifth Schedule')}`)}</li>
       <li><b>1982</b> ${deux(`La Loi sur l’Assemblée nationale ajoute un second serment, envers le peuple du Québec : « Je, (nom du député), déclare sous serment que je serai loyal envers le peuple du Québec et que j’exercerai mes fonctions de député avec honnêteté et justice dans le respect de la constitution du Québec. » Sans lui, pas de siège (art. 15). ${lien(S.lan, 'Loi sur l’Assemblée nationale, art. 15 et annexe I (1982, c. 62)')}`, `The National Assembly Act adds a second oath: the member swears to be loyal to the people of Quebec and to serve with honesty and justice, respecting Quebec’s constitution. Without it, no seat (s. 15). ${lien(S.lan, 'National Assembly Act, s. 15 and Schedule I (1982, c. 62)')}`)}</li>
@@ -176,9 +244,15 @@ ${sources([
       <li><b>${deux('21 octobre 2022', 'October 21, 2022')}</b> ${deux(`Les trois élus du Parti québécois font de même et refusent l’allégeance au roi. ${lien(S.chrono2022, 'Chronologie de l’Assemblée nationale')}`, `The three Parti Québécois members do the same and refuse allegiance to the King. ${lien(S.chrono2022, 'National Assembly timeline')}`)}</li>
       <li><b>${deux('1er novembre 2022', 'November 1, 2022')}</b> ${deux(`Le président sortant, François Paradis, décide que les élus qui refusent l’allégeance au roi ne peuvent pas siéger. Les élus de Québec solidaire prêtent alors le serment au roi. ${lien(S.chrono2022, 'Chronologie de l’Assemblée nationale')}`, `Outgoing Speaker François Paradis rules that members who refuse allegiance to the King cannot sit. Québec solidaire members then take the oath to the King. ${lien(S.chrono2022, 'National Assembly timeline')}`)}</li>
       <li><b>${deux('1er décembre 2022', 'December 1, 2022')}</b> ${deux(`Les trois élus du Parti québécois se voient refuser l’entrée de la Salle de l’Assemblée par la sergente d’armes. ${lien(S.chrono2022, 'Chronologie de l’Assemblée nationale')}`, `The three Parti Québécois members are refused entry to the Assembly Chamber by the Sergeant-at-Arms. ${lien(S.chrono2022, 'National Assembly timeline')}`)}</li>
+      <li><b>${deux('1er décembre 2022', 'December 1, 2022')}</b> ${deux(`Sol Zanetti, député de Jean-Lesage, dépose le projet de loi n° 190, Loi visant à reconnaître le serment des députés envers le peuple du Québec comme seul serment obligatoire à leur entrée en fonction. ${lien(S.chrono2022, 'Chronologie de l’Assemblée nationale')}`, `Sol Zanetti, member for Jean-Lesage, introduces Bill 190, An Act to recognize the members’ oath to the people of Quebec as the only mandatory oath on taking office. ${lien(S.chrono2022, 'National Assembly timeline')}`)}</li>
       <li><b>${deux('6 décembre 2022', 'December 6, 2022')}</b> ${deux(`Le ministre Jean-François Roberge présente le projet de loi n° 4, Loi visant à reconnaître le serment prévu par la Loi sur l’Assemblée nationale comme seul serment obligatoire pour y siéger. ${lien(S.pl4, 'Fiche du projet de loi')}`, `Minister Jean-François Roberge introduces Bill 4, making the National Assembly Act oath the only mandatory oath to sit. ${lien(S.pl4, 'Bill page')}`)}</li>
       <li><b>${deux('9 décembre 2022', 'December 9, 2022')}</b> ${deux(`Le projet de loi est adopté et sanctionné le même jour (L.Q. 2022, c. 30). Il ajoute à la Loi constitutionnelle de 1867 : « 128Q.1. L’article 128 ne s’applique pas au Québec. » Le serment au roi n’est plus exigé pour siéger. ${lien(S.loi2022, 'Loi de 2022, chapitre 30 (PDF officiel)')}`, `The bill is passed and assented to the same day (S.Q. 2022, c. 30). It adds to the Constitution Act, 1867: “128Q.1. Section 128 does not apply to Quebec.” The oath to the King is no longer required to sit. ${lien(S.loi2022, '2022 Act, chapter 30 (official PDF)')}`)}</li>
     </ol>
+
+    <h2 class="une-h2">${deux('Aujourd’hui : un seul serment obligatoire pour siéger', 'Today: one mandatory oath to sit')}</h2>
+    <p class="une-p">${deux('Deux serments exigés pendant 40 ans. Un seul aujourd’hui.', 'Two oaths required for 40 years. Only one today.')}</p>
+    <p class="une-p">${deux(`La Bibliothèque de l’Assemblée nationale le résume dans un billet du 14 octobre 2026 (mis à jour le 5 novembre 2026) : jusqu’en 2022, tous les parlementaires devaient prêter le serment d’allégeance. Le projet de loi n° 4 a retiré cette obligation. Le serment de loyauté envers le peuple du Québec demeure le « seul serment obligatoire pour y siéger » (${lien(S.biblio, 'billet de la Bibliothèque')}).`, `The National Assembly Library sums it up in a post dated October 14, 2026 (updated November 5, 2026): until 2022, all members had to take the oath of allegiance. Bill 4 removed that obligation. The oath of loyalty to the people of Quebec remains the only mandatory oath to sit (${lien(S.biblio, 'Library post')}, in French).`)}</p>
+    <p class="une-note">${deux('Le billet ne donne ni les dates d’assermentation ni le nombre d’élus de la 44e législature. Nous ne les donnons donc pas ici.', 'The post gives neither the swearing-in dates nor the number of members of the 44th legislature. So we do not give them here.')}</p>
 ${sources([
       [S.lc1867, 'Justice Canada, Loi constitutionnelle de 1867, art. 128', 'Justice Canada, Constitution Act, 1867, s. 128'],
       [S.lc1867ann, 'Justice Canada, Loi constitutionnelle de 1867, cinquième annexe', 'Justice Canada, Constitution Act, 1867, Fifth Schedule'],
@@ -186,6 +260,7 @@ ${sources([
       [S.chrono2022, 'Assemblée nationale, Chronologie parlementaire (2022)', 'National Assembly, parliamentary timeline (2022)'],
       [S.pl4, 'Assemblée nationale, projet de loi n° 4 (43-1)', 'National Assembly, Bill 4 (43-1)'],
       [S.loi2022, 'Publications du Québec, Lois du Québec 2022, chapitre 30', 'Publications du Québec, Statutes of Quebec 2022, chapter 30'],
+      [S.biblio, 'Bibliothèque de l’Assemblée nationale, billet du 14 oct. 2026 (mis à jour le 5 nov. 2026)', 'National Assembly Library, post of Oct. 14, 2026 (updated Nov. 5, 2026)'],
     ])}`,
   },
   {
@@ -212,6 +287,24 @@ ${sources([
       </tbody>
     </table></div>
     <p class="une-note">${deux('Ce tableau s’en tient à l’article 128, qui s’applique partout sauf au Québec. Certaines provinces peuvent exiger un serment de plus par leur propre loi. Nous ne les avons pas encore toutes lues et le dirons ici quand ce sera fait.', 'This table sticks to section 128, which applies everywhere except Quebec. Some provinces may require an additional oath under their own law. We have not read them all yet and will say so here when we have.')}</p>
+
+    <h2 class="une-h2">${deux('Le texte exact du serment fédéral nomme encore Elizabeth II', 'The exact wording of the federal oath still names Elizabeth II')}</h2>
+    <p class="une-p">${deux('Le voici, tel qu’il est codifié :', 'Here it is, as codified:')}</p>
+    <blockquote class="une-citation">« Je, ..., jure fidélité et sincère allégeance à Sa Majesté la Reine Elizabeth Deux, Reine du Canada, à ses héritiers et successeurs. Ainsi Dieu me soit en aide. »</blockquote>
+    <p class="une-p">${deux(`Loi sur les serments d’allégeance, L.R.C. 1985, ch. O-1, ${lien(S.o1, 'art. 2(1)')}, version à jour au 29 octobre 2026.`, `Oaths of Allegiance Act, R.S.C. 1985, c. O-1, ${lien(S.o1, 's. 2(1)')} (French text quoted), current to October 29, 2026.`)}</p>
+    <p class="une-p">${deux('Oui, Elizabeth II.', 'Yes, Elizabeth II.')}</p>
+    <p class="une-p">${deux('Le texte codifié nomme encore la reine. Nous n’avons pas vérifié pourquoi, donc nous ne l’expliquons pas ici.', 'The codified text still names the Queen. We have not verified why, so we do not explain it here.')}</p>
+    <p class="une-p">${deux(`Et si on ne veut pas jurer? La même loi prévoit une affirmation solennelle : elle reprend les mots du serment en les adaptant et a le même effet (${lien(S.o1, 'art. 3')}).`, `What if you would rather not swear? The same act provides for a solemn affirmation: it adapts the words of the oath and has the same effect (${lien(S.o1, 's. 3')}).`)}</p>
+
+    <h2 class="une-h2">${deux('Un exemple de province : en Colombie-Britannique, un seul serment, au souverain', 'One provincial example: in British Columbia, a single oath, to the sovereign')}</h2>
+    <p class="une-p">${deux(`Le député prête serment devant le lieutenant-gouverneur ou une personne qu’il autorise, avant de siéger ou de voter (${lien(S.bc, 'Constitution Act, RSBC 1996, c. 66, art. 24(1)')}). Le texte, en anglais :`, `The member takes the oath before the Lieutenant Governor or a person the Lieutenant Governor authorizes, before sitting or voting (${lien(S.bc, 'Constitution Act, RSBC 1996, c. 66, s. 24(1)')}). The wording:`)}</p>
+    <blockquote class="une-citation">${deux('« I, A.B., swear that I will be faithful and bear true allegiance to Her Majesty Queen Elizabeth II [or her successor], her heirs and successors, according to law. So help me God. »', '“I, A.B., swear that I will be faithful and bear true allegiance to Her Majesty Queen Elizabeth II [or her successor], her heirs and successors, according to law. So help me God.”')}</blockquote>
+    <ul class="une-liste">
+      <li>${deux(`<b>Affirmation solennelle permise</b> (${lien(S.bc, 'art. 24(2)')}).`, `<b>Solemn affirmation allowed</b> (${lien(S.bc, 's. 24(2)')}).`)}</li>
+      <li>${deux('<b>Aucun autre serment de député</b> dans cette loi.', '<b>No other member’s oath</b> in this act.')}</li>
+    </ul>
+    <p class="une-note">${deux('Les lois des huit autres provinces : pas encore lues. Nous le dirons ici quand ce sera fait.', 'The laws of the other eight provinces: not read yet. We will say so here when we have.')}</p>
+
     <p class="une-p">${deux('Voir aussi : <a href="/a-la-une/serment-des-elus-municipaux">le serment des élus municipaux, ville par ville</a> et <a href="/a-la-une/serment-au-roi-chronologie">la chronologie du serment au roi</a>.', 'See also: <a href="/a-la-une/serment-des-elus-municipaux">the municipal oath, city by city</a> and <a href="/a-la-une/serment-au-roi-chronologie">the oath to the King timeline</a>.')}</p>
 ${sources([
       [S.lc1867, 'Justice Canada, Loi constitutionnelle de 1867, art. 128', 'Justice Canada, Constitution Act, 1867, s. 128'],
@@ -219,6 +312,8 @@ ${sources([
       [S.lan, 'LégisQuébec, Loi sur l’Assemblée nationale, art. 15', 'LégisQuébec, National Assembly Act, s. 15'],
       [S.loi2022, 'Lois du Québec 2022, chapitre 30', 'Statutes of Quebec 2022, chapter 30'],
       [S.lerm, 'LégisQuébec, Loi sur les élections et les référendums dans les municipalités, art. 313 et annexe II', 'LégisQuébec, municipal elections act, s. 313 and Schedule II'],
+      [S.o1, 'Justice Canada, Loi sur les serments d’allégeance (O-1), art. 2(1) et 3, à jour au 29 oct. 2026', 'Justice Canada, Oaths of Allegiance Act (O-1), ss. 2(1) and 3, current to Oct. 29, 2026'],
+      [S.bc, 'BC Laws, Constitution Act, RSBC 1996, c. 66, art. 24', 'BC Laws, Constitution Act, RSBC 1996, c. 66, s. 24'],
     ])}`,
   },
 ];
