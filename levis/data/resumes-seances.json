@@ -1,17 +1,109 @@
 {
- "generatedAt": "2026-11-24T20:15:47.218Z",
+ "generatedAt": "2026-11-25T19:32:44.862Z",
  "modele": "claude-haiku-4-5",
  "genereParIA": true,
  "avertissement": "Phrase de résumé générée par IA à partir des décisions de la séance ; les points marquants sont choisis sans IA. Le procès-verbal officiel fait foi.",
  "page": "decisions-de-la-ville-de-levis",
  "seances": [
   {
+   "id": "CV_2026-11-24",
+   "instance": "Conseil de la Ville",
+   "instanceEn": "City council",
+   "date": "2026-11-24",
+   "nDecisions": 17,
+   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Ordres-du-jour/2026/PROJET-PV-CV-2026-11-24-CV3852-a-CV3892.pdf",
+   "votes": [],
+   "themes": [
+    {
+     "theme": "transport",
+     "n": 5
+    },
+    {
+     "theme": "urbanisme",
+     "n": 4
+    },
+    {
+     "theme": "subventions",
+     "n": 2
+    },
+    {
+     "theme": "social",
+     "n": 2
+    },
+    {
+     "theme": "environnement",
+     "n": 1
+    },
+    {
+     "theme": "contrats",
+     "n": 1
+    }
+   ],
+   "points": [
+    {
+     "id": "CV3873",
+     "numero": "CV3873",
+     "titre": "Adoption des prévisions budgétaires 2027 et approbation du programme des immobilisations 2027-2036 de la Société de transport de Lévis",
+     "titreEn": null,
+     "montant": "16,5 M$",
+     "montantEn": null,
+     "divise": false,
+     "theme": "transport"
+    },
+    {
+     "id": "CV3870",
+     "numero": "CV3870",
+     "titre": "Financement de la dépense relative à la mise à jour du Plan de développement de la zone agricole",
+     "titreEn": null,
+     "montant": "75 000 $",
+     "montantEn": null,
+     "divise": false,
+     "theme": "transport"
+    },
+    {
+     "id": "CV3879",
+     "numero": "CV3879",
+     "titre": "Aide financière à des organismes de la communauté",
+     "titreEn": null,
+     "montant": "65 446,52 $",
+     "montantEn": null,
+     "divise": false,
+     "theme": "subventions"
+    },
+    {
+     "id": "CV3869",
+     "numero": "CV3869",
+     "titre": "Appui à la campagne Centraide 2026 auprès du personnel de la Ville, aide financière à Centraide Québec et Chaudière-Appalaches et au Fonds d’impacts essentiels et tirages de prix",
+     "titreEn": null,
+     "montant": "60 000 $",
+     "montantEn": null,
+     "divise": false,
+     "theme": "environnement"
+    }
+   ],
+   "signature": "17:16",
+   "phrase": "Le conseil a versé 60 000 $ à Centraide Québec et Chaudière-Appalaches, 40 000 $ à des organismes culturels et 65 446,52 $ à deux clubs de gymnastique, et a financé à 75 000 $ la mise à jour du Plan de développement de la zone agricole.",
+   "phraseEn": "The council granted 60 000 $ to Centraide Québec and Chaudière-Appalaches, 40 000 $ to cultural organizations and 65 446,52 $ to two gymnastics clubs, and funded 75 000 $ for updating the Agricultural Zone Development Plan.",
+   "motsCles": [
+    "clubs de gymnastique"
+   ],
+   "motsClesEn": [
+    "gymnastics clubs",
+    "Agricultural Zone Development Plan"
+   ],
+   "motsEssais": 1,
+   "genereLe": "2026-11-25T19:32:44.848Z",
+   "motsThemes": [
+    null
+   ]
+  },
+  {
    "id": "CV_2026-11-10",
    "instance": "Conseil de la Ville",
    "instanceEn": "City council",
    "date": "2026-11-10",
    "nDecisions": 22,
-   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/2026/PROJET-PV-CV-2026-11-10-CV3803-a-CV3851.pdf",
+   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Ordres-du-jour/2026/PV-CV-2026-11-10-CV3803-a-CV3851.pdf",
    "themes": [
     {
      "theme": "honneurs",
@@ -1360,266 +1452,13 @@
     "contrats"
    ],
    "votes": []
-  },
-  {
-   "id": "CV_2026-08-25",
-   "instance": "Conseil de la Ville",
-   "instanceEn": "City council",
-   "date": "2026-08-25",
-   "nDecisions": 21,
-   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PV_CV-2026-08-25.pdf",
-   "themes": [
-    {
-     "theme": "urbanisme",
-     "n": 3
-    },
-    {
-     "theme": "environnement",
-     "n": 3
-    },
-    {
-     "theme": "contrats",
-     "n": 3
-    },
-    {
-     "theme": "finances",
-     "n": 2
-    },
-    {
-     "theme": "loisirs",
-     "n": 2
-    },
-    {
-     "theme": "transport",
-     "n": 2
-    }
-   ],
-   "points": [
-    {
-     "id": "CV3626",
-     "numero": "CV3626",
-     "titre": "Adoption du Règlement RV3622 modifiant le Règlement RV3586 fixant pour l’année 2026 le montant maximal des dépenses prévues pour l’acquisition d’immeubles à des fins industrielles, para-industrielles ou de recherche",
-     "titreEn": null,
-     "montant": "3 584 000 $",
-     "montantEn": null,
-     "divise": false,
-     "theme": "immobilier"
-    },
-    {
-     "id": "CV3616",
-     "numero": "CV3616",
-     "titre": "Demande d’aide financière au Programme de financement d’infrastructure en eau pour la réalisation d’habitation (FIERH), approbation des conditions d’octroi de l’aide financière relative à l’augmentation de capacité du site de traitement des eaux usées du secteur Saint-Nicolas et désignation d’un représentant de la Ville",
-     "titreEn": null,
-     "montant": "32 008 799 $",
-     "montantEn": null,
-     "divise": false,
-     "theme": "environnement"
-    },
-    {
-     "id": "CV3617",
-     "numero": "CV3617",
-     "titre": "Demande d’aide financière au Programme de financement d’infrastructure en eau pour la réalisation d’habitation (FIERH), approbation des conditions d’octroi de l’aide financière relative à l’augmentation de capacité du site de traitement des eaux usées Desjardins et désignation d’un représentant de la Ville",
-     "titreEn": null,
-     "montant": "29 578 928 $",
-     "montantEn": null,
-     "divise": false,
-     "theme": "environnement"
-    },
-    {
-     "id": "CV3620",
-     "numero": "CV3620",
-     "titre": "Attribution du contrat relatif aux services professionnels en évaluation foncière pour les immeubles non résidentiels",
-     "titreEn": null,
-     "montant": "2 637 452,53 $",
-     "montantEn": null,
-     "divise": false,
-     "theme": "contrats"
-    }
-   ],
-   "signature": "21:18",
-   "phrase": "Le conseil a approuvé l'agrandissement de la station de traitement des eaux usées de Saint-Nicolas pour 32 008 799 $ et celle de Desjardins pour 29 578 928 $, ainsi qu'une aide de 150 000 $ à l'Association des personnes handicapées de Lévis pour rénover sa Maison de quartier.",
-   "phraseEn": "The council approved the expansion of the Saint-Nicolas wastewater treatment plant for 32 008 799 $ and the Desjardins plant for 29 578 928 $, as well as 150 000 $ in funding to the Association of Persons with Disabilities of Lévis to renovate its community house.",
-   "motsCles": [
-    "station de traitement des eaux usées",
-    "Association des personnes handicapées",
-    "Maison de quartier"
-   ],
-   "motsClesEn": [
-    "wastewater treatment plant",
-    "Association of Persons with Disabilities",
-    "community house"
-   ],
-   "genereLe": "2026-11-13T11:36:48.409Z",
-   "motsThemes": [
-    "environnement",
-    "subventions",
-    "urbanisme"
-   ],
-   "votes": []
-  },
-  {
-   "id": "CACCO_2026-08-19",
-   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Ouest",
-   "instanceEn": "Chutes-de-la-Chaudière-Ouest borough council",
-   "date": "2026-08-19",
-   "nDecisions": 8,
-   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-Proces_verbal_de_la_seance_ordinaire_du_19_aout_2026.pdf",
-   "themes": [
-    {
-     "theme": "urbanisme",
-     "n": 6
-    },
-    {
-     "theme": "loisirs",
-     "n": 1
-    }
-   ],
-   "points": [
-    {
-     "id": "CACCO-2026-0132",
-     "numero": "CACCO-2026-0132",
-     "titre": "Rapport sur la consultation écrite",
-     "titreEn": null,
-     "montant": null,
-     "montantEn": null,
-     "divise": false,
-     "theme": "administration"
-    },
-    {
-     "id": "CACCO-2026-0133",
-     "numero": "CACCO-2026-0133",
-     "titre": "Demande de dérogation mineure – Marge de recul avant - Agrandissement d’un bâtiment principal en cour avant – 2810, chemin Sainte-Anne (secteur Saint-Étienne-de-Lauzon) – Lot 2 848 555 du cadastre du Québec",
-     "titreEn": null,
-     "montant": null,
-     "montantEn": null,
-     "divise": false,
-     "theme": "urbanisme"
-    },
-    {
-     "id": "CACCO-2026-0134",
-     "numero": "CACCO-2026-0134",
-     "titre": "Demande de dérogation mineure – Marge de recul latérale - Agrandissement d’un bâtiment principal (construction d’un garage intégré) – 1377, rue de la Sapinière (secteur Saint-Rédempteur) – Lot 2 284 436 du cadastre du Québec",
-     "titreEn": null,
-     "montant": null,
-     "montantEn": null,
-     "divise": false,
-     "theme": "urbanisme"
-    },
-    {
-     "id": "CACCO-2026-0135",
-     "numero": "CACCO-2026-0135",
-     "titre": "PIIA – Installation d’une enseigne appliquée – 102-430, route Marie-Victorin (secteur Saint-Nicolas) – Subway",
-     "titreEn": null,
-     "montant": null,
-     "montantEn": null,
-     "divise": false,
-     "theme": "urbanisme"
-    }
-   ],
-   "signature": "8:0",
-   "phrase": "Le conseil a approuvé deux dérogations mineures pour des agrandissements de bâtiments, l'installation de deux enseignes commerciales et des rénovations extérieures de bâtiments patrimoniaux, ainsi qu'une restriction pour la construction d'une piscine creusée.",
-   "phraseEn": "The council approved two minor variances for building expansions, the installation of two commercial signs and exterior renovations of heritage buildings, as well as a restriction on the construction of an in-ground pool.",
-   "motsCles": [
-    "dérogations mineures",
-    "agrandissements de bâtiments",
-    "enseignes commerciales"
-   ],
-   "motsClesEn": [
-    "minor variances",
-    "building expansions",
-    "commercial signs"
-   ],
-   "genereLe": "2026-11-13T11:36:50.836Z",
-   "motsThemes": [
-    "urbanisme",
-    null,
-    null
-   ],
-   "votes": []
-  },
-  {
-   "id": "CACCE_2026-08-12",
-   "instance": "Conseil d'arrondissement des Chutes-de-la-Chaudière-Est",
-   "instanceEn": "Chutes-de-la-Chaudière-Est borough council",
-   "date": "2026-08-12",
-   "nDecisions": 16,
-   "pv": "https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/08-proces_verbal_de_la_seance_ordinaire_du-12_aout_2026.pdf",
-   "votes": [],
-   "themes": [
-    {
-     "theme": "urbanisme",
-     "n": 15
-    }
-   ],
-   "points": [
-    {
-     "id": "CACCE-2026-0186",
-     "numero": "CACCE-2026-0186",
-     "titre": "Rapport sur la consultation écrite",
-     "titreEn": null,
-     "montant": null,
-     "montantEn": null,
-     "divise": false,
-     "theme": "administration"
-    },
-    {
-     "id": "CACCE-2026-0187",
-     "numero": "CACCE-2026-0187",
-     "titre": "Demande de dérogation mineure – Marges de recul avant et latérale d’un bâtiment existant et d’une galerie couverte – 979, rue Cantin (secteur Saint-Jean-Chrysostome) – Lot 2 692 917 du cadastre du Québec",
-     "titreEn": null,
-     "montant": null,
-     "montantEn": null,
-     "divise": false,
-     "theme": "urbanisme"
-    },
-    {
-     "id": "CACCE-2026-0188",
-     "numero": "CACCE-2026-0188",
-     "titre": "PIIA – Installation de deux enseignes appliquées – 2204, boulevard Guillaume-Couture (secteur Saint-Romuald) – Maahes Barbier MB",
-     "titreEn": null,
-     "montant": null,
-     "montantEn": null,
-     "divise": false,
-     "theme": "urbanisme"
-    },
-    {
-     "id": "CACCE-2026-0189",
-     "numero": "CACCE-2026-0189",
-     "titre": "PIIA – Installation d’une enseigne appliquée – 730-210, avenue Taniata (secteur Saint-Jean-Chrysostome) – CLINIQUE DENTAIRE Saint-Jean-Chrysostome",
-     "titreEn": null,
-     "montant": null,
-     "montantEn": null,
-     "divise": false,
-     "theme": "urbanisme"
-    }
-   ],
-   "signature": "16:0",
-   "phrase": "Le conseil a approuvé une demande de dérogation mineure pour des marges de recul au 979, rue Cantin, ainsi que plusieurs projets d'installations d'enseignes, rénovations extérieures et aménagements dans les secteurs Saint-Romuald, Saint-Jean-Chrysostome et Charny.",
-   "phraseEn": "The board approved a minor variance request for setback margins at 979 Cantin Street, as well as several projects for sign installations, exterior renovations and developments in the Saint-Romuald, Saint-Jean-Chrysostome and Charny sectors.",
-   "motsCles": [
-    "dérogation mineure",
-    "installations d'enseignes",
-    "rénovations extérieures"
-   ],
-   "motsClesEn": [
-    "minor variance",
-    "sign installations",
-    "exterior renovations"
-   ],
-   "motsEssais": 1,
-   "genereLe": "2026-11-13T17:18:28.930Z",
-   "motsThemes": [
-    "urbanisme",
-    null,
-    "urbanisme"
-   ]
   }
  ],
  "ordresDuJour": [],
  "enAttente": [
   {
-   "instance": "Conseil de la Ville",
-   "date": "2026-11-24"
+   "instance": "Conseil d'arrondissement de Desjardins",
+   "date": "2026-11-25"
   },
   {
    "instance": "Conseil de la Ville",

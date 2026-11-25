@@ -2,7 +2,7 @@
 > dossiervillelevis@0.1.0 refresh
 > node scripts/refresh.js
 
-Code : commit 863ee26 — Node v22.23.5
+Code : commit 4df7faa — Node v22.23.5
 
 === Syntaxe du JavaScript du site ===
 
@@ -24,41 +24,43 @@ https://levis-website-resources.s3.bhs.io.cloud.ovh.net/robots.txt : HTTP 403 Fo
 === Calendrier des séances ===
 80 séance(s) en 2026 écrites dans data/seances.json.
   CAD     12 séances, 8 avec procès-verbal
-  CV      21 séances, 18 avec procès-verbal
+  CV      21 séances, 19 avec procès-verbal
   CACCO   12 séances, 9 avec procès-verbal
   CACCE   12 séances, 10 avec procès-verbal
   CE      23 séances, 23 avec procès-verbal
 ⚠ 3 entrée(s) sans instance reconnue : Forum citoyen : contribuez à l’avenir de Lévis | Forum citoyen : contribuez à l’avenir de Lévis | Forum citoyen : contribuez à l’avenir de Lévis
 
 === Décisions de l'année ===
+CV_2026-11-24 : 14 pages, 41 résolutions, 23 liées à un sommaire, 0 vote(s) nominal(aux)
+CV_2026-11-10 : 19 pages, 49 résolutions, 32 liées à un sommaire, 0 vote(s) nominal(aux)
 
-2376 décisions écrites dans data/decisions.json — 0 séance(s) lue(s) cette fois, 7 en attente de procès-verbal.
-0 nouveauté(s) depuis la dernière exécution.
+2418 décisions écrites dans data/decisions.json — 2 séance(s) lue(s) cette fois, 7 en attente de procès-verbal.
+42 nouveauté(s) depuis la dernière exécution.
 
 Pastilles thématiques :
-    793  Urbanisme
-    606  Procédure
-    197  Administration
-    146  Transport
-     98  Finances
-     82  Contrats
-     73  Subventions
-     72  Environnement
-     56  Motions et hommages
+    801  Urbanisme
+    623  Procédure
+    198  Administration
+    152  Transport
+    100  Finances
+     83  Contrats
+     75  Subventions
+     74  Environnement
+     57  Motions et hommages
      43  Loisirs et communauté
      40  Travaux et infrastructures
      38  Sécurité publique
+     35  Logement et social
      34  Ressources humaines
-     33  Logement et social
      27  Développement économique
      21  Culture et patrimoine
      17  Immobilier
-    155  (classées par défaut — aucune règle n'a tranché)
+    156  (classées par défaut — aucune règle n'a tranché)
 
-=== Votes nominatifs (depuis 2026-09-25) ===
-Fenêtre depuis 2026-09-25 : 9 séance(s) relue(s), 17 vote(s) conservé(s) du fichier précédent.
+=== Votes nominatifs (depuis 2026-09-26) ===
+Fenêtre depuis 2026-09-26 : 10 séance(s) relue(s), 17 vote(s) conservé(s) du fichier précédent.
 
-20 votes nominaux écrits dans data/votes.json (9 procès-verbaux analysés).
+20 votes nominaux écrits dans data/votes.json (10 procès-verbaux analysés).
 0 portent un avertissement d'extraction (à vérifier à la main).
 
 === Contrats octroyés (SEAO) ===
@@ -73,34 +75,53 @@ Finances : taux 2026 (0.6361 $/100 $), dépenses réelles 2025 (360.3 M$).
 Votes par décision : 18 décisions, 18 noms.
 
 === Lexique, mesuré sur les procès-verbaux ===
-✖ 12 procès-verbal/aux de 2026 en cache (la dernière mesure en portait 55) — cache de texte incomplet : data/lexique.json de la veille est conservé.
+✖ 13 procès-verbal/aux de 2026 en cache (la dernière mesure en portait 55) — cache de texte incomplet : data/lexique.json de la veille est conservé.
 ⚠ « Lexique, mesuré sur les procès-verbaux » a échoué (code 1) — on garde les données précédentes, ça attendra.
 
 === Résumés en langage clair ===
-Sommaires depuis 2026-09-25 pas encore résumés (plafond : 120)…
-651 déjà résumés, 0 à faire.
-Rien à générer. (--force pour tout regénérer.)
+Sommaires depuis 2026-09-26 pas encore résumés (plafond : 120)…
+651 déjà résumés, 13 à faire.
+
+--- Estimation ---
+Documents à résumer  : 13
+Modèle               : claude-opus-5
+Ratio mesuré         : 1.59 caractères/jeton (sur 12 documents)
+Jetons d'entrée      : ~68 649
+Jetons de sortie     : ~4 160
+Coût estimé          : ~0.45 $ US
+                       (moitié moins avec --batch, résultats en moins d'une heure)
+
+Génération…
+  … 4/13
+  … 8/13
+  … 12/13
+  … 13/13
+
+13 résumés générés, 664 au total dans data/resumes.json
+Coût réel : 0.49 $ US
 
 === Récapitulatifs des projets ===
-Récapitulatifs des projets : rien de nouveau.
+Récapitulatifs des projets : stations-epuration (11 dossiers), logement (13 dossiers)
+  stations-epuration           5 étape(s), 4 à surveiller · retirés : 0 mécanique, 1 contre-lecture
+  logement                     5 étape(s), 4 à surveiller · retirés : 0 mécanique, 0 contre-lecture
+  coût ≈ 0.60 $ US
 
 === Projets pour « Mes dossiers » ===
-Projets publics : 4 projets · index 2.9 Ko · fichiers de projet 54 Ko au total.
-Décisions attendues : 42 dossiers en attente, dont 0 avec une date cible · 61.5 Ko.
-Dossiers de l'année : 1767 · 1316 Ko · organismes suggérés : 108.
-Décisions récentes : 290 dossiers depuis le 2026-09-26 · 255 Ko.
+Projets publics : 4 projets · index 2.7 Ko · fichiers de projet 57 Ko au total.
+Décisions attendues : 39 dossiers en attente, dont 0 avec une date cible · 56.2 Ko.
+Dossiers de l'année : 1802 · 1343 Ko · organismes suggérés : 108.
+Décisions récentes : 233 dossiers depuis le 2026-10-10 · 205 Ko.
 
 === Chiffres de la page Abonnement ===
-Travail public : 3054 documents, 594 résumés, 20 votes, 4 projets.
+Travail public : 3113 documents, 607 résumés, 20 votes, 4 projets.
 
 === En bref, séance par séance ===
-Séances : 19, appels : 0, rejets : 0, coût : 0.000 $ US
+Séances : 17, appels : 1, rejets : 0, coût : 0.005 $ US
 
 === Décisions récentes dans la page (Google) ===
-levis : 30 décisions écrites dans la page des décisions (inchangé).
+levis : 30 décisions écrites dans la page des décisions.
 
 === Courriels de Lévis publiés ===
---seance=2026-11-10 → Déjà publié : conseil-2026-11-10. Rien à faire.
 --mois=2026-10 → Déjà publié : 2026-10. Rien à faire.
 
 === Bilan ===
