@@ -203,12 +203,12 @@ const PAGES = [
     fil: 'Votes', cle: 'fil.votes', frequence: 'daily', priorite: '0.9',
   },
   {
-    // « À la une » (25 nov. 2026) : prend la place d'Archives dans la barre. Page d'attente
-    // privée (noindex, hors sitemap) jusqu'à la première page de référence relue par Hugo.
-    fichier: 'a-la-une.html', vue: 'alaune', onglet: 'alaune', url: '/a-la-une', prive: true,
+    // « À la une » (25 nov. 2026) : prend la place d'Archives dans la barre. Publiée le 25 nov.
+    // 2026 après la relecture de Hugo (les pages filles : scripts/build-a-la-une.js).
+    fichier: 'a-la-une.html', vue: 'alaune', onglet: 'alaune', url: '/a-la-une',
     donnees: [],
     title: "À la une : l'actualité avec ses sources — DossierQuébec",
-    desc: "Pages de référence et outils sur l'actualité politique du Québec, chaque fait relié à sa source officielle. Bientôt : le serment des élus, ville par ville.",
+    desc: "Pages de référence et outils sur l'actualité politique du Québec, chaque fait relié à sa source officielle. Ce mois-ci : à qui nos élus jurent-ils fidélité?",
     fil: 'À la une', cle: 'fil.alaune', frequence: 'weekly', priorite: '0.7',
   },
   {

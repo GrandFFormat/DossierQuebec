@@ -4,8 +4,8 @@
 // a-la-une.html (fait par scripts/build-section-pages.js depuis gabarit.html) : même en-tête, même pied
 // de page, même noindex. Le contenu vit ici, dans PAGES et CARTES_A_VENIR.
 //
-// VERROU : tout reste en noindex (la page modèle est `prive` dans build-section-pages.js) tant que
-// Hugo n'a pas relu le lot. Pour publier : enlever `prive: true` de l'entrée a-la-une.html.
+// PUBLIÉE le 25 nov. 2026 après la relecture de Hugo : les pages sont indexées et entrent au sitemap.
+// Toute nouvelle page passe par Hugo avant le push (consigne de Martin).
 //
 // RÈGLE : aucune donnée sans source officielle lue (LégisQuébec, communiqués des villes, MAMH,
 // Assemblée nationale). Une ville sans date publiée l'affiche telle quelle, « non publiée ».
@@ -558,11 +558,16 @@ export function construireALaUne() {
         .replace(/<meta property="og:image:height" content="[^"]*">/, '<meta property="og:image:height" content="1024">')
         .replace(/<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${SITE}${imageDe(p.slug)}">`);
     }
-    if (!/<meta name="robots" content="noindex/.test(h)) throw new Error(`build-a-la-une : ${p.slug} sans noindex alors que la rubrique n'est pas relue`);
+    if (/<meta name="robots" content="[^"]*noindex/.test(h)) throw new Error(`build-a-la-une : ${p.slug} porte un noindex alors que la rubrique est publiée`);
     if ((h.match(/<h1[\s>]/g) || []).length !== 1) throw new Error(`build-a-la-une : ${p.slug} n'a pas exactement un <h1>`);
     writeFileSync(`${DOSSIER}/${p.slug}.html`, h, 'utf8');
   }
-  console.log(`✓ À la une : le hub et ${PAGES.length} page(s) (/${DOSSIER}/…), en noindex jusqu'à la relecture.`);
+  // Au sitemap, à la suite des pages du site (build-section-pages.js vient de l'écrire).
+  const plan = readFileSync('sitemap.xml', 'utf8').replace(/\r\n/g, '\n');
+  const entrees = PAGES.map((p) => `  <url>\n    <loc>${SITE}/${DOSSIER}/${p.slug}</loc>\n    <lastmod>${MAJ_ISO}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>0.7</priority>\n  </url>`).filter((e) => !plan.includes(e.split('\n')[1])).join('\n');
+  const nouveau = entrees ? plan.replace(/\n<\/urlset>/, `\n${entrees}\n</urlset>`) : plan;
+  if (nouveau !== plan) writeFileSync('sitemap.xml', nouveau, 'utf8');
+  console.log(`✓ À la une : le hub et ${PAGES.length} page(s) (/${DOSSIER}/…), publiées et au sitemap.`);
 }
 
 // Lancé seul : node scripts/build-a-la-une.js
