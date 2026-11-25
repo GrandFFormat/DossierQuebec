@@ -203,9 +203,18 @@ const PAGES = [
     fil: 'Votes', cle: 'fil.votes', frequence: 'daily', priorite: '0.9',
   },
   {
+    // « À la une » (25 nov. 2026) : prend la place d'Archives dans la barre. Page d'attente
+    // privée (noindex, hors sitemap) jusqu'à la première page de référence relue par Hugo.
+    fichier: 'a-la-une.html', vue: 'alaune', onglet: 'alaune', url: '/a-la-une', prive: true,
+    donnees: [],
+    title: "À la une : l'actualité avec ses sources — DossierQuébec",
+    desc: "Pages de référence et outils sur l'actualité politique du Québec, chaque fait relié à sa source officielle. Bientôt : le serment des élus, ville par ville.",
+    fil: 'À la une', cle: 'fil.alaune', frequence: 'weekly', priorite: '0.7',
+  },
+  {
     // Les législatures terminées (30 oct. 2026) : leurs projets de loi, leurs votes, et les
     // promesses de l'élection de 2026. La liste se dessine depuis data/archives/index.json.
-    fichier: 'archives.html', vue: 'archives', onglet: 'archives', url: '/archives',
+    fichier: 'archives.html', vue: 'archives', onglet: null, url: '/archives',
     donnees: [],
     title: "Archives de l'Assemblée nationale — DossierQuébec",
     desc: "Les législatures terminées de l'Assemblée nationale du Québec : leurs projets de loi, leurs votes nominaux et les promesses électorales de 2026, tels quels.",

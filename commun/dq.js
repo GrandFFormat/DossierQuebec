@@ -182,7 +182,7 @@ function renderArchives(){
 const translations = {
   fr: {
     'nav.close':"Fermer",'nav.villes':"Villes",'nav.rtv':"+ Représentez votre ville",'nav.apercu':"Aperçu",'nav.ministres':"Ministres",'nav.projets':"Projets de loi",
-    'nav.votes':"Votes",'nav.archives':"Archives",'nav.quoideneuf':"Quoi de neuf",'nav.compte':"Compte & à propos",'nav.trouve':"Trouvez votre député",
+    'nav.votes':"Votes",'nav.archives':"Archives",'nav.alaune':"À la une",'nav.quoideneuf':"Quoi de neuf",'nav.compte':"Compte & à propos",'nav.trouve':"Trouvez votre député",
     'nav.lexique':"Lexique",'nav.personnes':"Qui gravite autour",'nav.petitions':"Pétitions",'nav.apropos':"D'où viennent ces données",
     'stat.ministres':"Ministres",'stat.projets':"Projets de loi",'stat.votes':"Votes enregistrés",
     'h.composition':"Composition — 125 sièges",
@@ -218,7 +218,7 @@ const translations = {
   },
   en: {
     'nav.close':"Close",'nav.villes':"Cities",'nav.rtv':"+ Represent your city",'nav.apercu':"Overview",'nav.ministres':"Ministers",'nav.projets':"Bills",
-    'nav.votes':"Votes",'nav.archives':"Archives",'nav.quoideneuf':"What's new",'nav.compte':"Account & about",'nav.trouve':"Find your MNA",
+    'nav.votes':"Votes",'nav.archives':"Archives",'nav.alaune':"Featured",'nav.quoideneuf':"What's new",'nav.compte':"Account & about",'nav.trouve':"Find your MNA",
     'nav.lexique':"Glossary",'nav.personnes':"Who's involved",'nav.petitions':"Petitions",'nav.apropos':"Where this data comes from",
     'stat.ministres':"Ministers",'stat.projets':"Bills",'stat.votes':"Votes recorded",
     'h.composition':"Composition — 125 seats",
@@ -475,6 +475,8 @@ const translations = {
     'abcode.btn':"Use the code",
     'fil.regles':"The rules",
     'fil.archives':"Archives",
+    'fil.alaune':"Featured",'sujet.alaune':"Featured",'unehero.l1':"The news,",'unehero.l2':"with its sources.",
+    'unehero.sub':"Reference pages and tools on current topics, every fact linked to its official source. <b>Coming soon: the elected officials' oath, city by city.</b>",
     'sujet.archives':"National Assembly archives",
     'archhero.l1':"The archives,",
     'archhero.l2':"legislature by legislature.",
