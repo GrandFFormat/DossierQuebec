@@ -2821,7 +2821,7 @@ body.abonne .bill-abo, body.abonne .bill-abo-devenir{display:none;}
 .une-boite-date{margin:auto 0 0; font-family:ui-monospace,monospace; font-size:12px; letter-spacing:.08em; text-transform:uppercase; opacity:.7;}
 .une-boite-lien:hover .une-boite-titre{text-decoration:underline; text-underline-offset:3px;}
 .une-banniere{margin:8px 0 12px; max-width:1000px; border:3px solid var(--ink); aspect-ratio:1200/560; overflow:hidden;} .une-banniere img{width:100%; height:100%; object-fit:cover; display:block;}
-.une-table td, .une-table th, .une-table td:last-child{text-align:left; white-space:normal; font-weight:400; padding-left:12px;} .une-table td:first-child{font-weight:700;} .une-table td:nth-child(2){white-space:nowrap;}
+.une-table td, .une-table th, .une-table td:last-child{text-align:left; white-space:normal; font-weight:400; padding-left:12px;} .une-table td:first-child{font-weight:700;} .une-table-villes td:nth-child(2){white-space:nowrap;} .une-table{min-width:0;} .une-table td:first-child{min-width:130px;}
 
 /* Les bénévoles et l'icône Reddit (25 nov. 2026, copie de DossierNBrunswick). */
 .header-ctrls > :is(.lien-reddit,.lien-benevoles){display:inline-flex; align-items:center; justify-content:center; width:26px; flex:none; background:none; border:none;}

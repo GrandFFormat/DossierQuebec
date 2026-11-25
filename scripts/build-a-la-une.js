@@ -50,7 +50,7 @@ const VILLES = [
 const SERMENT_TEXTE = 'Je, (nom de la personne élue), déclare sous serment que j’exercerai mes fonctions de (maire ou conseiller) avec honnêteté et justice dans le respect de la loi et du Code d’éthique et de déontologie des élus municipaux de (nom de la municipalité) et que je m’engage à respecter les règles de ce code applicables après la fin de mon mandat.';
 
 const tableauVilles = () => `
-    <div class="une-table-wrap"><table class="fin-table une-table">
+    <div class="une-table-wrap"><table class="fin-table une-table une-table-villes">
       <thead><tr><th>${deux('Ville', 'City')}</th><th>${deux('Serment prêté le', 'Oath taken on')}</th><th>${deux('Jours après le scrutin', 'Days after election day')}</th><th>${deux('Source', 'Source')}</th></tr></thead>
       <tbody>
 ${VILLES.map((v) => `        <tr><td><b>${v.ville}</b></td><td>${v.date ? deux(v.date, v.dateEn) : `<span class="une-attente">${deux('Non publiée', 'Not published')}</span>`}</td><td>${v.jours ?? '—'}</td><td>${v.src ? lien(v.src, v.note) : v.note}</td></tr>`).join('\n')}
