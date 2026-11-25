@@ -246,11 +246,47 @@ function sectionPage(p) {
   </section>`;
 }
 
+// Les boîtes du hub (25 nov. 2026, sur le modèle des sites Agent) : image en haut avec son
+// étiquette, mot-clic, titre, résumé (la description) et date. Image dans a-la-une/images/<slug>.webp
+// (ou .jpg / .png) ; sans image, un bloc de couleur prend sa place.
+const BOITES = {
+  'serment-des-elus-municipaux': { etiquette: deux('Municipal', 'Municipal'), tag: '#serment', fond: '#1c1c1c', rond: '#0E4FC1' },
+  'conseil-sans-serment': { etiquette: deux('Loi électorale', 'Election law'), tag: '#serment', fond: '#6f6c66', rond: '#e0915a' },
+  'serment-au-roi-chronologie': { etiquette: deux('Chronologie', 'Timeline'), tag: '#roi', fond: '#1c1c1c', rond: '#c8102e' },
+  'qui-jure-quoi': { etiquette: deux('Comparatif', 'Comparison'), tag: '#roi', fond: '#0E4FC1', rond: '#f4c542' },
+};
+const NOUVEAU_JOURS = 21;
+const MAJ_ISO = '2026-11-25';
+
+function imageDe(slug) {
+  for (const ext of ['webp', 'jpg', 'png']) if (existsSync(`${DOSSIER}/images/${slug}.${ext}`)) return `/${DOSSIER}/images/${slug}.${ext}`;
+  return null;
+}
+
+function boite(p) {
+  const b = BOITES[p.slug] || { etiquette: deux('À la une', 'Featured'), tag: '#alaune', fond: '#1c1c1c', rond: '#0E4FC1' };
+  const img = imageDe(p.slug);
+  const nouveau = (Date.now() - Date.parse(MAJ_ISO)) / 864e5 < NOUVEAU_JOURS;
+  const titreCourt = p.titre.replace(/ — DossierQuébec$/, '');
+  return `      <li class="une-boite">
+        <a class="une-boite-lien" href="/${DOSSIER}/${p.slug}">
+          <div class="une-boite-visuel" style="--fond:${b.fond}; --rond:${b.rond}">
+            ${img ? `<img src="${img}" alt="" loading="lazy" width="1200" height="630">` : ''}
+            ${nouveau ? `<span class="une-boite-nouveau">${deux('Nouveau', 'New')}</span>` : ''}
+            <span class="une-boite-etiquette">${b.etiquette}</span>
+          </div>
+          <div class="une-boite-corps">
+            <span class="une-boite-tag">${b.tag}</span>
+            <h2 class="une-boite-titre">${deux(esc(titreCourt), esc(p.titreEn.replace(/ — DossierQuébec$/, '')))}</h2>
+            <p class="une-boite-resume">${deux(esc(p.desc), '')}</p>
+            <p class="une-boite-date">${deux(MAJ.fr, MAJ.en)}</p>
+          </div>
+        </a>
+      </li>`;
+}
+
 function sectionHub() {
-  const cartes = PAGES.map((p) => `      <li class="regle">
-        <h2 class="regle-titre"><a href="/${DOSSIER}/${p.slug}">${p.sujet}</a></h2>
-        <p>${p.chapeau}</p>
-      </li>`).join('\n');
+  const cartes = PAGES.map(boite).join('\n');
   const avenir = CARTES_A_VENIR.map((c) => `      <li class="regle une-avenir">
         <h2 class="regle-titre">${c.titre} <span class="une-attente">${deux('À venir', 'Coming')}</span></h2>
         <p>${c.texte}</p>
@@ -265,10 +301,10 @@ function sectionHub() {
       </h1>
       <p class="view-hero-sub">${deux('Des pages de référence sur les sujets du moment, chaque fait relié à sa source officielle. Ce mois-ci : <b>à qui nos élus jurent-ils fidélité?</b>', 'Reference pages on current topics, every fact linked to its official source. This month: <b>who do our elected officials swear allegiance to?</b>')}</p>
     </div>
-    <ol class="regles-liste">
+    <ol class="une-boites">
 ${cartes}
-${avenir}
     </ol>
+${avenir ? `    <ol class="regles-liste">\n${avenir}\n    </ol>` : ''}
   </section>`;
 }
 
