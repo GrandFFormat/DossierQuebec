@@ -241,6 +241,7 @@ function sectionPage(p) {
       <p class="view-hero-sub">${p.chapeau}</p>
       ${enTete(p)}
     </div>
+    ${imageDe(p.slug) ? `<figure class="une-banniere"><img src="${imageDe(p.slug)}" alt="" width="1536" height="1024" fetchpriority="high"></figure>` : ''}
     <article class="une-article">${p.corps()}
     </article>
   </section>`;
@@ -333,6 +334,12 @@ export function construireALaUne() {
     h = remplacer(h, /<meta name="twitter:description" content="[^"]*">/, `<meta name="twitter:description" content="${esc(p.desc)}">`);
     h = remplacer(h, /<script type="application\/ld\+json">[\s\S]*?<\/script>/, `<script type="application/ld+json">\n${ld}\n</script>`);
     h = remplacer(h, motifSection, sectionPage(p));
+    if (imageDe(p.slug)) {
+      h = h.replace(/<meta property="og:image" content="[^"]*">/, `<meta property="og:image" content="${SITE}${imageDe(p.slug)}">`)
+        .replace(/<meta property="og:image:width" content="[^"]*">/, '<meta property="og:image:width" content="1536">')
+        .replace(/<meta property="og:image:height" content="[^"]*">/, '<meta property="og:image:height" content="1024">')
+        .replace(/<meta name="twitter:image" content="[^"]*">/, `<meta name="twitter:image" content="${SITE}${imageDe(p.slug)}">`);
+    }
     if (!/<meta name="robots" content="noindex/.test(h)) throw new Error(`build-a-la-une : ${p.slug} sans noindex alors que la rubrique n'est pas relue`);
     if ((h.match(/<h1[\s>]/g) || []).length !== 1) throw new Error(`build-a-la-une : ${p.slug} n'a pas exactement un <h1>`);
     writeFileSync(`${DOSSIER}/${p.slug}.html`, h, 'utf8');
