@@ -1,5 +1,5 @@
 {
- "generatedAt": "2026-11-25T18:45:36.803Z",
+ "generatedAt": "2026-11-26T18:33:25.170Z",
  "modele": "claude-haiku-4-5",
  "genereParIA": true,
  "avertissement": "Phrase de résumé générée par IA à partir des décisions de la séance ; les points marquants sont choisis sans IA. Le procès-verbal officiel fait foi.",
@@ -267,6 +267,119 @@
    ]
   },
   {
+   "id": "2026-11-20__Comité exécutif",
+   "instance": "Comité exécutif",
+   "instanceEn": "Executive committee",
+   "date": "2026-11-20",
+   "nDecisions": 1,
+   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CE_SP_2026-11-20_00h00.pdf",
+   "votes": [],
+   "themes": [],
+   "points": [
+    {
+     "id": "CE-2026-1398.pdf",
+     "numero": "CE-2026-1398",
+     "titre": "Adoption de la Politique de gestion d'actifs de la Ville de Québec - Autorisation de soumettre au conseil d'agglomération - Adoption de la Politique de gestion d'actifs de la Ville de Québec",
+     "titreEn": null,
+     "montant": null,
+     "montantEn": null,
+     "divise": false,
+     "theme": "administration"
+    }
+   ],
+   "signature": "1:1",
+   "phrase": null,
+   "phraseEn": null,
+   "motsThemes": []
+  },
+  {
+   "id": "2026-11-18__Comité exécutif",
+   "instance": "Comité exécutif",
+   "instanceEn": "Executive committee",
+   "date": "2026-11-18",
+   "nDecisions": 9,
+   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CE_PL_2026-11-18_00h00.pdf",
+   "votes": [],
+   "themes": [
+    {
+     "theme": "contrats",
+     "n": 2
+    },
+    {
+     "theme": "culture",
+     "n": 2
+    },
+    {
+     "theme": "environnement",
+     "n": 1
+    },
+    {
+     "theme": "subventions",
+     "n": 1
+    },
+    {
+     "theme": "securite",
+     "n": 1
+    }
+   ],
+   "points": [
+    {
+     "id": "CE-2026-1391.pdf",
+     "numero": "CE-2026-1391",
+     "titre": "Attribution d'un contrat pour la fourniture des pompes et accessoires d'eau potable (Appel d'offres public 95983)",
+     "titreEn": null,
+     "montant": "761 000 $",
+     "montantEn": "$761,000",
+     "divise": false,
+     "theme": "environnement"
+    },
+    {
+     "id": "CE-2026-1389.pdf",
+     "numero": "CE-2026-1389",
+     "titre": "Autorisation de soumettre au conseil d'agglomération - Entente entre la Ville de Québec et le Programme d'encadrement clinique et d'hébergement (PECH) relativement à des services en soutien aux interventions policières sur le territoire de la ville de Québec (Dossier 96714)",
+     "titreEn": null,
+     "montant": "400 955 $",
+     "montantEn": "$400,955",
+     "divise": false,
+     "theme": "contrats"
+    },
+    {
+     "id": "CE-2026-1394.pdf",
+     "numero": "CE-2026-1394",
+     "titre": "Subventions à plusieurs organismes de loisir pour la réalisation de projets de médiation culturelle dans le cadre de l'Entente de développement culturel MCC/Ville",
+     "titreEn": null,
+     "montant": "211 701 $",
+     "montantEn": "$211,701",
+     "divise": false,
+     "theme": "culture"
+    },
+    {
+     "id": "CE-2026-1395.pdf",
+     "numero": "CE-2026-1395",
+     "titre": "Ententes entre la Ville de Québec et Patinage de vitesse Canada relativement au versement de deux subventions et à la fourniture à titre gratuit de services municipaux, à titre d'assistance, dans le cadre de la tenue des événements Coupes du monde ISU junior de patinage de vitesse longue piste - éta",
+     "titreEn": null,
+     "montant": "80 000 $",
+     "montantEn": "$80,000",
+     "divise": false,
+     "theme": "subventions"
+    }
+   ],
+   "signature": "9:7",
+   "phrase": "Le comité exécutif a approuvé une entente avec l'organisme PECH pour soutenir les interventions policières en situations de crise psychosociale pour 400 955 $, et l'achat de pompes d'eau potable pour le poste Roland-Beaudin pour 761 000 $.",
+   "phraseEn": "The executive committee approved an agreement with the PECH organization to support police interventions in psychosocial crisis situations for 400 955 $, and the purchase of drinking water pumps for the Roland-Beaudin station for 761 000 $.",
+   "motsCles": [
+    "pompes d'eau potable"
+   ],
+   "motsClesEn": [
+    "drinking water pumps"
+   ],
+   "motsEssais": 1,
+   "genereLe": "2026-11-26T18:33:19.191Z",
+   "motsThemes": [
+    "environnement"
+   ]
+  },
+  {
    "id": "2026-11-18__Conseil d'agglomération de Québec",
    "instance": "Conseil d'agglomération de Québec",
    "instanceEn": "Québec agglomeration council",
@@ -410,10 +523,19 @@
     }
    ],
    "signature": "21:16",
-   "rejets": 1,
-   "phrase": null,
-   "phraseEn": null,
-   "motsThemes": []
+   "phrase": "Le conseil a approuvé la réparation de camions lourds Freightliner pour 5 556 624,10 $, l'acquisition d'un terrain rue Saint-Jean pour 1 480 000 $ dans le cadre du réseau structurant de transport en commun, et accordé 400 000 $ à une société de capital de risque pour soutenir l'entrepreneuriat.",
+   "phraseEn": "The council approved the repair of Freightliner heavy trucks for 5 556 624,10 $, the acquisition of land on rue Saint-Jean for 1 480 000 $ as part of the structured public transit network project, and granted 400 000 $ to a venture capital company to support entrepreneurship.",
+   "motsCles": [
+    "réparation de camions lourds",
+    "acquisition d'un terrain"
+   ],
+   "motsClesEn": [],
+   "motsEssais": 1,
+   "genereLe": "2026-11-26T18:33:22.098Z",
+   "motsThemes": [
+    "contrats",
+    "transport"
+   ]
   },
   {
    "id": "2026-11-17__Conseil de la ville",
@@ -500,13 +622,19 @@
     }
    ],
    "signature": "39:26",
-   "phrase": "Le conseil a créé une réserve financière pour les matières résiduelles de 160 000 000 $ et une réserve pour l'eau de 190 000 000 $. Il a aussi accordé 2 166 855 $ à trois organismes pour restaurer des églises de valeur patrimoniale exceptionnelle.",
-   "phraseEn": "The council created a financial reserve for waste management of 160 000 000 $ and a water reserve of 190 000 000 $. It also granted 2 166 855 $ to three organizations to restore churches of exceptional heritage value.",
-   "motsCles": [],
-   "motsClesEn": [],
-   "motsEssais": 1,
-   "genereLe": "2026-11-25T18:45:33.731Z",
-   "motsThemes": []
+   "phrase": "Le conseil a créé deux réserves financières, l'une de 93 567 000 $ pour la gestion des matières résiduelles et l'autre de 162 597 000 $ pour le service de l'eau, autorisé 469 logements résidentiels boulevard Henri-Bourassa et accordé 2 166 855 $ pour restaurer trois églises de valeur patrimoniale exceptionnelle.",
+   "phraseEn": "The council created two financial reserves, one for $93,567,000 for waste management and another for $162,597,000 for water service, authorized 469 residential units on Henri-Bourassa Boulevard, and granted $2,166,855 to restore three churches of exceptional heritage value.",
+   "motsCles": [
+    "logements résidentiels"
+   ],
+   "motsClesEn": [
+    "residential units"
+   ],
+   "motsEssais": 2,
+   "genereLe": "2026-11-26T18:33:25.146Z",
+   "motsThemes": [
+    null
+   ]
   },
   {
    "id": "2026-11-16__Conseil de l'Arrondissement de La Haute-Saint-Charles",
@@ -4914,278 +5042,6 @@
     null
    ],
    "votes": []
-  },
-  {
-   "id": "2026-08-26__Comité exécutif",
-   "instance": "Comité exécutif",
-   "instanceEn": "Executive committee",
-   "date": "2026-08-26",
-   "nDecisions": 13,
-   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CE_PL_2026-08-26_00h00.pdf",
-   "themes": [
-    {
-     "theme": "contrats",
-     "n": 4
-    },
-    {
-     "theme": "loisirs",
-     "n": 2
-    },
-    {
-     "theme": "subventions",
-     "n": 1
-    },
-    {
-     "theme": "travaux",
-     "n": 1
-    },
-    {
-     "theme": "environnement",
-     "n": 1
-    },
-    {
-     "theme": "rh",
-     "n": 1
-    }
-   ],
-   "points": [
-    {
-     "id": "CE-2026-1084.pdf",
-     "numero": "CE-2026-1084",
-     "titre": "Adjudication d'un contrat pour la réfection des bassins 1 et 2 au Complexe de valorisation énergétique (Appel d'offres public 95856)",
-     "titreEn": null,
-     "montant": "1 765 550 $",
-     "montantEn": "$1,765,550",
-     "divise": false,
-     "theme": "travaux"
-    },
-    {
-     "id": "CE-2026-1085.pdf",
-     "numero": "CE-2026-1085",
-     "titre": "Adjudication d'un contrat de services professionnels - Réparation des escaliers de la Chapelle et Lépine (POA186033) (Appel d'offres public 96157)",
-     "titreEn": null,
-     "montant": "408 560 $",
-     "montantEn": "$408,560",
-     "divise": false,
-     "theme": "contrats"
-    },
-    {
-     "id": "CE-2026-1086.pdf",
-     "numero": "CE-2026-1086",
-     "titre": "Adjudication d'un contrat pour des services professionnels en ingénierie - Ajout d'une conduite d'eau potable et réfection des infrastructures de surface sur le boulevard Henri-Bourrassa et la 24e Rue (Appel d'offres public 96076)",
-     "titreEn": null,
-     "montant": "403 770 $",
-     "montantEn": "$403,770",
-     "divise": false,
-     "theme": "environnement"
-    },
-    {
-     "id": "CE-2026-1082.pdf",
-     "numero": "CE-2026-1082",
-     "titre": "Adjudication d'un contrat pour l'acquisition d'un système de distribution audio pour l'amphithéâtre multifonctionnel de Québec (Appel d'offres public 95996)",
-     "titreEn": null,
-     "montant": "332 500 $",
-     "montantEn": "$332,500",
-     "divise": false,
-     "theme": "contrats"
-    }
-   ],
-   "signature": "13:11",
-   "phrase": "Le comité exécutif a autorisé l'aide de 165 000 $ à La Parade des jouets inc., accordé un contrat de 1 765 550 $ pour la réfection des bassins du Complexe de valorisation énergétique et confié 408 560 $ à Pluritec pour la réparation d'escaliers.",
-   "phraseEn": "The executive committee authorized aid of 165 000 $ to La Parade des jouets inc., awarded a 1 765 550 $ contract for renovating the basins at the Energy Valorization Complex and entrusted 408 560 $ to Pluritec for stair repairs.",
-   "motsCles": [
-    "Parade des jouets",
-    "réparation d'escaliers"
-   ],
-   "motsClesEn": [
-    "La Parade des jouets inc.",
-    "stair repairs"
-   ],
-   "genereLe": "2026-11-13T11:31:13.021Z",
-   "motsThemes": [
-    "subventions",
-    "contrats"
-   ],
-   "votes": []
-  },
-  {
-   "id": "2026-08-26__Conseil d'agglomération de Québec",
-   "instance": "Conseil d'agglomération de Québec",
-   "instanceEn": "Québec agglomeration council",
-   "date": "2026-08-26",
-   "nDecisions": 44,
-   "pv": "https://gpddocs.ville.quebec.qc.ca/gpdblob/PV_CAG_PL_2026-08-26_13h00.pdf",
-   "themes": [
-    {
-     "theme": "subventions",
-     "n": 8
-    },
-    {
-     "theme": "urbanisme",
-     "n": 7
-    },
-    {
-     "theme": "contrats",
-     "n": 7
-    },
-    {
-     "theme": "finances",
-     "n": 6
-    },
-    {
-     "theme": "transport",
-     "n": 4
-    },
-    {
-     "theme": "environnement",
-     "n": 3
-    }
-   ],
-   "points": [
-    {
-     "id": "CA-2026-0436.pdf",
-     "numero": "CA-2026-0436",
-     "titre": "Fermeture de règlements d'emprunt, réduction des pouvoirs de dépenser et annulation des soldes résiduaires de pouvoir d'emprunt ¿ Règlements d'emprunt de compétence d'agglomération",
-     "titreEn": null,
-     "montant": "136 136 071,00 $",
-     "montantEn": "$136,136,071.00",
-     "divise": false,
-     "theme": "finances"
-    },
-    {
-     "id": "CA-2026-0437.pdf",
-     "numero": "CA-2026-0437",
-     "titre": "Fermeture de règlements d'emprunt, réduction des pouvoirs de dépenser et annulation des soldes résiduaires de pouvoir d'emprunt ¿ Règlements d'emprunt d'agglomération pour des dépenses de nature mixte",
-     "titreEn": null,
-     "montant": "66 743 900,00 $",
-     "montantEn": "$66,743,900.00",
-     "divise": false,
-     "theme": "finances"
-    },
-    {
-     "id": "CA-2026-0466.pdf",
-     "numero": "CA-2026-0466",
-     "titre": "Dépôt d'une demande d'aide financière pour des projets de cheminements scolaires et de sécurisation piétonnière dans la poursuite du déploiement de la Stratégie de sécurité routière, dans le cadre du Programme d'aide financière du Fonds de la sécurité routière du ministère des Transports et de la Mo",
-     "titreEn": null,
-     "montant": "2 817 530 $",
-     "montantEn": "$2,817,530",
-     "divise": false,
-     "theme": "loisirs"
-    },
-    {
-     "id": "CA-2026-0438.pdf",
-     "numero": "CA-2026-0438",
-     "titre": "Adjudication d'un contrat pour le service de réparation de véhicules légers et intermédiaires, incluant les pièces, chez le concessionnaire du fabricant Ford (Appel d'offres public 95732)",
-     "titreEn": null,
-     "montant": "2 519 051,16 $",
-     "montantEn": "$2,519,051.16",
-     "divise": false,
-     "theme": "contrats"
-    }
-   ],
-   "signature": "44:42",
-   "phrase": "Le conseil a approuvé la réparation de véhicules Ford pour 2 519 051,16 $ et de toitures d'immeubles pour 2 056 705,12 $, le transport pour l'écocentre Val-Bélair pour 2 383 116,21 $ et versé 432 500 $ au Marathon de Québec.",
-   "phraseEn": "The council approved Ford vehicle repairs for 2 519 051,16 $, building roof repairs for 2 056 705,12 $, transport for Val-Bélair ecocentre for 2 383 116,21 $ and allocated 432 500 $ to the Quebec Marathon.",
-   "motsCles": [
-    "réparation de véhicules Ford",
-    "Marathon de Québec"
-   ],
-   "motsClesEn": [
-    "Ford vehicle repairs",
-    "roof repairs",
-    "Quebec Marathon"
-   ],
-   "genereLe": "2026-11-13T11:31:16.192Z",
-   "motsThemes": [
-    "contrats",
-    "subventions"
-   ],
-   "votes": [
-    {
-     "numero": "CA-2026-0435",
-     "titre": "Adoption du document indiquant la nature des modifications que la Ville de Québec devra apporter à sa réglementation d'urbanisme à la suite de l'entrée en vigueur du Règlement de l'agglomération modifiant le Schéma d'aménagement et de développement révisé relativement à la création d'une aire de gra",
-     "pour": 7,
-     "contre": 1,
-     "resultat": "Adoptée à la majorité"
-    },
-    {
-     "numero": "CA-2026-0438",
-     "titre": "Adjudication d'un contrat pour le service de réparation de véhicules légers et intermédiaires, incluant les pièces, chez le concessionnaire du fabricant Ford (Appel d'offres public 95732)",
-     "pour": 7,
-     "contre": 1,
-     "resultat": "Adoptée à la majorité"
-    },
-    {
-     "numero": "CA-2026-0441",
-     "titre": "Adjudication de contrats pour des travaux de réparation, d'entretien et de réfection de toitures d'immeubles (Appel d'offres public 95858)",
-     "pour": 7,
-     "contre": 1,
-     "resultat": "Adoptée à la majorité"
-    },
-    {
-     "numero": "CA-2026-0442",
-     "titre": "Adjudication d'un contrat pour la fourniture de pièces chez le concessionnaire du fabricant General Motors (Appel d'offres public 95946)",
-     "pour": 7,
-     "contre": 1,
-     "resultat": "Adoptée à la majorité"
-    },
-    {
-     "numero": "CA-2026-0452",
-     "titre": "Autorisation de l'acceptation par la Ville de Québec des permissions accordées par Hydro-Québec, afin de réaliser des travaux dans le corridor énergétique Pie-XII, à des fins municipales, soit dans les assiettes des servitudes en faveur d'Hydro-Québec sur des terrains de la Ville relativement au pro",
-     "pour": 7,
-     "contre": 1,
-     "resultat": "Adoptée à la majorité"
-    },
-    {
-     "numero": "CA-2026-0453",
-     "titre": "Entente entre la Ville de Québec et la Corporation Événements Course de Québec relativement au versement d'une subvention, à la fourniture, à titre gratuit, de services municipaux et à l'achat de biens et services, à titre d'assistance, dans le cadre de la tenue de l'événement Marathon de Québec, en",
-     "pour": 7,
-     "contre": 1,
-     "resultat": "Adoptée à la majorité"
-    },
-    {
-     "numero": "CA-2026-0454",
-     "titre": "Entente entre la Ville de Québec et l'Alliance Arc-en-ciel de Québec relativement au versement d'une subvention et à la fourniture à titre gratuit de services municipaux, à titre d'assistance, dans le cadre de la tenue de l'événement Fierté de Québec, en 2026",
-     "pour": 7,
-     "contre": 1,
-     "resultat": "Adoptée à la majorité"
-    },
-    {
-     "numero": "CA-2026-0461",
-     "titre": "Modification de la nomenclature des emplois professionnels",
-     "pour": 7,
-     "contre": 1,
-     "resultat": "Adoptée à la majorité"
-    },
-    {
-     "numero": "CA-2026-0462",
-     "titre": "Prise d'acte de l'entente intervenue entre la Ville de Québec et le Syndicat des employés manuels de la Ville de Québec concernant la modification de l'Annexe F de la convention collective en vigueur jusqu'au 31 décembre 2028",
-     "pour": 7,
-     "contre": 1,
-     "resultat": "Adoptée à la majorité"
-    },
-    {
-     "numero": "CA-2026-0469",
-     "titre": "Avenant numéro 1 au protocole d'entente signé le 15 avril 2024 entre la Ville de Québec et la Société hôtesse des Jeux du Canada 2027 relatif au versement d'une contribution pour l'organisation, l'administration et la gestion des activités des Jeux d'hiver du Canada - Québec 2027",
-     "pour": 7,
-     "contre": 1,
-     "resultat": "Adoptée à la majorité"
-    },
-    {
-     "numero": "CA-2026-0472",
-     "titre": "Appropriation d'un montant de 28 700 $ au fonds général",
-     "pour": 7,
-     "contre": 1,
-     "resultat": "Adoptée à la majorité"
-    },
-    {
-     "numero": "CA-2026-0474",
-     "titre": "Appropriation d'un montant de 45 000 $ au fonds général",
-     "pour": 7,
-     "contre": 1,
-     "resultat": "Adoptée à la majorité"
-    }
-   ]
   }
  ],
  "ordresDuJour": [],
