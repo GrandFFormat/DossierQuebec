@@ -18,7 +18,7 @@ on:
   schedule:
     # 08:30 UTC, après le rafraîchissement de DossierQuébec (08:00). Le groupe de
     # concurrence ci-dessous garantit de toute façon qu'ils ne se chevauchent pas.
-    - cron: '30 8 * * *'
+    - cron: '30 8 */2 * *' # aux deux jours depuis le 26 nov. 2026 (Martin : moins de constructions Vercel)
   workflow_dispatch: {} # bouton « Run workflow » pour lancer à la main
 
 permissions:

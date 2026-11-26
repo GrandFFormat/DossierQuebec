@@ -17,7 +17,7 @@ on:
   schedule:
     # 09:30 UTC, après DossierQuébec (08:00), le volet Québec (08:30) et Montréal (09:00), pour
     # que les journaux se lisent dans l'ordre. Ce volet a son propre groupe (voir plus bas).
-    - cron: '30 9 * * *'
+    - cron: '30 9 */2 * *' # aux deux jours depuis le 26 nov. 2026 (Martin : moins de constructions Vercel)
   workflow_dispatch: {} # bouton « Run workflow » pour lancer à la main
 
 permissions:
