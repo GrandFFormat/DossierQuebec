@@ -113,8 +113,11 @@ function extractPresentationDate($) {
   // c'est la meilleure approximation disponible sans inventer de donnée.
   const list = presentationHeading.nextAll('ul.ListeLien').first();
   const items = list.find('li');
+  // Seules les lignes « Séance du … » portent la date : le premier <li> est le titre
+  // du projet, qui contient parfois une date (« Convention … du 5 octobre 1961 »).
   for (let i = 0; i < items.length; i++) {
-    const date = parseFrenchDate($(items[i]).text().replace(/\s+/g, ' ').trim());
+    const m = $(items[i]).text().replace(/\s+/g, ' ').match(/Séance du (\d{1,2})(?:er)? (\S+ \d{4})/i);
+    const date = m && parseFrenchDate(`${m[1]} ${m[2]}`);
     if (date) return date;
   }
   return null;
@@ -164,11 +167,10 @@ async function enrichBill(bill) {
   const pdfUrl = extractPresentationPdfUrl($);
   if (pdfUrl) bill.presentationPdfUrl = pdfUrl;
 
-  // Ne jamais écraser une fois capturée — c'est une date historique fixe.
-  if (!bill.presentedOn) {
-    const presentedOn = extractPresentationDate($);
-    if (presentedOn) bill.presentedOn = presentedOn;
-  }
+  // Date historique fixe, mais réécrite à chaque passage : l'ancienne lecture prenait
+  // parfois une date du titre (corrigé le 25 nov. 2026), il faut réparer ces valeurs.
+  const presentedOn = extractPresentationDate($);
+  if (presentedOn) bill.presentedOn = presentedOn;
 
   // On ne recalcule le statut/l'étape que pour les dossiers actifs. Un projet
   // "laissé de côté" n'est, par définition, plus mis à jour ; on se contente d'y
