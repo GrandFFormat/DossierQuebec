@@ -1,16 +1,16 @@
 {
- "generatedAt": "2026-11-25T18:44:09.630Z",
+ "generatedAt": "2026-11-26T18:31:33.053Z",
  "source": "https://decisions.ville.quebec.qc.ca/",
  "methode": "Extraction par analyse du texte des résolutions (champ « content » de l'index de la Ville). Les noms sont lus dans les passages « Ont voté en faveur / Ont voté contre ». Chaque vote conserve le texte brut et signale tout écart avec le décompte officiel.",
  "parametres": {
   "annee": "2026",
   "max": 1000,
-  "depuis": "2026-09-26"
+  "depuis": "2026-09-27"
  },
  "totalDisponible": 298,
  "documentsAnalyses": 51,
  "nombre": 298,
- "nouveauxDepuisDerniereExecution": 11,
+ "nouveauxDepuisDerniereExecution": 0,
  "avecAvertissement": 11,
  "themes": {
   "procedure": {
@@ -109,7 +109,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -139,7 +139,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -169,7 +169,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "subventions",
    "themeSource": "objet"
   },
@@ -199,7 +199,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "rh",
    "themeSource": "objet"
   },
@@ -229,7 +229,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -259,7 +259,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "administration",
    "themeSource": "objet"
   },
@@ -289,7 +289,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -319,7 +319,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "contrats",
    "themeSource": "objet"
   },
@@ -349,7 +349,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "transport",
    "themeSource": "objet"
   },
@@ -379,7 +379,7 @@
    "texteSourceDegrade": false,
    "avertissements": [],
    "brut": "Ont voté en faveur : mesdames les conseillères Catherine Deschamps, Elainie Lepage, Elisa Verreault et Catherine Vallières-Roland et monsieur le conseiller Gabriel Dusablon. | Ont voté contre : monsieur le conseiller Richard Levesque.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "rh",
    "themeSource": "objet"
   },
@@ -407,7 +407,7 @@
     "Texte source dégradé (PDF aux glyphes espacés) — noms non extraits, voir le champ « brut »."
    ],
    "brut": "Ont voté en faveur : monsieur le maire Bruno Marchand, mesdames les c o n s e i l l è r e s M a r i e - J o s é e A s s e l i n , M a r i e - P i e r r e B o u c h e r , Marylou Boulianne, Mélissa Coulombe-Leduc, Catherine Deschamps, Elainie Lepage, Catherine Vallières-Roland, Elisa Verreault et Marianne White et messieurs les conseillers Clément Bourdeau, Éric Cour t emanche Ba r i l , Max ime E lma leh , Yann i ck Fau t eux , C laude Lavo i e , Raphaë l Leba i l l y e t Raymond Po i r i e r . | Ont voté contre : madame la conseillère Mélanie Sauvé et messieurs les conseillers Stéphane Lachance et Marc Roussin.",
-   "nouveau": true,
+   "nouveau": false,
    "theme": "immobilier",
    "themeSource": "objet"
   },
