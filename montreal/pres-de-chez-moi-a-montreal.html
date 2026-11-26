@@ -138,6 +138,32 @@
     <div id="resultat-adresse" aria-live="polite"></div>
     <p class="compte" data-en="Your address stays in your browser. It is not sent to anyone. The search covers the City of Montréal, not the linked cities (Westmount, Mont-Royal, etc.).">Votre adresse reste dans votre navigateur. Elle n’est envoyée à personne. La recherche couvre la Ville de Montréal, pas les villes liées (Westmount, Mont-Royal, etc.).</p>
   </form>
+  <!-- 26 nov. 2026 (Martin) : données ouvertes prêtes à brancher, présentées comme offertes avec un commanditaire. -->
+  <section class="donnees-commandite" aria-labelledby="titre-donnees-commandite">
+    <h2 id="titre-donnees-commandite" data-en="Data available with a sponsor">Données disponibles avec un commanditaire</h2>
+    <ul>
+      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Renovation and addition permits">Permis de rénovation et d’agrandissement</span></li>
+      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="311 requests in your neighbourhood">Requêtes au 311 de votre quartier</span></li>
+      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Collection day at your address">Jour de collecte à votre adresse</span></li>
+      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Snow removal on your street">Déneigement de votre rue</span></li>
+      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Crimes by neighbourhood">Actes criminels par quartier</span></li>
+      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Restaurant inspections">Inspections des restaurants</span></li>
+      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Trees on your street">Arbres de votre rue</span></li>
+      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Parking permit zones">Zones de vignettes de stationnement</span></li>
+      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Bike paths and BIXI stations">Pistes cyclables et stations BIXI</span></li>
+    </ul>
+    <p data-en="This data is public and ready to connect. A local business can make it available to the whole neighbourhood.">Ces données sont publiques et prêtes à brancher. Une entreprise d’ici peut les rendre disponibles pour tout le quartier.</p>
+    <a class="donnees-commandite-btn" href="/represente-ta-ville" data-mesure="pres-donnees-commandite" data-en="Sponsor Montréal →">Commanditer Montréal →</a>
+  </section>
+  <style>
+    .donnees-commandite { border: 2px solid var(--accent); border-radius: 12px; padding: 16px 18px; margin: 0 0 20px; background: color-mix(in srgb, var(--accent) 9%, var(--carte, #fff)); }
+    .donnees-commandite h2 { margin: 0 0 10px; font-size: 1.15rem; }
+    .donnees-commandite ul { list-style: none; margin: 0 0 12px; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+    .donnees-commandite li { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+    .donnees-commandite input { width: 18px; height: 18px; margin: 0; accent-color: var(--accent); opacity: 1; }
+    .donnees-commandite p { margin: 0 0 12px; }
+    .donnees-commandite-btn { display: inline-block; padding: 8px 18px; border-radius: 6px; font-weight: 700; text-decoration: none; color: var(--carte, #fff); background: var(--accent); }
+  </style>
   <style>
     .qui-represente { background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon); padding: 14px 16px; margin: 16px 0 20px; }
     .qui-represente label { font-weight: 600; display: block; margin-bottom: 6px; }
