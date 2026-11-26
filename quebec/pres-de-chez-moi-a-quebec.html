@@ -139,6 +139,29 @@
     <div id="resultat-adresse" aria-live="polite"></div>
     <p class="compte" data-en="Your address stays in your browser. It is not sent to anyone. Addresses, districts and neighbourhoods: City of Québec open data (CC BY 4.0).">Votre adresse reste dans votre navigateur. Elle n’est envoyée à personne. Adresses, districts et quartiers&nbsp;: données ouvertes de la Ville de Québec (CC BY 4.0).</p>
   </form>
+  <!-- 26 nov. 2026 (Martin) : données ouvertes prêtes à brancher, présentées comme offertes avec un commanditaire. -->
+  <section class="donnees-commandite" aria-labelledby="titre-donnees-commandite">
+    <h2 id="titre-donnees-commandite" data-en="Data available with a sponsor">Données disponibles avec un commanditaire</h2>
+    <ul>
+      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Trees on your street">Arbres de votre rue</span></li>
+      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Bike paths near you">Pistes cyclables autour de chez vous</span></li>
+      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Zoning of your lot">Zonage de votre terrain</span></li>
+      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Parks and public places">Parcs et lieux publics</span></li>
+      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Free public Wi-Fi">Wi-Fi public gratuit</span></li>
+      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Drinking fountains">Fontaines à boire</span></li>
+    </ul>
+    <p data-en="This data is public and ready to connect. A local business can make it available to the whole neighbourhood.">Ces données sont publiques et prêtes à brancher. Une entreprise d’ici peut les rendre disponibles pour tout le quartier.</p>
+    <a class="donnees-commandite-btn" href="/represente-ta-ville" data-mesure="pres-donnees-commandite" data-en="Sponsor Québec City →">Commanditer Québec →</a>
+  </section>
+  <style>
+    .donnees-commandite { border: 2px solid var(--accent); border-radius: 12px; padding: 16px 18px; margin: 0 0 20px; background: color-mix(in srgb, var(--accent) 9%, var(--carte, #fff)); }
+    .donnees-commandite h2 { margin: 0 0 10px; font-size: 1.15rem; }
+    .donnees-commandite ul { list-style: none; margin: 0 0 12px; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+    .donnees-commandite li { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+    .donnees-commandite input { width: 18px; height: 18px; margin: 0; accent-color: var(--accent); opacity: 1; }
+    .donnees-commandite p { margin: 0 0 12px; }
+    .donnees-commandite-btn { display: inline-block; padding: 8px 18px; border-radius: 6px; font-weight: 700; text-decoration: none; color: var(--carte, #fff); background: var(--accent); }
+  </style>
   <style>
     .qui-represente { background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon); padding: 14px 16px; margin: 16px 0 20px; }
     .qui-represente label { font-weight: 600; display: block; margin-bottom: 6px; }
