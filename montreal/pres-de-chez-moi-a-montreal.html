@@ -128,16 +128,6 @@
     la Ville de Montréal.
   </p>
 
-  <form class="qui-represente" id="qui-represente" autocomplete="off">
-    <label for="adresse" data-en="Your address">Votre adresse</label>
-    <div class="ligne">
-      <input id="adresse" type="search" placeholder="Ex. 1191 rue Peel" data-en-placeholder="E.g. 1191 rue Peel">
-      <button type="submit" data-en="Search">Chercher</button>
-    </div>
-    <p class="compte" style="margin:6px 0 0" data-en="No idea? <a href=&quot;#1191 rue Peel&quot;>Try 1191 rue Peel</a>, downtown.">Pas d’idée&nbsp;? <a href="#1191 rue Peel">Essayez avec 1191 rue Peel</a>, au centre-ville.</p>
-    <div id="resultat-adresse" aria-live="polite"></div>
-    <p class="compte" data-en="Your address stays in your browser. It is not sent to anyone. The search covers the City of Montréal, not the linked cities (Westmount, Mont-Royal, etc.).">Votre adresse reste dans votre navigateur. Elle n’est envoyée à personne. La recherche couvre la Ville de Montréal, pas les villes liées (Westmount, Mont-Royal, etc.).</p>
-  </form>
   <!-- 26 nov. 2026 (Martin) : données ouvertes prêtes à brancher, présentées comme offertes avec un commanditaire. -->
   <section class="donnees-commandite" aria-labelledby="titre-donnees-commandite">
     <h2 id="titre-donnees-commandite" data-en="Data available with a sponsor">Données disponibles avec un commanditaire</h2>
@@ -164,6 +154,16 @@
     .donnees-commandite p { margin: 0 0 12px; }
     .donnees-commandite-btn { display: inline-block; padding: 8px 18px; border-radius: 6px; font-weight: 700; text-decoration: none; color: var(--carte, #fff); background: var(--accent); }
   </style>
+  <form class="qui-represente" id="qui-represente" autocomplete="off">
+    <label for="adresse" data-en="Your address">Votre adresse</label>
+    <div class="ligne">
+      <input id="adresse" type="search" placeholder="Ex. 1191 rue Peel" data-en-placeholder="E.g. 1191 rue Peel">
+      <button type="submit" data-en="Search">Chercher</button>
+    </div>
+    <p class="compte" style="margin:6px 0 0" data-en="No idea? <a href=&quot;#1191 rue Peel&quot;>Try 1191 rue Peel</a>, downtown.">Pas d’idée&nbsp;? <a href="#1191 rue Peel">Essayez avec 1191 rue Peel</a>, au centre-ville.</p>
+    <div id="resultat-adresse" aria-live="polite"></div>
+    <p class="compte" data-en="Your address stays in your browser. It is not sent to anyone. The search covers the City of Montréal, not the linked cities (Westmount, Mont-Royal, etc.).">Votre adresse reste dans votre navigateur. Elle n’est envoyée à personne. La recherche couvre la Ville de Montréal, pas les villes liées (Westmount, Mont-Royal, etc.).</p>
+  </form>
   <style>
     .qui-represente { background: var(--carte); border: var(--bordure-carte); border-radius: var(--rayon); padding: 14px 16px; margin: 16px 0 20px; }
     .qui-represente label { font-weight: 600; display: block; margin-bottom: 6px; }
