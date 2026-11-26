@@ -94,6 +94,7 @@ import { libelleEn, themeEn } from './libelles-en.js';
 
 globalThis.VILLE = {
   courriels: true,   // bande d'inscription au bas des pages (22 nov. 2026)
+  courrielsEnHaut: ['conseil', 'pres', 'outil', 'lexique'],   // en haut pour les non-connectés (26 nov. 2026, Martin)
   nom: 'Montréal',
   pages: {
     decisions: 'decisions-de-la-ville-de-montreal',

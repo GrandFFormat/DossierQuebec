@@ -2873,6 +2873,11 @@ if (VILLE.mesure && !window.__dqMesure) {
 
 // ========== RAPPEL DES COURRIELS AU BAS DES PAGES (22 nov. 2026) ==========
 // Allumé par `courriels: true` dans ville.js : les visiteurs de Google n'arrivent pas par l'accueil.
+// `courrielsEnHaut` (liste de data-page) : la bande monte en haut de la page pour les visiteurs
+// non connectés (26 nov. 2026, Montréal). Connecté = témoin de session Supabase dans le navigateur.
+const connecteSupabase = () => { try { return Object.keys(localStorage).some((k) => /^sb-.*-auth-token$/.test(k)); } catch { return false; } };
 if (VILLE.courriels && document.body.dataset.page !== 'accueil') {
-  document.querySelector('footer')?.insertAdjacentHTML('beforebegin', `<aside class="rappel-courriels"><p><strong>${tr(`Les décisions de ${echapper(VILLE.nom)} dans vos courriels`, `${echapper(VILLE.nom)} council decisions by email`)}</strong> ${tr('Une fois par mois, gratuit.', 'Once a month, free.')}</p><a data-mesure="rappel-courriels" href="./#infolettre">${tr('M’inscrire', 'Subscribe')}</a></aside>`);
+  const enHaut = (VILLE.courrielsEnHaut ?? []).includes(document.body.dataset.page) && !connecteSupabase();
+  const cible = enHaut ? document.querySelector('main') : document.querySelector('footer');
+  cible?.insertAdjacentHTML(enHaut ? 'afterbegin' : 'beforebegin', `<aside class="rappel-courriels${enHaut ? ' rappel-haut' : ''}"><p><strong>${tr(`Les décisions de ${echapper(VILLE.nom)} dans vos courriels`, `${echapper(VILLE.nom)} council decisions by email`)}</strong> ${tr('Une fois par mois, gratuit.', 'Once a month, free.')}</p><a data-mesure="rappel-courriels" href="./#infolettre">${tr('M’inscrire', 'Subscribe')}</a></aside>`);
 }

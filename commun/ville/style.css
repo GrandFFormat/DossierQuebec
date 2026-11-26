@@ -884,4 +884,5 @@ label.case:has(#filtre-resume) input { accent-color: #fff; }
 .rappel-courriels{box-sizing:border-box;display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;max-width:1120px;margin:28px auto;padding:14px 18px;border:2px solid var(--accent);border-radius:12px;background:color-mix(in srgb,var(--accent) 11%,var(--carte,#fff))}
 .rappel-courriels p{margin:0}
 .rappel-courriels a{padding:8px 18px;border-radius:6px;font-weight:700;text-decoration:none;color:var(--carte,#fff);background:var(--accent)}
+.rappel-courriels.rappel-haut{margin-top:0;margin-bottom:24px}
 @media (max-width:1160px){.rappel-courriels{margin-left:16px;margin-right:16px}}
