@@ -16,7 +16,7 @@
   // Les autres sites Dossier chargent ce même fichier (16 nov. 2026) : leur « ville » est le nom du
   // site (plus son volet de ville s'il y a lieu) et leur page garde le domaine, pour ne pas mêler
   // l'accueil de DC avec celui de DQ.
-  var SITES = { 'dossiercanada.ca': 'canada', 'dossierontario.ca': 'ontario', 'dossiersaskatchewan.ca': 'saskatchewan', 'dossiernbrunswick.ca': 'nbrunswick', 'dossierbc.ca': 'bc' };
+  var SITES = { 'dossiertexas.com': 'texas', 'dossiercanada.ca': 'canada', 'dossierontario.ca': 'ontario', 'dossiersaskatchewan.ca': 'saskatchewan', 'dossiernbrunswick.ca': 'nbrunswick', 'dossierbc.ca': 'bc' };
   var VOLETS = ['ottawa', 'vancouver', 'fredericton'];
   var HOTE = location.hostname.replace(/^www\./, '');
   var SITE = SITES[HOTE] || '';

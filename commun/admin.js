@@ -6,13 +6,13 @@
   var sb = supabase.createClient('https://wfgcqftgtmptfutrbujz.supabase.co', 'sb_publishable_CutVYEz29QYUV3tCDsAhSQ_RvZUQ3G6');
   var zone = document.getElementById('tbZone');
   var sortir = document.getElementById('tbSortir');
-  var SITES_FILTRE = [['', 'Tous les sites'], ['dq', 'DossierQuébec'], ['dossiercanada.ca', 'DossierCanada'], ['dossierontario.ca', 'DossierOntario'], ['dossiersaskatchewan.ca', 'DossierSaskatchewan'], ['dossiernbrunswick.ca', 'DossierNBrunswick'], ['dossierbc.ca', 'DossierBC']];
+  var SITES_FILTRE = [['', 'Tous les sites'], ['dq', 'DossierQuébec'], ['dossiercanada.ca', 'DossierCanada'], ['dossierontario.ca', 'DossierOntario'], ['dossiersaskatchewan.ca', 'DossierSaskatchewan'], ['dossiernbrunswick.ca', 'DossierNBrunswick'], ['dossierbc.ca', 'DossierBC'], ['dossiertexas.com', 'DossierTexas']];
   var site = '';
   try { site = localStorage.getItem('dq:admin-site') || ''; } catch (e) {}
   var PERIODES = [[1, 'Aujourd’hui'], [7, '7 jours'], [30, '30 jours'], [90, '90 jours']];
   var jours = 7;
   try { jours = parseInt(localStorage.getItem('dq:admin-jours'), 10) || 7; } catch (e) {}
-  var NOMS_VILLE = { '': 'Assemblée nationale', quebec: 'Ville de Québec', montreal: 'Ville de Montréal', levis: 'Ville de Lévis', longueuil: 'Ville de Longueuil', laval: 'Ville de Laval', canada: 'DossierCanada', ontario: 'DossierOntario', 'ontario-ottawa': 'Ontario · Ottawa', saskatchewan: 'DossierSaskatchewan', nbrunswick: 'DossierNBrunswick', 'nbrunswick-fredericton': 'N.-B. · Fredericton', bc: 'DossierBC', 'bc-vancouver': 'BC · Vancouver' };
+  var NOMS_VILLE = { '': 'Assemblée nationale', quebec: 'Ville de Québec', montreal: 'Ville de Montréal', levis: 'Ville de Lévis', longueuil: 'Ville de Longueuil', laval: 'Ville de Laval', canada: 'DossierCanada', ontario: 'DossierOntario', 'ontario-ottawa': 'Ontario · Ottawa', saskatchewan: 'DossierSaskatchewan', nbrunswick: 'DossierNBrunswick', 'nbrunswick-fredericton': 'N.-B. · Fredericton', bc: 'DossierBC', 'bc-vancouver': 'BC · Vancouver', texas: 'DossierTexas' };
   var DEMO = /^(localhost|127\.0\.0\.1)$/.test(location.hostname) && /[?&]demo=1/.test(location.search);
   var ouverts = {};
   var onglets = document.getElementById('tbOnglets');
