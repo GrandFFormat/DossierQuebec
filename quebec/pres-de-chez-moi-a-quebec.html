@@ -129,27 +129,19 @@
     permis de construction, d’agrandissement et de démolition délivrés depuis 12 mois. Tout vient des
     données ouvertes de la Ville de Québec.
   </p>
-  <!-- 26 nov. 2026 (Martin) : données ouvertes prêtes à brancher, présentées comme offertes avec un commanditaire. -->
-  <section class="donnees-commandite" aria-labelledby="titre-donnees-commandite">
-    <h2 id="titre-donnees-commandite" data-en="Data available with a sponsor">Données disponibles avec un commanditaire</h2>
+  <!-- 27 nov. 2026 (Martin) : le greffier refuse collecte, 311 et rôle en fichier ; liens vers les cartes de la Ville à la place. -->
+  <section class="cartes-ville" aria-labelledby="titre-cartes-ville">
+    <h2 id="titre-cartes-ville" data-en="City maps">Les cartes de la Ville</h2>
     <ul>
-      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Collection day at your address">Jour de collecte à votre adresse</span></li>
-      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Snow removal on your street">Déneigement de votre rue</span></li>
-      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="311 requests in your neighbourhood">Requêtes au 311 de votre quartier</span></li>
-      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Parking permit zone of your street">Zone de vignette de stationnement de votre rue</span></li>
-      <li><input type="checkbox" checked disabled aria-hidden="true"><span data-en="Property assessment of your address">Évaluation foncière de votre adresse</span></li>
+      <li><a href="https://experience.arcgis.com/experience/c7a787657db74f528d2b18809fe56784" rel="noopener" target="_blank" data-mesure="pres-carte-deneigement" data-en="Snow removal in your sector →">Déneigement de votre secteur →</a></li>
+      <li><a href="https://experience.arcgis.com/experience/ccc5c185c6944c08b3f7fdc3e1489b34" rel="noopener" target="_blank" data-mesure="pres-carte-vignettes" data-en="Parking permit zones →">Zones de vignettes de stationnement →</a></li>
     </ul>
-    <p data-en="This data is public and ready to connect. A local business can make it available to the whole neighbourhood.">Ces données sont publiques et prêtes à brancher. Une entreprise d’ici peut les rendre disponibles pour tout le quartier.</p>
-    <a class="donnees-commandite-btn" href="/represente-ta-ville" data-mesure="pres-donnees-commandite" data-en="Sponsor Québec City →">Commanditer Québec →</a>
   </section>
   <style>
-    .donnees-commandite { border: 2px solid var(--accent); border-radius: 12px; padding: 16px 18px; margin: 0 0 20px; background: color-mix(in srgb, var(--accent) 9%, var(--carte, #fff)); }
-    .donnees-commandite h2 { margin: 0 0 10px; font-size: 1.15rem; }
-    .donnees-commandite ul { list-style: none; margin: 0 0 12px; padding: 0; display: flex; flex-direction: column; gap: 7px; }
-    .donnees-commandite li { display: flex; align-items: center; gap: 10px; font-weight: 600; }
-    .donnees-commandite input { width: 18px; height: 18px; margin: 0; accent-color: var(--accent); opacity: 1; }
-    .donnees-commandite p { margin: 0 0 12px; }
-    .donnees-commandite-btn { display: inline-block; padding: 8px 18px; border-radius: 6px; font-weight: 700; text-decoration: none; color: var(--carte, #fff); background: var(--accent); }
+    .cartes-ville { border: 1px solid var(--ligne, #ddd); border-radius: 12px; padding: 14px 18px; margin: 0 0 20px; }
+    .cartes-ville h2 { margin: 0 0 8px; font-size: 1.05rem; }
+    .cartes-ville ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+    .cartes-ville a { font-weight: 600; }
   </style>
   <form class="qui-represente" id="qui-represente" autocomplete="off">
     <label for="adresse" data-en="Your address">Votre adresse</label>
