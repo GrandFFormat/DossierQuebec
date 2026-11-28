@@ -14,7 +14,7 @@ import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
 
 const SITE = 'https://dossierquebec.ca';
 const DOSSIER = 'a-la-une';
-const MAJ = { fr: '25 novembre 2026', en: 'November 25, 2026' };
+const MAJ = { fr: '27 novembre 2026', en: 'November 27, 2026' };
 const esc = (s) => String(s ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const deux = (fr, en) => `<span class="fr-txt">${fr}</span><span class="en-txt">${en}</span>`;
 const lien = (url, texte) => `<a href="${url}" rel="noopener" target="_blank">${texte}</a>`;
@@ -27,6 +27,7 @@ const S = {
   montreal: 'https://montreal.ca/communiques-de-presse/la-mairesse-soraya-martinez-ferrada-et-les-elus-de-la-ville-de-montreal-sont-assermentees-pour-un',
   laval: 'https://www.laval.ca/organisation-municipale/salle-presse/communiques-presse/election-municipale-2025-nomination-membres-comite-executif/',
   longueuil: 'https://longueuil.quebec/fr/nouvelles/cabinet-de-la-mairesse-catherine-fournier-assermentee-avec-son-nouveau-conseil-municipal',
+  levisMaire: 'https://levis.ca/fr/ville/decouvrir-levis/nos-actualites/assermentation-du-nouveau-maire-de-levis-monsieur-steven-blaney',
   levisPv: 'https://levis-website-resources.s3.bhs.io.cloud.ovh.net/pc/Proces-verbaux/PVCV-2025-11-24.pdf',
   lan: 'https://www.legisquebec.gouv.qc.ca/fr/document/lc/A-23.1',
   lc1867: 'https://laws-lois.justice.gc.ca/fra/const/page-4.html',
@@ -66,8 +67,8 @@ const VILLES = [
   { ville: 'Saint-Hyacinthe', date: 'Au plus tard le 17 novembre 2025', dateEn: 'By November 17, 2025', jours: null, note: deux('Jour exact non publié. Procès-verbal du 17 nov. 2025 : « tous les membres du Conseil ont dûment été assermentés »', 'Exact day not published. Minutes of Nov. 17, 2025: all council members had been duly sworn in'), src: 'https://www.st-hyacinthe.ca/medias/ville/vie-democratique/seances-publiques/2025/PVSE251117.pdf' },
   { ville: 'Saguenay', date: null, note: deux('Le 7 nov. 2025, la date était « encore à déterminer ». Aucune confirmation publiée depuis.', 'On Nov. 7, 2025, the date was still to be determined. No confirmation published since.'), src: 'https://elections.saguenay.ca/files/documents/avis_publics/%C3%89lection-Saguenay-communiqu%C3%A9-de-presse-2025-11-07.pdf' },
   { ville: 'Gatineau', date: null, note: deux('Prévue le 10 nov. 2025 dans un communiqué de juin 2025. Aucune confirmation publiée depuis.', 'Scheduled for Nov. 10, 2025 in a June 2025 release. No confirmation published since.'), src: 'https://www.gatineau.ca/portail/default.aspx?p=nouvelles_annonces%2Fcommuniques%2Fcommunique_2015&id=200531233' },
-  { ville: 'Québec', date: null, note: deux('Aucune date publiée par la Ville. Demande faite au greffe le 25 nov. 2026.', 'No date published by the City. Request sent to the clerk on Nov. 25, 2026.'), src: null },
-  { ville: 'Lévis', date: null, note: deux('Aucune date publiée. Le procès-verbal de la première séance (24 nov. 2025) n’en parle pas.', 'No date published. The minutes of the first sitting (Nov. 24, 2025) do not mention it.'), src: S.levisPv },
+  { ville: 'Québec', date: '9 novembre 2025', dateEn: 'November 9, 2025', jours: 7, note: deux('Confirmé par le greffier de la Ville, courriel du 26 nov. 2026. La Ville ne l’a pas publié sur son site.', 'Confirmed by the City Clerk, email of Nov. 26, 2026. The City has not published it on its website.'), src: null },
+  { ville: 'Lévis', date: '16 novembre 2025', dateEn: 'November 16, 2025', jours: 14, note: deux('Les conseillers le 16 nov., le maire le 10 nov. 2025. Communiqué de la Ville du 11 nov. 2025, confirmé par le greffe le 27 nov. 2026', 'Councillors on Nov. 16, the mayor on Nov. 10, 2025. City news release, Nov. 11, 2025, confirmed by the clerk on Nov. 27, 2026'), src: S.levisMaire },
 ];
 
 // ---------------------------------------------------------------- les pages
@@ -160,17 +161,17 @@ const PAGES = [
 
     <h2 class="une-h2">${deux('Quand chaque conseil a prêté serment (élection du 2 novembre 2025)', 'When each council took the oath (November 2, 2025 election)')}</h2>
 ${tableauVilles()}
-    <p class="une-p">${deux('Neuf villes ont publié le jour exact. Une autre confirme seulement que c’était fait au 17 novembre. Quatre, rien.', 'Nine cities published the exact day. One more only confirms it was done by November 17. Four published nothing.')}</p>
+    <p class="une-p">${deux('Dix villes ont publié le jour exact. Québec nous l’a donné par son greffier. Une autre confirme seulement que c’était fait au 17 novembre. Deux, rien.', 'Ten cities published the exact day. Québec City gave it to us through its clerk. One more only confirms it was done by November 17. Two published nothing.')}</p>
     <p class="une-p">${deux('Parmi les villes qui ont publié le jour exact, les premières : Drummondville et Victoriaville, le 7 novembre. Cinq jours après le scrutin.', 'Among cities that published the exact day, the first: Drummondville and Victoriaville, on November 7. Five days after the vote.')}</p>
     <p class="une-p">${deux('Saint-Hyacinthe est un cas à part. Le procès-verbal du 17 novembre dit seulement que « tous les membres du Conseil ont dûment été assermentés ». Le jour exact n’y est pas, d’où le « au plus tard ».', 'Saint-Hyacinthe is a special case. The November 17 minutes only say that all council members had been duly sworn in (French text). The exact day is not given, hence “by”.')}</p>
-    <p class="une-note">${deux('Une ville sans date n’a rien publié à ce sujet sur son site. Nous avons écrit aux greffes de Québec et de Lévis et ajouterons la date dès leur réponse.', 'A city without a date has published nothing on its website. We have written to the Québec City and Lévis clerks and will add the date as soon as we hear back.')}</p>
+    <p class="une-note">${deux('Une ville sans date n’a rien publié à ce sujet sur son site.', 'A city without a date has published nothing on its website.')}</p>
 ${sources([
       [S.lerm, 'LégisQuébec, chapitre E-2.2 : art. 313, 314.2, 330, 335, 337, 339, 653 et annexe II', 'LégisQuébec, chapter E-2.2: ss. 313, 314.2, 330, 335, 337, 339, 653 and Schedule II'],
       [S.guide, 'MAMH, Guide d’accueil des élus municipaux, oct. 2026 (PDF)', 'MAMH, welcome guide for municipal councillors, Oct. 2026 (PDF, French)'],
       [S.montreal, 'Ville de Montréal, communiqué du 13 nov. 2025', 'City of Montréal, news release, Nov. 13, 2025'],
       [S.laval, 'Ville de Laval, communiqué du 11 nov. 2025', 'City of Laval, news release, Nov. 11, 2025'],
       [S.longueuil, 'Ville de Longueuil, communiqué du 10 nov. 2025', 'City of Longueuil, news release, Nov. 10, 2025'],
-      [S.levisPv, 'Ville de Lévis, procès-verbal de la séance du 24 nov. 2025', 'City of Lévis, minutes of the Nov. 24, 2025 sitting'],
+      [S.levisMaire, 'Ville de Lévis, communiqué du 11 nov. 2025', 'City of Lévis, news release, Nov. 11, 2025'],
       [srcVille('Drummondville'), 'Ville de Drummondville, communiqué du 7 nov. 2025', 'City of Drummondville, news release, Nov. 7, 2025'],
       [srcVille('Repentigny'), 'Ville de Repentigny, communiqué du 12 nov. 2025', 'City of Repentigny, news release, Nov. 12, 2025'],
       [srcVille('Brossard'), 'Ville de Brossard, communiqué du 10 nov. 2025', 'City of Brossard, news release, Nov. 10, 2025'],
@@ -214,7 +215,7 @@ ${sources([
       <li>${deux('<b>7 décembre 2025</b> : 35e jour après le scrutin. Au plus tard ce jour-là, la règle tombait d’elle-même.', '<b>December 7, 2025</b>: 35th day after election day. By that day at the latest, the rule lapsed on its own.')}</li>
     </ul>
     <p class="une-p">${deux('Combien de jours après le scrutin?', 'How many days after election day?')}</p>
-    <p class="une-p">${deux('Entre 5 et 11 jours après le scrutin, dans les neuf villes qui ont publié le jour :', 'Between 5 and 11 days after election day, in the nine cities that published the day:')}</p>
+    <p class="une-p">${deux('Entre 5 et 14 jours après le scrutin, dans les onze villes dont on connaît le jour :', 'Between 5 and 14 days after election day, in the eleven cities where the day is known:')}</p>
 ${tableauVilles()}
     <p class="une-p">${deux(`À Laval, le conseil a prêté serment le dimanche 9 novembre. Dès le lendemain, il siégeait en séance extraordinaire pour nommer son comité exécutif (${lien(S.laval, 'communiqué de la Ville')}).`, `In Laval, council took the oath on Sunday, November 9. The very next day, it met in a special sitting to appoint its executive committee (${lien(S.laval, 'City news release')}).`)}</p>
 
@@ -455,7 +456,7 @@ const BOITES = {
   'qui-jure-quoi': { etiquette: deux('Comparatif', 'Comparison'), tag: '#roi', fond: '#0E4FC1', rond: '#f4c542' },
 };
 const NOUVEAU_JOURS = 21;
-const MAJ_ISO = '2026-11-25';
+const MAJ_ISO = '2026-11-27';
 
 function imageDe(slug) {
   for (const ext of ['webp', 'jpg', 'png']) if (existsSync(`${DOSSIER}/images/${slug}.${ext}`)) return `/${DOSSIER}/images/${slug}.${ext}`;
@@ -540,7 +541,7 @@ export function construireALaUne() {
     const url = `${SITE}/${DOSSIER}/${p.slug}`;
     if (p.titre.length > 70) throw new Error(`build-a-la-une : titre trop long (${p.titre.length}) : ${p.titre}`);
     if (p.desc.length < 120 || p.desc.length > 165) throw new Error(`build-a-la-une : description de ${p.desc.length} caractères (${p.slug})`);
-    const ld = JSON.stringify({ '@context': 'https://schema.org', '@type': 'Article', headline: p.titre.replace(/ — DossierQuébec$/, ''), description: p.desc, inLanguage: 'fr-CA', dateModified: '2026-11-25', url, publisher: { '@type': 'Organization', name: 'DossierQuébec', url: SITE } }, null, 2);
+    const ld = JSON.stringify({ '@context': 'https://schema.org', '@type': 'Article', headline: p.titre.replace(/ — DossierQuébec$/, ''), description: p.desc, inLanguage: 'fr-CA', dateModified: '2026-11-27', url, publisher: { '@type': 'Organization', name: 'DossierQuébec', url: SITE } }, null, 2);
     let h = modele;
     h = remplacer(h, /<title>[^<]*<\/title>/, `<title>${esc(p.titre)}</title>`);
     h = remplacer(h, /<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(p.desc)}">`);
